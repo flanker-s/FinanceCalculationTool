@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+
+  admin_api:
+    build:
+      context: ./docker/admin_api
+    container_name: admin_api
+    restart: unless-stopped
+    environment:
+      DB_NAME: admin_db
+      DB_HOST: admin_db
+      DB_USER: root
+      DB_PASSWORD: uy%6#kdS)@9
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./admin_api:/app
+    depends_on:
+      - admin_db
+    networks:
+      - app
+  
+  admin_db:
+    image: mysql:8.0.28
+    restart: unless-stopped
+    container_name: admin_db
+    environment:
+      MYSQL_DATABASE: admin_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: uy%6#kdS)@9
+      MYSQL_ROOT_PASSWORD: 'uy%6#kdS)@9'
+    ports:
+      - "33066:3306"
+    volumes:
+      - ./admin_db/data:/var/lib/mysql
+    networks:
+      - app
+
+networks:
+  app:
