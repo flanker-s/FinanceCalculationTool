@@ -22,7 +22,16 @@
 	"settings": {},
 
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [],
+	"extensions": [
+		"bmewburn.vscode-intelephense-client",
+		"onecentlin.laravel5-snippets",
+		"amiralizadeh9480.laravel-extra-intellisense",
+		"dbaeumer.vscode-eslint",
+		"xabikos.JavaScriptSnippets",
+		"sibiraj-s.vscode-scss-formatter",
+		"mrmlnc.vscode-scss",
+		"IronGeek.vscode-env"
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

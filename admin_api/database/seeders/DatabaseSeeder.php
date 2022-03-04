@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Transactions\Category;
+use App\Models\Transactions\Template;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,42 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        //Create default categories
+        // Category::insert([
+        //     [
+        //         'name' => 'Various incomes',
+        //         'type' => 'income',
+        //         'created_at'=> date('Y-m-d H:i:s'),
+        //         'updated_at'=> date('Y-m-d H:i:s'),
+        //     ],
+        //     [
+        //         'name' => 'Various expenses',
+        //         'type' => 'expense',
+        //         'created_at'=> date('Y-m-d H:i:s'),
+        //         'updated_at'=> date('Y-m-d H:i:s'),
+        //     ]
+        // ]);
+        Category::create([
+            'name' => 'Various incomes',
+            'type' => 'income',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        Category::create([
+            'name' => 'Various expenses',
+            'type' => 'expense',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        if (env('APP_MODE') === 'development') {
+            Category::factory()->count(10)->create();
+            $category_ids = Category::all()->pluck('id');
+
+            Template::factory()->count(50)->create([
+                'category_id' => function () use ($category_ids) {
+                    return $category_ids->random();
+                }
+            ]);
+        }
     }
 }

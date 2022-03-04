@@ -13,7 +13,7 @@ services:
       DB_USER: root
       DB_PASSWORD: uy%6#kdS)@9
     ports:
-      - "8000:8000"
+      - "8400:8000"
     volumes:
       - ./admin_api:/app
     depends_on:
