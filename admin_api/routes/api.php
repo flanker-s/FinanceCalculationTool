@@ -2,10 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Transactions\TemplateController;
-use App\Http\Controllers\Api\Transactions\CategoryController;
-use App\Http\Controllers\Api\Transactions\Categories\IncomeController;
-use App\Http\Controllers\Api\Transactions\Categories\ExpenseController;
+use App\Http\Controllers\Api\v1\Templates\TemplateController;
+use App\Http\Controllers\Api\v1\Templates\CategoryController;
+use App\Http\Controllers\Api\v1\Templates\TypeCategoryController;
+use App\Http\Controllers\Api\v1\Templates\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
-    'transactions/categories/incomes' => IncomeController::class,
-    'transactions/categories/expenses' => ExpenseController::class,
-    'transactions/templates' => TemplateController::class,
-    'transactions/categories' => CategoryController::class,
+    'v1/templates/categories' => CategoryController::class,
+    'v1/templates/types.categories' => TypeCategoryController::class,
+    'v1/templates/types' => TypeController::class,
+    'v1/templates' => TemplateController::class,
 ]);

@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Api\Transactions\Categories;
+namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transactions\Category;
+use App\Models\Templates\Category;
 use Illuminate\Http\Request;
 
-class IncomeController extends Controller
+class CategoryController extends Controller
 {
     /**
-     * Display all incomes.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Category::where('type', 'income')->get();
+        return Category::all();
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *

@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Api\Transactions\Categories;
+namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transactions\Category;
+use App\Models\Templates\Category;
 use Illuminate\Http\Request;
 
-class ExpenseController extends Controller
+class TypeCategoryController extends Controller
 {
-     /**
-     * Display all expenses.
+    /**
+     * Display a listing of the resource.
      *
+     * @param  string  $type
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type)
     {
-        return Category::where('type', 'expense')->get();
+        return Category::where('type', $type)->get();
     }
 
     /**
