@@ -33,6 +33,8 @@ class TypeController extends Controller
      */
     public function show($type)
     {
-        return TemplateResource::collection(Template::where('type', $type)->paginate(10));
+        return TemplateResource::collection(Template::whereHas('category', function($query) use($type){
+            $query->where('type', $type);
+        })->paginate(10));
     }
 }

@@ -40,7 +40,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return Category::with('templates')->find($id);
+        return new CategoryResource(Category::with('templates')->find($id));
     }
 
     /**

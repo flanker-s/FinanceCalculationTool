@@ -23,7 +23,6 @@ class TemplateFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'type' => $this->faker->randomElement(['income', 'expense']),
         ];
     }
 }

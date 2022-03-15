@@ -16,7 +16,6 @@ class CreateTemplatesTable extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', ['income', 'expense']);
             $table->timestamps();
             $table->foreignId('category_id');
         });

@@ -30,15 +30,10 @@ class DatabaseSeeder extends Seeder
 
         Category::factory()->count(10)->create();
         $category_ids = Category::all()->pluck('id');
-        $random_id = 0;
 
         Template::factory()->count(50)->create([
-            'category_id' => function () use (&$random_id) {
-                return $random_id;
-            },
-            'type' => function () use ($category_ids, &$random_id) {
-                $random_id = $category_ids->random();
-                return Category::find($random_id)->type;
+            'category_id' => function () use ($category_ids) {
+                return $category_ids->random();
             },
         ]);
     }
