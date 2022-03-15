@@ -33,23 +33,12 @@ class TemplateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Template  $transactionTemplate
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Template $transactionTemplate)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Template  $transactionTemplate
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Template $transactionTemplate)
-    {
-        
+        return new TemplateResource(Template::find($id));
     }
 
     /**
