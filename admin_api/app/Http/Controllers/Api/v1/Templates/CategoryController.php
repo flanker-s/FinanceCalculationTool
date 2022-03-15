@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\v1\Templates\CategoryResource;
 use App\Models\Templates\Category;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::all();
+        return CategoryResource::collection(Category::paginate(10));
     }
     
     /**
@@ -37,7 +38,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return new CategoryResource(Category::find($id));
     }
 
     /**
