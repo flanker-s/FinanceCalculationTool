@@ -1,19 +1,18 @@
 <?php
 
-namespace Database\Factories\Transactions;
+namespace Database\Factories\Templates;
 
-use App\Models\Transactions\Category;
-use App\Models\Transactions\Template;
+use App\Models\Templates\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TemplateFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
+     * The name of the factory's corresponding model
+     * 
      * @var string
      */
-    protected $model = Template::class;
+    protected $model = Category::class;
 
     /**
      * Define the model's default state.

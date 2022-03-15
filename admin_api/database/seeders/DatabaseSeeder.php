@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Transactions\Category;
-use App\Models\Transactions\Template;
+use App\Models\Templates\Category;
+use App\Models\Templates\Template;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,21 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //Create default categories
-        // Category::insert([
-        //     [
-        //         'name' => 'Various incomes',
-        //         'type' => 'income',
-        //         'created_at'=> date('Y-m-d H:i:s'),
-        //         'updated_at'=> date('Y-m-d H:i:s'),
-        //     ],
-        //     [
-        //         'name' => 'Various expenses',
-        //         'type' => 'expense',
-        //         'created_at'=> date('Y-m-d H:i:s'),
-        //         'updated_at'=> date('Y-m-d H:i:s'),
-        //     ]
-        // ]);
         Category::create([
             'name' => 'Various incomes',
             'type' => 'income',
