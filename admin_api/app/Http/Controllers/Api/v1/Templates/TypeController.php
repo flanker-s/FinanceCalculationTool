@@ -3,25 +3,28 @@
 namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\v1\Templates\TemplateResource;
 use App\Models\Templates\Category;
 use App\Models\Templates\Template;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
-     /**
+    /**
      * Display all expenses.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return ['types' => [
-            0 => 'income',
-            1 => 'expanse'
-        ]];
+        return [
+            'data' => [
+                0 => 'expense',
+                1 => 'income'
+            ]
+        ];
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -30,6 +33,6 @@ class TypeController extends Controller
      */
     public function show($type)
     {
-        return Template::where('type', $type)->get();
+        return TemplateResource::collection(Template::where('type', $type)->paginate(10));
     }
 }
