@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\v1\Templates\CategoryResource;
 use App\Models\Templates\Category;
 use Illuminate\Http\Request;
 
@@ -33,12 +34,19 @@ class TypeCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $type
+     * @param  string  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type, $categoryId)
     {
-        //
+        $category = Category::find($categoryId);
+        if($category->type == $type)
+        {
+            return new CategoryResource($category);
+        } else {
+            abort(404);
+        }
     }
 
     /**
