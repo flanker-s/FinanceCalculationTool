@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\v1\Templates\TemplateResource;
 use App\Models\Templates\Template;
 use Illuminate\Http\Request;
 
@@ -15,11 +16,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        $templates = [
-            'incomes' => Template::where('type', '=', 'income')->get(), 
-            'expenses' => Template::where('type', '=', 'expense')->get(), 
-        ];
-        return $templates;
+        return TemplateResource::collection(Template::paginate(10));
     }
 
     /**

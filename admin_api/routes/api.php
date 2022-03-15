@@ -23,8 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
+    'v1/templates/types.categories' => TypeCategoryController::class, 
     'v1/templates/categories' => CategoryController::class,
-    'v1/templates/types.categories' => TypeCategoryController::class,
     'v1/templates/types' => TypeController::class,
     'v1/templates' => TemplateController::class,
 ]);
