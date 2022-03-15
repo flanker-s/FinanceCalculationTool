@@ -18,7 +18,8 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'type' => $this->type,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'templates' => TemplateResource::collection($this->whenLoaded('templates'))
         ];
     }
 }
