@@ -13,62 +13,47 @@ class TypeCategoryController extends Controller
      * Display a listing of the resource.
      *
      * @param  string  $type
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index($type)
     {
-        return Category::where('type', $type)->get();
+        $categories = Category::where('type', $type)->get();
+        return CategoryResource::collection($categories);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return CategoryResource
      */
-    public function store(Request $request)
+    public function store(Request $request, string $type)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $category = Category::create([
+            'name' => $request->name,
+            'type' => $type
+        ]);
+        return new CategoryResource($category);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  string  $type
-     * @param  string  $category
-     * @return \Illuminate\Http\Response
+     * @param  int  $categoryId
+     * @return CategoryResource
      */
-    public function show($type, $categoryId)
+    public function show(string $type, int $categoryId)
     {
-        $category = Category::find($categoryId);
+        $category = Category::with('templates')->find($categoryId);
         if($category && $category->type == $type)
         {
             return new CategoryResource($category);
         } else {
             abort(404);
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
