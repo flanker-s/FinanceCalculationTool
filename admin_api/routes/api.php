@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\v1\Templates\TemplateController;
 use App\Http\Controllers\Api\v1\Templates\CategoryController;
 use App\Http\Controllers\Api\v1\Templates\TypeCategoryController;
 use App\Http\Controllers\Api\v1\Templates\TypeController;
+use \App\Http\Controllers\Api\v1\UserController;
+use \App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +24,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResources([
-    'v1/templates/types.categories' => TypeCategoryController::class, 
-    'v1/templates/categories' => CategoryController::class,
-    'v1/templates/types' => TypeController::class,
-    'v1/templates' => TemplateController::class,
-]);
+Route::post('/auth/register', [AuthController::class, 'register'])->name('register');
+Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
+
+Route::group([
+    'prefix' => 'v1',
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::apiResources([
+        '/templates/types.categories' => TypeCategoryController::class,
+        '/templates/categories' => CategoryController::class,
+        '/templates/types' => TypeController::class,
+        '/templates' => TemplateController::class,
+    ]);
+});
+
