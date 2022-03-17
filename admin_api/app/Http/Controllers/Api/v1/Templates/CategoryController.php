@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\v1\Templates\CategoryResource;
-use App\Http\Resources\Api\v1\Templates\TemplateResource;
 use App\Models\Templates\Category;
-use App\Models\Templates\Template;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,31 +12,35 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
         return CategoryResource::collection(Category::paginate(10));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return CategoryResource
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'type' => 'required',
+        ]);
+        return new CategoryResource(Category::create($request->all()));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return CategoryResource
      */
-    public function show($id)
+    public function show(int $id)
     {
         return new CategoryResource(Category::with('templates')->find($id));
     }
@@ -47,12 +49,14 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return CategoryResource
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $category = Category::find($id);
+        $category->update($request->all());
+        return new CategoryResource($category);
     }
 
     /**
@@ -61,8 +65,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        //TODO: add soft delete
+        Category::destroy($id);
+        return response('item deleted', 204);
     }
 }
