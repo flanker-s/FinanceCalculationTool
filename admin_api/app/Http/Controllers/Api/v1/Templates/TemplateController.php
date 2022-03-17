@@ -12,7 +12,7 @@ class TemplateController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -23,20 +23,24 @@ class TemplateController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Resources\Api\v1\Templates\TemplateResource
      */
     public function store(Request $request)
     {
-
+        $request->validate([
+            'name' => 'required',
+            'category_id' => 'required',
+        ]);
+        return new TemplateResource(Template::create($request->all()));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \App\Http\Resources\Api\v1\Templates\TemplateResource
      */
-    public function show($id)
+    public function show(int $id)
     {
         return new TemplateResource(Template::find($id));
     }
@@ -45,22 +49,28 @@ class TemplateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Template  $transactionTemplate
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     * @return \App\Http\Resources\Api\v1\Templates\TemplateResource
      */
-    public function update(Request $request, Template $transactionTemplate)
+    public function update(Request $request, $id)
     {
-        //
+        $template = Template::find($id);
+        if($template){
+            $template->update($request->all());
+            return new TemplateResource($template);
+        } else abort(404);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Template  $transactionTemplate
+     * @param  string $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Template $transactionTemplate)
+    public function destroy($id)
     {
-        //
+        //TODO: add soft delete
+        Template::destroy($id);
+        return response('item deleted', 204);
     }
 }
