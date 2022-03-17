@@ -55,8 +55,10 @@ class CategoryController extends Controller
     public function update(Request $request, int $id)
     {
         $category = Category::find($id);
-        $category->update($request->all());
-        return new CategoryResource($category);
+        if($category){
+            $category->update($request->all());
+            return new CategoryResource($category);
+        } else abort(404);
     }
 
     /**
