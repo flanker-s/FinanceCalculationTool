@@ -38,11 +38,14 @@ class TemplateController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \App\Http\Resources\Api\v1\Templates\TemplateResource
+     * @return TemplateResource
      */
     public function show(int $id)
     {
-        return new TemplateResource(Template::find($id));
+        $template = Template::find($id);
+        if($template){
+            return new TemplateResource($template);
+        } else abort(404);
     }
 
     /**

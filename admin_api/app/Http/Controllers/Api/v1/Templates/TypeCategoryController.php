@@ -41,7 +41,7 @@ class TypeCategoryController extends Controller
     public function show($type, $categoryId)
     {
         $category = Category::find($categoryId);
-        if($category->type == $type)
+        if($category && $category->type == $type)
         {
             return new CategoryResource($category);
         } else {
