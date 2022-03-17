@@ -18,6 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->enum('type', ['income', 'expense']);
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

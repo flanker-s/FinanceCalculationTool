@@ -69,7 +69,6 @@ class CategoryController extends Controller
      */
     public function destroy(int $id)
     {
-        //TODO: add soft delete
         Category::destroy($id);
         return response('item deleted', 204);
     }

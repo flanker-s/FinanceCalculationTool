@@ -18,6 +18,8 @@ class CreateTemplatesTable extends Migration
             $table->string('name');
             $table->timestamps();
             $table->foreignId('category_id');
+
+            $table->softDeletes();
         });
     }
 

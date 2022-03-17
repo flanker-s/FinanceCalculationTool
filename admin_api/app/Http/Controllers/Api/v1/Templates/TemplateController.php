@@ -69,7 +69,6 @@ class TemplateController extends Controller
      */
     public function destroy($id)
     {
-        //TODO: add soft delete
         Template::destroy($id);
         return response('item deleted', 204);
     }
