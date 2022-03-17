@@ -22,7 +22,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return CategoryResource
      */
     public function store(Request $request)
@@ -43,31 +43,29 @@ class CategoryController extends Controller
     public function show(int $id)
     {
         $category = Category::with('templates')->find($id);
-        if($category){
-            return new CategoryResource($category);
-        } else abort(404);
+        if (!$category) abort(404);
+        return new CategoryResource($category);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @param int $id
      * @return CategoryResource
      */
     public function update(Request $request, int $id)
     {
         $category = Category::find($id);
-        if($category){
-            $category->update($request->all());
-            return new CategoryResource($category);
-        } else abort(404);
+        if (!$category) abort(404);
+        $category->update($request->all());
+        return new CategoryResource($category);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)

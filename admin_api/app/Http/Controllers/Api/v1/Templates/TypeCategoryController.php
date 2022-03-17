@@ -12,7 +12,7 @@ class TypeCategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  string  $type
+     * @param string $type
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index($type)
@@ -24,7 +24,7 @@ class TypeCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return CategoryResource
      */
     public function store(Request $request, string $type)
@@ -42,18 +42,14 @@ class TypeCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $type
-     * @param  int  $categoryId
+     * @param string $type
+     * @param int $categoryId
      * @return CategoryResource
      */
     public function show(string $type, int $categoryId)
     {
         $category = Category::with('templates')->find($categoryId);
-        if($category && $category->type == $type)
-        {
-            return new CategoryResource($category);
-        } else {
-            abort(404);
-        }
+        if (!$category || $category->type != $type) abort(404);
+        return new CategoryResource($category);
     }
 }

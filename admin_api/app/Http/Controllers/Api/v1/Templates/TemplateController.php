@@ -43,9 +43,8 @@ class TemplateController extends Controller
     public function show(int $id)
     {
         $template = Template::find($id);
-        if($template){
-            return new TemplateResource($template);
-        } else abort(404);
+        if(!$template) abort(404);
+        return new TemplateResource($template);
     }
 
     /**
@@ -58,10 +57,9 @@ class TemplateController extends Controller
     public function update(Request $request, $id)
     {
         $template = Template::find($id);
-        if($template){
-            $template->update($request->all());
-            return new TemplateResource($template);
-        } else abort(404);
+        if(!$template) abort(404);
+        $template->update($request->all());
+        return new TemplateResource($template);
     }
 
     /**

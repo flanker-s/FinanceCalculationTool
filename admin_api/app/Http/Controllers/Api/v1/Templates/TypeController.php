@@ -26,18 +26,15 @@ class TypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $type
+     * @param string $type
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function show(string $type)
     {
-        $templates = Template::whereHas('category', function($query) use($type){
+        $templates = Template::whereHas('category', function ($query) use ($type) {
             $query->where('type', $type);
         })->paginate(10);
-        if($templates){
-            return TemplateResource::collection($templates);
-        } else {
-            abort(404);
-        }
+        if (!$templates) abort(404);
+        return TemplateResource::collection($templates);
     }
 }
