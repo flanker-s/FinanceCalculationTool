@@ -6,8 +6,7 @@ use App\Http\Controllers\Api\v1\Templates\TemplateController;
 use App\Http\Controllers\Api\v1\Templates\CategoryController;
 use App\Http\Controllers\Api\v1\Templates\TypeCategoryController;
 use App\Http\Controllers\Api\v1\Templates\TypeController;
-use \App\Http\Controllers\Api\v1\UserController;
-use \App\Http\Controllers\Api\AuthController;
+use \App\Http\Controllers\Api\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthenticationController::class, 'register']);
+Route::post('/login', [AuthenticationController::class, 'login']);
 
 Route::group([
     'prefix' => 'v1',

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class AuthController extends Controller
+class AuthenticationController extends Controller
 {
     /**
      * Register new user.
