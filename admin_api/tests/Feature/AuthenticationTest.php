@@ -15,7 +15,7 @@ class AuthenticationTest extends TestCase
      *
      * @return void
      */
-    public function test_register()
+    public function test_register_status()
     {
         $response = $this->post('api/register', [
             'name' => 'user',
