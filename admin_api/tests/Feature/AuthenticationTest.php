@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -24,5 +23,20 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(201);
+    }
+
+    public function test_login_status()
+    {
+        $password = 'password';
+        $factory = User::factory(['password' => bcrypt($password)]);
+        $user = $factory->count(1)->create()->first();
+
+        $response = $this->post('api/login', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $password
+        ]);
+
+        $response->assertStatus(200);
     }
 }
