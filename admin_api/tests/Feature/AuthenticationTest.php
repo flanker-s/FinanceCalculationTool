@@ -14,7 +14,7 @@ class AuthenticationTest extends TestCase
      *
      * @return void
      */
-    public function test_register_status()
+    public function test_user_can_register()
     {
         $response = $this->post('api/register', [
             'name' => 'user',
@@ -25,8 +25,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_login_status()
-    {
+    public function test_user_can_get_an_access_token(){
         $password = 'password';
         $factory = User::factory(['password' => bcrypt($password)]);
         $user = $factory->count(1)->create()->first();
@@ -36,20 +35,7 @@ class AuthenticationTest extends TestCase
             'email' => $user->email,
             'password' => $password
         ]);
-
         $response->assertStatus(200);
-    }
-
-    public function test_login_returns_an_access_token(){
-        $password = 'password';
-        $factory = User::factory(['password' => bcrypt($password)]);
-        $user = $factory->count(1)->create()->first();
-
-        $response = $this->post('api/login', [
-            'name' => $user->name,
-            'email' => $user->email,
-            'password' => $password
-        ]);
         $response->assertJsonStructure([
             'access_token'
         ]);
