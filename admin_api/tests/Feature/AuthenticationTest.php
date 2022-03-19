@@ -39,4 +39,19 @@ class AuthenticationTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_login_returns_an_access_token(){
+        $password = 'password';
+        $factory = User::factory(['password' => bcrypt($password)]);
+        $user = $factory->count(1)->create()->first();
+
+        $response = $this->post('api/login', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $password
+        ]);
+        $response->assertJsonStructure([
+            'access_token'
+        ]);
+    }
 }
