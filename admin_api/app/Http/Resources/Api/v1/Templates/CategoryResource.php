@@ -17,7 +17,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'type' => $this->type,
+            'operation_type' => $this->operation_type,
             'created_at' => $this->created_at,
             'templates' => TemplateResource::collection($this->whenLoaded('templates'))
         ];

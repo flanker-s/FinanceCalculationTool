@@ -9,7 +9,7 @@ class CategoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model
-     * 
+     *
      * @var string
      */
     protected $model = Category::class;
@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'type' => $this->faker->randomElement(['income', 'expense']),
+            'operation_type' => $this->faker->randomElement(['income', 'expense']),
         ];
     }
 }

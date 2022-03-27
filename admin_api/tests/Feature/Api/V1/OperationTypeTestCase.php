@@ -4,9 +4,9 @@
 namespace Tests\Feature\Api\V1;
 use Tests\Feature\Api\V1TestCase as TestCase;
 
-class TypeTestCase extends TestCase
+class OperationTypeTestCase extends TestCase
 {
-    protected $types = [
+    protected $operationTypes = [
         0 => 'expense',
         1 => 'income'
     ];

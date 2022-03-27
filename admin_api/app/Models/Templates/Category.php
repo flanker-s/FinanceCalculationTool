@@ -11,7 +11,7 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'type'];
+    protected $fillable = ['name', 'operation_type'];
 
     public function templates(){
         return $this->hasMany(Template::class);

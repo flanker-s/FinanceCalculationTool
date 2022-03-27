@@ -12,12 +12,12 @@ class TypeCategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param string $type
+     * @param string $operationType
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index($type)
+    public function index($operationType)
     {
-        $categories = Category::where('type', $type)->get();
+        $categories = Category::where('operation_type', $operationType)->get();
         return CategoryResource::collection($categories);
     }
 
@@ -27,14 +27,14 @@ class TypeCategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return CategoryResource
      */
-    public function store(Request $request, string $type)
+    public function store(Request $request, string $operationType)
     {
         $request->validate([
             'name' => 'required'
         ]);
         $category = Category::create([
             'name' => $request->name,
-            'type' => $type
+            'operation_type' => $operationType
         ]);
         return new CategoryResource($category);
     }
@@ -42,14 +42,14 @@ class TypeCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param string $type
+     * @param string $operationType
      * @param int $categoryId
      * @return CategoryResource
      */
-    public function show(string $type, int $categoryId)
+    public function show(string $operationType, int $categoryId)
     {
         $category = Category::with('templates')->find($categoryId);
-        if (!$category || $category->type != $type) abort(404);
+        if (!$category || $category->operation_type != $operationType) abort(404);
         return new CategoryResource($category);
     }
 }

@@ -31,9 +31,9 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::apiResources([
-        '/templates/types.categories' => TypeCategoryController::class,
+        '/templates/operation-types.categories' => TypeCategoryController::class,
         '/templates/categories' => CategoryController::class,
-        '/templates/types' => TypeController::class,
+        '/templates/operation-types' => TypeController::class,
         '/templates' => TemplateController::class,
     ]);
 });
