@@ -4,15 +4,10 @@ namespace Tests\Feature\Api\V1;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Feature\Api\V1TestCase as TestCase;
+use Tests\Feature\Api\V1\TypeTestCase as TestCase;
 
 class TypeTest extends TestCase
 {
-    private $types = [
-        0 => 'expense',
-        1 => 'income'
-    ];
-
     public function test_user_can_get_all_types()
     {
         $this->seed();
