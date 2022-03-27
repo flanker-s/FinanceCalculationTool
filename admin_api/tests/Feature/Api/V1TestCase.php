@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tests\Api\V1;
+namespace Tests\Feature\Api;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\AuthorizedTestCase;
