@@ -70,6 +70,10 @@ class CategoryController extends Controller
      */
     public function destroy(int $id)
     {
+        //prevent deleting primary categories
+        if($id < 3){
+            abort(405);
+        }
         Category::destroy($id);
         return response('item deleted', 204);
     }

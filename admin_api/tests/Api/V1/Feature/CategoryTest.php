@@ -70,4 +70,13 @@ class CategoryTest extends TestCase
         $response = $this->delete($this->uri . '/templates/categories/' . $category->id);
         $response->assertStatus(204);
     }
+
+    public function test_user_cant_delete_primary_categories()
+    {
+        $this->seed();
+        $response = $this->delete($this->uri . '/templates/categories/' . 1);
+        $response->assertStatus(405);
+        $response = $this->delete($this->uri . '/templates/categories/' . 2);
+        $response->assertStatus(405);
+    }
 }
