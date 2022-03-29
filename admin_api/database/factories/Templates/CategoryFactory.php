@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'operation_type' => $this->faker->randomElement(['income', 'expense']),
+            'operation' => $this->faker->randomElement(['income', 'expense']),
         ];
     }
 }

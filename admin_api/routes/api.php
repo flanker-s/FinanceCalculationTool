@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\Templates\TemplateController;
 use App\Http\Controllers\Api\v1\Templates\CategoryController;
-use App\Http\Controllers\Api\v1\Templates\TypeCategoryController;
-use App\Http\Controllers\Api\v1\Templates\TypeController;
+use App\Http\Controllers\Api\v1\Templates\OperationCategoryController;
+use App\Http\Controllers\Api\v1\Templates\OperationController;
 use \App\Http\Controllers\Api\AuthenticationController;
 
 /*
@@ -31,9 +31,9 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::apiResources([
-        '/templates/operation-types.categories' => TypeCategoryController::class,
+        '/templates/operations.categories' => OperationCategoryController::class,
         '/templates/categories' => CategoryController::class,
-        '/templates/operation-types' => TypeController::class,
+        '/templates/operations' => OperationController::class,
         '/templates' => TemplateController::class,
     ]);
 });

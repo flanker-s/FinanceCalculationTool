@@ -24,7 +24,7 @@ class CategoryTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
-                'id', 'name', 'operation_type', 'created_at', 'templates'
+                'id', 'name', 'operation', 'created_at', 'templates'
             ]
         ]);
     }
@@ -34,13 +34,13 @@ class CategoryTest extends TestCase
         $this->seed();
         $data = [
             'name' => 'test',
-            'operation_type' => collect(['income', 'expense'])->random()
+            'operation' => collect(['income', 'expense'])->random()
         ];
         $response = $this->post($this->uri . '/templates/categories', $data);
         $response->assertStatus(201);
         $response->assertJsonStructure([
             'data' => [
-                'id', 'name', 'operation_type', 'created_at'
+                'id', 'name', 'operation', 'created_at'
             ]
         ]);
     }
@@ -50,7 +50,7 @@ class CategoryTest extends TestCase
         $this->seed();
         $data = [
             'name' => 'test2',
-            'operation_type' => collect(['income', 'expense'])->random()
+            'operation' => collect(['income', 'expense'])->random()
         ];
         $category = Category::factory()->create();
         $uri = $this->uri . '/templates/categories/' . $category->id;
@@ -58,7 +58,7 @@ class CategoryTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
-                'id', 'name', 'operation_type', 'created_at'
+                'id', 'name', 'operation', 'created_at'
             ]
         ]);
     }

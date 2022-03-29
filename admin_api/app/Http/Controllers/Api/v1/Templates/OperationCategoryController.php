@@ -7,17 +7,17 @@ use App\Http\Resources\Api\v1\Templates\CategoryResource;
 use App\Models\Templates\Category;
 use Illuminate\Http\Request;
 
-class TypeCategoryController extends Controller
+class OperationCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param string $operationType
+     * @param string $operation
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index($operationType)
+    public function index($operation)
     {
-        $categories = Category::where('operation_type', $operationType)->get();
+        $categories = Category::where('operation', $operation)->get();
         return CategoryResource::collection($categories);
     }
 
@@ -27,14 +27,14 @@ class TypeCategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return CategoryResource
      */
-    public function store(Request $request, string $operationType)
+    public function store(Request $request, string $operation)
     {
         $request->validate([
             'name' => 'required'
         ]);
         $category = Category::create([
             'name' => $request->name,
-            'operation_type' => $operationType
+            'operation' => $operation
         ]);
         return new CategoryResource($category);
     }
@@ -42,14 +42,14 @@ class TypeCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param string $operationType
+     * @param string $operation
      * @param int $categoryId
      * @return CategoryResource
      */
-    public function show(string $operationType, int $categoryId)
+    public function show(string $operation, int $categoryId)
     {
         $category = Category::with('templates')->find($categoryId);
-        if (!$category || $category->operation_type != $operationType) abort(404);
+        if (!$category || $category->operation != $operation) abort(404);
         return new CategoryResource($category);
     }
 }

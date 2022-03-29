@@ -25,7 +25,7 @@ class TemplateTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
-                'id', 'name', 'operation_type', 'created_at'
+                'id', 'name', 'operation', 'created_at'
             ]
         ]);
     }
@@ -41,7 +41,7 @@ class TemplateTest extends TestCase
         $response->assertStatus(201);
         $response->assertJsonStructure([
             'data' => [
-                'id', 'name', 'operation_type', 'created_at'
+                'id', 'name', 'operation', 'created_at'
             ]
         ]);
     }
@@ -58,7 +58,7 @@ class TemplateTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
-                'id', 'name', 'operation_type', 'created_at'
+                'id', 'name', 'operation', 'created_at'
             ]
         ]);
     }

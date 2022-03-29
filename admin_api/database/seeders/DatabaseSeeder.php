@@ -27,13 +27,13 @@ class DatabaseSeeder extends Seeder
 
         Category::create([
             'name' => 'Various incomes',
-            'operation_type' => 'income',
+            'operation' => 'income',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         Category::create([
             'name' => 'Various expenses',
-            'operation_type' => 'expense',
+            'operation' => 'expense',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
