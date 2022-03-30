@@ -43,7 +43,7 @@ class CategoryController extends Controller
     public function show(int $id)
     {
         $category = Category::with('templates')->find($id);
-        if (!$category) abort(404);
+        if(!$category) abort(404);
         return new CategoryResource($category);
     }
 
@@ -57,7 +57,10 @@ class CategoryController extends Controller
     public function update(Request $request, int $id)
     {
         $category = Category::find($id);
-        if (!$category) abort(404);
+
+        if(!$category) abort(404);
+        if($category->isPrimary) abort(405);
+
         $category->update($request->all());
         return new CategoryResource($category);
     }
@@ -70,10 +73,11 @@ class CategoryController extends Controller
      */
     public function destroy(int $id)
     {
-        //prevent deleting primary categories
-        if($id < 3){
-            abort(405);
-        }
+        $category = Category::find($id);
+
+        if(!$category) abort(404);
+        if($category->isPrimary) abort(405);
+
         Category::destroy($id);
         return response('item deleted', 204);
     }

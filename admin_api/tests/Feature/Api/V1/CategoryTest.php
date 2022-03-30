@@ -50,10 +50,10 @@ class CategoryTest extends TestCase
     {
         $this->seed();
         $data = [
-            'name' => 'test2',
+            'name' => 'test',
             'operation_id' => Operation::first()->id
         ];
-        $category = Category::first();
+        $category = Category::where('isPrimary', false)->first();
         $uri = $this->uri . '/templates/categories/' . $category->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(200);
@@ -64,10 +64,23 @@ class CategoryTest extends TestCase
         ]);
     }
 
+    public function test_user_cant_update_primary_categories()
+    {
+        $this->seed();
+        $data = [
+            'name' => 'test',
+            'operation_id' => Operation::first()->id
+        ];
+        $primaryCategory = Category::where('isPrimary', true)->first();
+        $uri = $this->uri . '/templates/categories/' . $primaryCategory->id;
+        $response = $this->put($uri, $data);
+        $response->assertStatus(405);
+    }
+
     public function test_user_can_delete_category()
     {
         $this->seed();
-        $category = Category::first();
+        $category = Category::where('isPrimary', false)->first();
         $response = $this->delete($this->uri . '/templates/categories/' . $category->id);
         $response->assertStatus(204);
     }
@@ -75,9 +88,8 @@ class CategoryTest extends TestCase
     public function test_user_cant_delete_primary_categories()
     {
         $this->seed();
-        $response = $this->delete($this->uri . '/templates/categories/' . 1);
-        $response->assertStatus(405);
-        $response = $this->delete($this->uri . '/templates/categories/' . 2);
+        $primaryCategory = Category::where('isPrimary', true)->first();
+        $response = $this->delete($this->uri . '/templates/categories/' . $primaryCategory->id);
         $response->assertStatus(405);
     }
 }
