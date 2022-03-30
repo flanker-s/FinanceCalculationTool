@@ -29,7 +29,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'operation' => 'required',
+            'operation_id' => 'required',
         ]);
         return new CategoryResource(Category::create($request->all()));
     }

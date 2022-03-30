@@ -3,6 +3,7 @@
 namespace Tests\Feature\Api\V1;
 
 use App\Models\Templates\Category;
+use App\Models\Templates\Operation;
 use App\Models\Templates\Template;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -34,7 +35,7 @@ class CategoryTest extends TestCase
         $this->seed();
         $data = [
             'name' => 'test',
-            'operation' => collect(['income', 'expense'])->random()
+            'operation_id' => Operation::first()->id
         ];
         $response = $this->post($this->uri . '/templates/categories', $data);
         $response->assertStatus(201);
@@ -50,9 +51,9 @@ class CategoryTest extends TestCase
         $this->seed();
         $data = [
             'name' => 'test2',
-            'operation' => collect(['income', 'expense'])->random()
+            'operation_id' => Operation::first()->id
         ];
-        $category = Category::factory()->create();
+        $category = Category::first();
         $uri = $this->uri . '/templates/categories/' . $category->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(200);
@@ -66,7 +67,7 @@ class CategoryTest extends TestCase
     public function test_user_can_delete_category()
     {
         $this->seed();
-        $category = Category::factory()->create();
+        $category = Category::first();
         $response = $this->delete($this->uri . '/templates/categories/' . $category->id);
         $response->assertStatus(204);
     }

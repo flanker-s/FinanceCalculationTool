@@ -15,9 +15,9 @@ class OperationCategoryController extends Controller
      * @param string $operation
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index($operation)
+    public function index($operationId)
     {
-        $categories = Category::where('operation', $operation)->get();
+        $categories = Category::where('operation_id', $operationId)->get();
         return CategoryResource::collection($categories);
     }
 
@@ -27,14 +27,14 @@ class OperationCategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return CategoryResource
      */
-    public function store(Request $request, string $operation)
+    public function store(Request $request, string $operationId)
     {
         $request->validate([
             'name' => 'required'
         ]);
         $category = Category::create([
             'name' => $request->name,
-            'operation' => $operation
+            'operation_id' => $operationId
         ]);
         return new CategoryResource($category);
     }
@@ -46,10 +46,10 @@ class OperationCategoryController extends Controller
      * @param int $categoryId
      * @return CategoryResource
      */
-    public function show(string $operation, int $categoryId)
+    public function show(string $operationId, int $categoryId)
     {
         $category = Category::with('templates')->find($categoryId);
-        if (!$category || $category->operation != $operation) abort(404);
+        if (!$category || $category->operation_id != $operationId) abort(404);
         return new CategoryResource($category);
     }
 }

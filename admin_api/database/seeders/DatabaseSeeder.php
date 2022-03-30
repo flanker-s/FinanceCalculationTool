@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Models\Templates\Operation;
 use App\Models\Templates\Category;
 use App\Models\Templates\Template;
 use Illuminate\Support\Str;
@@ -25,22 +26,34 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
+        $income = Operation::create([
+            'name' => 'income'
+        ]);
+        $expense = Operation::create([
+            'name' => 'expense'
+        ]);
+
         Category::create([
             'name' => 'Various incomes',
-            'operation' => 'income',
+            'operation_id' => $income->id,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         Category::create([
             'name' => 'Various expenses',
-            'operation' => 'expense',
+            'operation_id' => $expense->id,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        Category::factory()->count(10)->create();
-        $category_ids = Category::all()->pluck('id');
+        $operation_ids = Operation::all()->pluck('id');
+        Category::factory()->count(10)->create([
+            'operation_id' => function () use ($operation_ids) {
+                return $operation_ids->random();
+            }
+        ]);
 
+        $category_ids = Category::all()->pluck('id');
         Template::factory()->count(50)->create([
             'category_id' => function () use ($category_ids) {
                 return $category_ids->random();

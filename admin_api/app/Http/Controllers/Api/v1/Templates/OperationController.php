@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\v1\Templates;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\v1\Templates\OperationResource;
 use App\Http\Resources\Api\v1\Templates\TemplateResource;
+use App\Models\Templates\Operation;
 use App\Models\Templates\Template;
 
 class OperationController extends Controller
@@ -11,16 +13,11 @@ class OperationController extends Controller
     /**
      * Display all expenses.
      *
-     * @return string[][]
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        return [
-            'data' => [
-                0 => 'expense',
-                1 => 'income'
-            ]
-        ];
+        return OperationResource::collection(Operation::all());
     }
 
     /**
@@ -29,10 +26,10 @@ class OperationController extends Controller
      * @param string $operation
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function show(string $operation)
+    public function show(int $operationId)
     {
-        $templates = Template::whereHas('category', function ($query) use ($operation) {
-            $query->where('operation', $operation);
+        $templates = Template::whereHas('category', function ($query) use ($operationId) {
+            $query->where('operation_id', $operationId);
         })->paginate(10);
         if (!$templates) abort(404);
         return TemplateResource::collection($templates);
