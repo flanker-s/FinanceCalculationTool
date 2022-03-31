@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\Defaults\TemplateController;
 use App\Http\Controllers\Api\v1\Defaults\CategoryController;
 use App\Http\Controllers\Api\v1\Defaults\OperationCategoryController;
+use App\Http\Controllers\Api\v1\Defaults\OperationTemplateController;
 use App\Http\Controllers\Api\v1\Defaults\OperationController;
 use \App\Http\Controllers\Api\AuthenticationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::apiResources([
+        '/defaults/operations.templates' => OperationTemplateController::class,
         '/defaults/operations.categories' => OperationCategoryController::class,
         '/defaults/categories' => CategoryController::class,
         '/defaults/operations' => OperationController::class,
