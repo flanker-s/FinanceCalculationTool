@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Api\V1;
 
-use App\Models\Templates\Operation;
+use App\Models\Defaults\Operation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Models\Templates\Category;
-use Tests\Feature\Api\V1TestCase as TestCase;
+use App\Models\Defaults\Category;
+use Tests\Feature\Api\V1\DefaultsTestCase as TestCase;
 
 class OperationCategoryTest extends TestCase
 {
@@ -14,7 +14,7 @@ class OperationCategoryTest extends TestCase
     {
         $this->seed();
         $operation = Operation::first();
-        $uri = $this->uri . '/templates/operations/' . $operation->id . '/categories';
+        $uri = $this->uri . '/operations/' . $operation->id . '/categories';
         $response = $this->get($uri);
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -30,7 +30,7 @@ class OperationCategoryTest extends TestCase
         $this->seed();
         $operation = Operation::first();
         $category = Category::where('operation_id', $operation->id)->first();
-        $uri = $this->uri . '/templates/operations/' . $operation->id . '/categories/' . $category->id;
+        $uri = $this->uri . '/operations/' . $operation->id . '/categories/' . $category->id;
         $response = $this->get($uri);
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -45,7 +45,7 @@ class OperationCategoryTest extends TestCase
     {
         $this->seed();
         $operation = Operation::first();
-        $uri = $this->uri . '/templates/operations/' . $operation->id . '/categories';
+        $uri = $this->uri . '/operations/' . $operation->id . '/categories';
         $response = $this->post($uri, [
             'name' => 'test-' . $operation->id
         ]);

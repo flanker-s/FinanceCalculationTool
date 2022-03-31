@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Api\V1;
 
-use App\Models\Templates\Template;
-use App\Models\Templates\Category;
+use App\Models\Defaults\Template;
+use App\Models\Defaults\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
-use Tests\Feature\Api\V1TestCase as TestCase;
+use Tests\Feature\Api\V1\DefaultsTestCase as TestCase;
 
 class TemplateTest extends TestCase
 {

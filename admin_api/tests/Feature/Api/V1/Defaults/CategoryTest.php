@@ -2,26 +2,26 @@
 
 namespace Tests\Feature\Api\V1;
 
-use App\Models\Templates\Category;
-use App\Models\Templates\Operation;
-use App\Models\Templates\Template;
+use App\Models\Defaults\Category;
+use App\Models\Defaults\Operation;
+use App\Models\Defaults\Template;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Feature\Api\V1TestCase as TestCase;
+use Tests\Feature\Api\V1\DefaultsTestCase as TestCase;
 
 class CategoryTest extends TestCase
 {
     public function test_user_can_get_all_categories()
     {
         $this->seed();
-        $response = $this->get($this->uri . '/templates/categories');
+        $response = $this->get($this->uri . '/categories');
         $response->assertStatus(200);
     }
 
     public function test_user_can_get_category()
     {
         $this->seed();
-        $response = $this->get($this->uri . '/templates/categories/' . Category::first()->id);
+        $response = $this->get($this->uri . '/categories/' . Category::first()->id);
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
@@ -37,7 +37,7 @@ class CategoryTest extends TestCase
             'name' => 'test',
             'operation_id' => Operation::first()->id
         ];
-        $response = $this->post($this->uri . '/templates/categories', $data);
+        $response = $this->post($this->uri . '/categories', $data);
         $response->assertStatus(201);
         $response->assertJsonStructure([
             'data' => [
@@ -54,7 +54,7 @@ class CategoryTest extends TestCase
             'operation_id' => Operation::first()->id
         ];
         $category = Category::where('isPrimary', false)->first();
-        $uri = $this->uri . '/templates/categories/' . $category->id;
+        $uri = $this->uri . '/categories/' . $category->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -72,7 +72,7 @@ class CategoryTest extends TestCase
             'operation_id' => Operation::first()->id
         ];
         $primaryCategory = Category::where('isPrimary', true)->first();
-        $uri = $this->uri . '/templates/categories/' . $primaryCategory->id;
+        $uri = $this->uri . '/categories/' . $primaryCategory->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(405);
     }
@@ -81,7 +81,7 @@ class CategoryTest extends TestCase
     {
         $this->seed();
         $category = Category::where('isPrimary', false)->first();
-        $response = $this->delete($this->uri . '/templates/categories/' . $category->id);
+        $response = $this->delete($this->uri . '/categories/' . $category->id);
         $response->assertStatus(204);
     }
 
@@ -89,7 +89,7 @@ class CategoryTest extends TestCase
     {
         $this->seed();
         $primaryCategory = Category::where('isPrimary', true)->first();
-        $response = $this->delete($this->uri . '/templates/categories/' . $primaryCategory->id);
+        $response = $this->delete($this->uri . '/categories/' . $primaryCategory->id);
         $response->assertStatus(405);
     }
 }

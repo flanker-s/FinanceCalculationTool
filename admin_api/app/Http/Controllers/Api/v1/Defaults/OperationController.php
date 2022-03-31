@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Templates;
+namespace App\Http\Controllers\Api\v1\Defaults;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\v1\Templates\OperationResource;
-use App\Http\Resources\Api\v1\Templates\TemplateResource;
-use App\Models\Templates\Operation;
-use App\Models\Templates\Template;
+use App\Http\Resources\Api\v1\Defaults\OperationResource;
+use App\Http\Resources\Api\v1\Defaults\TemplateResource;
+use App\Models\Defaults\Operation;
+use App\Models\Defaults\Template;
 
 class OperationController extends Controller
 {

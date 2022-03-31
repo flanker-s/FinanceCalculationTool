@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Templates;
+namespace App\Http\Controllers\Api\v1\Defaults;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\v1\Templates\CategoryResource;
-use App\Models\Templates\Category;
+use App\Http\Resources\Api\v1\Defaults\CategoryResource;
+use App\Models\Defaults\Category;
 use Illuminate\Http\Request;
 
 class OperationCategoryController extends Controller

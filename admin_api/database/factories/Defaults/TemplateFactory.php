@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories\Templates;
+namespace Database\Factories\Defaults;
 
-use App\Models\Templates\Template;
+use App\Models\Defaults\Template;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TemplateFactory extends Factory

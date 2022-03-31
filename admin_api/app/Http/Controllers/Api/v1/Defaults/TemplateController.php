@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Templates;
+namespace App\Http\Controllers\Api\v1\Defaults;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\v1\Templates\TemplateResource;
-use App\Models\Templates\Template;
+use App\Http\Resources\Api\v1\Defaults\TemplateResource;
+use App\Models\Defaults\Template;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller
@@ -23,7 +23,7 @@ class TemplateController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \App\Http\Resources\Api\v1\Templates\TemplateResource
+     * @return \App\Http\Resources\Api\v1\Defaults\TemplateResource
      */
     public function store(Request $request)
     {
@@ -52,7 +52,7 @@ class TemplateController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int $id
-     * @return \App\Http\Resources\Api\v1\Templates\TemplateResource
+     * @return \App\Http\Resources\Api\v1\Defaults\TemplateResource
      */
     public function update(Request $request, $id)
     {

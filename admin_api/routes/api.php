@@ -2,10 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\v1\Templates\TemplateController;
-use App\Http\Controllers\Api\v1\Templates\CategoryController;
-use App\Http\Controllers\Api\v1\Templates\OperationCategoryController;
-use App\Http\Controllers\Api\v1\Templates\OperationController;
+use App\Http\Controllers\Api\v1\Defaults\TemplateController;
+use App\Http\Controllers\Api\v1\Defaults\CategoryController;
+use App\Http\Controllers\Api\v1\Defaults\OperationCategoryController;
+use App\Http\Controllers\Api\v1\Defaults\OperationController;
 use \App\Http\Controllers\Api\AuthenticationController;
 
 /*
@@ -31,10 +31,10 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::apiResources([
-        '/templates/operations.categories' => OperationCategoryController::class,
-        '/templates/categories' => CategoryController::class,
-        '/templates/operations' => OperationController::class,
-        '/templates' => TemplateController::class,
+        '/defaults/operations.categories' => OperationCategoryController::class,
+        '/defaults/categories' => CategoryController::class,
+        '/defaults/operations' => OperationController::class,
+        '/defaults/templates' => TemplateController::class,
     ]);
 });
 

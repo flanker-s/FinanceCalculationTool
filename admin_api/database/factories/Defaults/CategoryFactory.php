@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories\Templates;
+namespace Database\Factories\Defaults;
 
-use App\Models\Templates\Category;
+use App\Models\Defaults\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoryFactory extends Factory
