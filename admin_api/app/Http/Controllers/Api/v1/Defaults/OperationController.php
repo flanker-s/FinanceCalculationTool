@@ -23,15 +23,13 @@ class OperationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param string $operation
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @param string $id
+     * @return OperationResource
      */
-    public function show(int $operationId)
+    public function show(int $id)
     {
-        $templates = Template::whereHas('category', function ($query) use ($operationId) {
-            $query->where('operation_id', $operationId);
-        })->paginate(10);
-        if (!$templates) abort(404);
-        return TemplateResource::collection($templates);
+        $operation = Operation::find($id);
+        if(!$operation) abort(404);
+        return new OperationResource($operation);
     }
 }

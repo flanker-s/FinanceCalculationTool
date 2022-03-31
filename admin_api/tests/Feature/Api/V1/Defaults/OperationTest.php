@@ -21,7 +21,7 @@ class OperationTest extends TestCase
         ]);
     }
 
-    public function test_user_can_get_template_lists_by_operations()
+    public function test_user_can_get_operation()
     {
         $this->seed();
         $operation = Operation::first();
@@ -29,7 +29,7 @@ class OperationTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
-                ['id', 'name', 'operation', 'created_at']
+                'id', 'name'
             ]
         ]);
     }
