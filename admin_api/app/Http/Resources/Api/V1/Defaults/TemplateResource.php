@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Api\v1\Defaults;
+namespace App\Http\Resources\Api\V1\Defaults;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class TemplateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,8 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'operation' => $this->operation,
-            'created_at' => $this->created_at,
-            'templates' => TemplateResource::collection($this->whenLoaded('templates'))
+            'category' => $this->category,
+            'created_at' => $this->created_at
         ];
     }
 }
