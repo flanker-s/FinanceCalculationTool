@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\V1;
+namespace Tests\Feature\Api\V1\Defaults;
 
 use App\Models\Defaults\Template;
 use App\Models\Defaults\Category;
@@ -22,12 +22,7 @@ class TemplateTest extends TestCase
     {
         $this->seed();
         $response = $this->get($this->uri . '/templates/' . Template::first()->id);
-        $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at'
-            ]
-        ]);
+        $response->assertStatus(200);;
     }
 
     public function test_user_can_create_template()
@@ -39,11 +34,6 @@ class TemplateTest extends TestCase
         ];
         $response = $this->post($this->uri . '/templates', $data);
         $response->assertStatus(201);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at'
-            ]
-        ]);
     }
 
     public function test_user_can_update_template()
@@ -56,11 +46,6 @@ class TemplateTest extends TestCase
         $uri = $this->uri . '/templates/' . Template::first()->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at'
-            ]
-        ]);
     }
 
     public function test_user_can_delete_template()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\V1;
+namespace Tests\Feature\Api\V1\Defaults;
 
 use App\Models\Defaults\Operation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,11 +14,6 @@ class OperationTest extends TestCase
         $this->seed();
         $response = $this->get($this->uri . '/operations');
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                ['id', 'name']
-            ]
-        ]);
     }
 
     public function test_user_can_get_operation()
@@ -27,10 +22,5 @@ class OperationTest extends TestCase
         $operation = Operation::first();
         $response = $this->get($this->uri . '/operations/' . $operation->id);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name'
-            ]
-        ]);
     }
 }

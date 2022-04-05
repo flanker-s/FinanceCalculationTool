@@ -17,11 +17,6 @@ class OperationTemplateTest extends TestCase
         $uri = $this->uri . '/operations/' . $operation->id . '/templates';
         $response = $this->get($uri);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                ['id', 'name']
-            ]
-        ]);
     }
 
     public function test_user_can_get_a_template_by_operation()
@@ -34,12 +29,6 @@ class OperationTemplateTest extends TestCase
         $uri = $this->uri . '/operations/' . $operation->id . '/templates/' . $template->id;
         $response = $this->get($uri);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name'
-            ]
-        ]);
-
     }
 
     public function test_user_can_create_a_template_of_a_specific_operation()
@@ -51,10 +40,5 @@ class OperationTemplateTest extends TestCase
             'name' => 'test'
         ]);
         $response->assertStatus(201);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name'
-            ]
-        ]);
     }
 }

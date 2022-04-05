@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\V1;
+namespace Tests\Feature\Api\V1\Defaults;
 
 use App\Models\Defaults\Category;
 use App\Models\Defaults\Operation;
@@ -23,11 +23,6 @@ class CategoryTest extends TestCase
         $this->seed();
         $response = $this->get($this->uri . '/categories/' . Category::first()->id);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at', 'templates'
-            ]
-        ]);
     }
 
     public function test_user_can_create_category()
@@ -39,11 +34,6 @@ class CategoryTest extends TestCase
         ];
         $response = $this->post($this->uri . '/categories', $data);
         $response->assertStatus(201);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at'
-            ]
-        ]);
     }
 
     public function test_user_can_update_category()
@@ -57,11 +47,6 @@ class CategoryTest extends TestCase
         $uri = $this->uri . '/categories/' . $category->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at'
-            ]
-        ]);
     }
 
     public function test_user_cant_update_primary_categories()

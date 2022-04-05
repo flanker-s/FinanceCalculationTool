@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Api\V1;
+namespace Tests\Feature\Api\V1\Defaults;
 
 use App\Models\Defaults\Operation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,11 +17,6 @@ class OperationCategoryTest extends TestCase
         $uri = $this->uri . '/operations/' . $operation->id . '/categories';
         $response = $this->get($uri);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                ['id', 'name', 'operation', 'created_at']
-            ]
-        ]);
 
     }
 
@@ -33,12 +28,6 @@ class OperationCategoryTest extends TestCase
         $uri = $this->uri . '/operations/' . $operation->id . '/categories/' . $category->id;
         $response = $this->get($uri);
         $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at', 'templates'
-            ]
-        ]);
-
     }
 
     public function test_user_can_create_a_category_of_a_specific_operation()
@@ -50,10 +39,5 @@ class OperationCategoryTest extends TestCase
             'name' => 'test-' . $operation->id
         ]);
         $response->assertStatus(201);
-        $response->assertJsonStructure([
-            'data' => [
-                'id', 'name', 'operation', 'created_at'
-            ]
-        ]);
     }
 }
