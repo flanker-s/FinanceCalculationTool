@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Filters;
+namespace App\Http\Filters\Api\V1\Defaults;
 
 
 use Illuminate\Database\Eloquent\Builder;

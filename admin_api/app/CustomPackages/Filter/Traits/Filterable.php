@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 
 trait Filterable
 {
+    private static $filtersNamespace = 'App\\Http\\Filters\\Api\\V1\\Defaults';
+
     public function scopeFilter($query, $parameters)
     {
         $modelClass = get_class($this);
@@ -23,7 +25,7 @@ trait Filterable
     {
         $modelName = Str::afterLast($modelClass, '\\');
 
-        $filterClasses = ClassFinder::getClassesInNamespace('App\\Http\\Filters');
+        $filterClasses = ClassFinder::getClassesInNamespace(self::$filtersNamespace);
         foreach ($filterClasses as $filterClass) {
             if (self::getClassKeyWord($filterClass) === $modelName) {
                 return $filterClass;
