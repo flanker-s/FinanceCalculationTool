@@ -14,9 +14,15 @@ class TemplateController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        return TemplateResource::collection(Template::paginate(10));
+        $data = $request->validate([
+            'name' => 'string',
+            'category_id' => '',
+            'operation_id' => ''
+        ]);
+        $templates = Template::filter($data);
+        return TemplateResource::collection($templates->paginate(10));
     }
 
     /**
