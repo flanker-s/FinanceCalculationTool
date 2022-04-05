@@ -7,6 +7,7 @@ use App\Http\Resources\Api\v1\Defaults\OperationResource;
 use App\Http\Resources\Api\v1\Defaults\TemplateResource;
 use App\Models\Defaults\Operation;
 use App\Models\Defaults\Template;
+use Illuminate\Http\Request;
 
 class OperationController extends Controller
 {
@@ -15,9 +16,13 @@ class OperationController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        return OperationResource::collection(Operation::all());
+        $data = $request->validate([
+           'name' => 'string'
+        ]);
+        $operations = Operation::filter($data);
+        return OperationResource::collection($operations->get());
     }
 
     /**
