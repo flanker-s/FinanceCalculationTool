@@ -14,9 +14,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        return CategoryResource::collection(Category::paginate(10));
+        $data = $request->validate([
+            'name' => 'string',
+            'operation_id' => ''
+        ]);
+        $categories = Category::filter($data);
+        return CategoryResource::collection($categories->paginate(10));
     }
 
     /**
