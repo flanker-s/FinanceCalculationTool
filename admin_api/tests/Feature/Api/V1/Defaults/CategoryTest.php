@@ -16,6 +16,18 @@ class CategoryTest extends TestCase
         $this->seed();
         $response = $this->get($this->uri . '/categories');
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                [
+                    'type',
+                    'id',
+                    'attributes' => [
+                        'name',
+                        'created_at'
+                    ]
+                ]
+            ]
+        ]);
     }
 
     public function test_user_can_get_category()
@@ -23,6 +35,16 @@ class CategoryTest extends TestCase
         $this->seed();
         $response = $this->get($this->uri . '/categories/' . Category::first()->id);
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                'type',
+                'id',
+                'attributes' => [
+                    'name',
+                    'created_at'
+                ]
+            ]
+        ]);
     }
 
     public function test_user_can_create_category()
@@ -34,6 +56,16 @@ class CategoryTest extends TestCase
         ];
         $response = $this->post($this->uri . '/categories', $data);
         $response->assertStatus(201);
+        $response->assertJsonStructure([
+            'data' => [
+                'type',
+                'id',
+                'attributes' => [
+                    'name',
+                    'created_at'
+                ]
+            ]
+        ]);
     }
 
     public function test_user_can_update_category()
