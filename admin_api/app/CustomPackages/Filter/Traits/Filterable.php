@@ -5,7 +5,6 @@ namespace App\CustomPackages\Filter\Traits;
 
 
 use App\CustomPackages\Filter\ClassFinder;
-use App\Http\Filters\TemplateFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
