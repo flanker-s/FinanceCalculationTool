@@ -16,13 +16,35 @@ class TemplateTest extends TestCase
         $this->seed();
         $response = $this->get($this->uri . '/templates');
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                [
+                    'type',
+                    'id',
+                    'attributes' => [
+                        'name',
+                        'created_at'
+                    ]
+                ]
+            ]
+        ]);
     }
 
     public function test_user_can_get_template()
     {
         $this->seed();
         $response = $this->get($this->uri . '/templates/' . Template::first()->id);
-        $response->assertStatus(200);;
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                'type',
+                'id',
+                'attributes' => [
+                    'name',
+                    'created_at'
+                ]
+            ]
+        ]);
     }
 
     public function test_user_can_create_template()
@@ -34,6 +56,16 @@ class TemplateTest extends TestCase
         ];
         $response = $this->post($this->uri . '/templates', $data);
         $response->assertStatus(201);
+        $response->assertJsonStructure([
+            'data' => [
+                'type',
+                'id',
+                'attributes' => [
+                    'name',
+                    'created_at'
+                ]
+            ]
+        ]);
     }
 
     public function test_user_can_update_template()
@@ -46,6 +78,16 @@ class TemplateTest extends TestCase
         $uri = $this->uri . '/templates/' . Template::first()->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                'type',
+                'id',
+                'attributes' => [
+                    'name',
+                    'created_at'
+                ]
+            ]
+        ]);
     }
 
     public function test_user_can_delete_template()
