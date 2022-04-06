@@ -3,22 +3,30 @@
 namespace App\Http\Resources\Api\V1\Defaults;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\CustomPackages\ResourceAdvancedCodnitions\Traits\HasAdvancedConditions;
 
 class TemplateResource extends JsonResource
 {
+    use HasAdvancedConditions;
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
         return [
+            'type' => 'templates',
             'id' => $this->id,
-            'name' => $this->name,
-            'category' => $this->category,
-            'created_at' => $this->created_at
+            'attributes' => [
+                'name' => $this->name,
+                'created_at' => $this->created_at
+            ],
+            'included' => $this->whenAnyLoaded([
+                'category' => new CategoryResource($this->whenLoaded('category')),
+                'operation' => new OperationResource($this->whenLoaded('operation'))
+            ]),
         ];
     }
 }
