@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Defaults;
 
+use App\CustomPackages\QueryRequest\KeyWords;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\v1\Defaults\OperationResource;
 use App\Http\Resources\Api\v1\Defaults\TemplateResource;
@@ -19,10 +20,12 @@ class OperationController extends Controller
     public function index(Request $request)
     {
         $data = $request->validate([
-           'name' => 'string'
+           'name' => 'string',
+            KeyWords::FILTER => 'array',
+            KeyWords::INCLUDE => 'array'
         ]);
-        $operations = Operation::filter($data);
-        return OperationResource::collection($operations->get());
+        $query = Operation::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
+        return OperationResource::collection($query->get());
     }
 
     /**
@@ -31,9 +34,9 @@ class OperationController extends Controller
      * @param string $id
      * @return OperationResource
      */
-    public function show(int $id)
+    public function show(Request $request, int $id)
     {
-        $operation = Operation::find($id);
+        $operation = Operation::queryRequest($request, KeyWords::INCLUDE)->find($id);
         if(!$operation) abort(404);
         return new OperationResource($operation);
     }

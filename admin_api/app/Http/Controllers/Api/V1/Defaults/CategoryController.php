@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Defaults;
 
+use App\CustomPackages\QueryRequest\KeyWords;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\v1\Defaults\CategoryResource;
 use App\Models\Defaults\Category;
@@ -18,10 +19,11 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'string',
-            'operation_id' => ''
+            KeyWords::FILTER => 'array',
+            KeyWords::INCLUDE => 'array'
         ]);
-        $categories = Category::filter($data);
-        return CategoryResource::collection($categories->paginate(10));
+        $query = Category::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
+        return CategoryResource::collection($query->paginate(10));
     }
 
     /**
@@ -45,9 +47,9 @@ class CategoryController extends Controller
      * @param int $id
      * @return CategoryResource
      */
-    public function show(int $id)
+    public function show(Request $request, int $id)
     {
-        $category = Category::with('templates')->find($id);
+        $category = Category::queryRequest($request, KeyWords::INCLUDE)->find($id);
         if(!$category) abort(404);
         return new CategoryResource($category);
     }

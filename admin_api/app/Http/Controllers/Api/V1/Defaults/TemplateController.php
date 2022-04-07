@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\v1\Defaults\TemplateResource;
 use App\Models\Defaults\Template;
 use Illuminate\Http\Request;
+use App\CustomPackages\QueryRequest\KeyWords;
 
 class TemplateController extends Controller
 {
@@ -18,11 +19,11 @@ class TemplateController extends Controller
     {
         $data = $request->validate([
             'name' => 'string',
-            'category_id' => '',
-            'operation_id' => ''
+            KeyWords::FILTER => 'array',
+            KeyWords::INCLUDE => 'array'
         ]);
-        $templates = Template::filter($data);
-        return TemplateResource::collection($templates->paginate(10));
+        $query = Template::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
+        return TemplateResource::collection($query->paginate(10));
     }
 
     /**
@@ -46,9 +47,13 @@ class TemplateController extends Controller
      * @param int $id
      * @return TemplateResource
      */
-    public function show(int $id)
+    public function show(int $id, Request $request)
     {
-        $template = Template::find($id);
+        $data = $request->validate([
+            'name' => 'string',
+            KeyWords::INCLUDE => 'array'
+        ]);
+        $template = Template::queryRequest($data, KeyWords::INCLUDE)->find($id);
         if(!$template) abort(404);
         return new TemplateResource($template);
     }
