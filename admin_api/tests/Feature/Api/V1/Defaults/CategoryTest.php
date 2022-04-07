@@ -42,6 +42,9 @@ class CategoryTest extends TestCase
                 'attributes' => [
                     'name',
                     'created_at'
+                ],
+                'links' => [
+                    'self'
                 ]
             ]
         ]);
@@ -63,6 +66,9 @@ class CategoryTest extends TestCase
                 'attributes' => [
                     'name',
                     'created_at'
+                ],
+                'links' => [
+                    'self'
                 ]
             ]
         ]);

@@ -23,6 +23,9 @@ class TemplateResource extends JsonResource
                 'name' => $this->name,
                 'created_at' => $this->created_at
             ],
+            'links' => [
+                'self' => route('templates') . '/' . $this->id
+            ],
             'included' => $this->whenAnyLoaded([
                 'category' => new CategoryResource($this->whenLoaded('category')),
                 'operation' => new OperationResource($this->whenLoaded('operation'))

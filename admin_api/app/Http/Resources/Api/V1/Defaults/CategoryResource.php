@@ -23,6 +23,9 @@ class CategoryResource extends JsonResource
                 'name' => $this->name,
                 'created_at' => $this->created_at
             ],
+            'links' => [
+                'self' => route('categories') . '/' . $this->id
+            ],
             'included' => $this->whenAnyLoaded([
                 'operation' => new OperationResource($this->whenLoaded('operation')),
                 'templates' => TemplateResource::collection($this->whenLoaded('templates')),

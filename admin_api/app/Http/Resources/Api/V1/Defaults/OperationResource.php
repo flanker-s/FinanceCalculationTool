@@ -22,6 +22,9 @@ class OperationResource extends JsonResource
             'attributes' => [
                 'name' => $this->name,
             ],
+            'links' => [
+                'self' => route('operations') . '/' . $this->id
+            ],
             'included' => $this->whenAnyLoaded([
                 'categories' => CategoryResource::collection($this->whenLoaded('categories')),
                 'templates' => TemplateResource::collection($this->whenLoaded('templates')),

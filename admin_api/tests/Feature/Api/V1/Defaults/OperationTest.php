@@ -21,6 +21,9 @@ class OperationTest extends TestCase
                     'id',
                     'attributes' => [
                         'name',
+                    ],
+                    'links' => [
+                        'self'
                     ]
                 ]
             ]
@@ -39,6 +42,9 @@ class OperationTest extends TestCase
                 'id',
                 'attributes' => [
                     'name',
+                ],
+                'links' => [
+                    'self'
                 ]
             ]
         ]);

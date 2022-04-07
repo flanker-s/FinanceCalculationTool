@@ -24,6 +24,9 @@ class TemplateTest extends TestCase
                     'attributes' => [
                         'name',
                         'created_at'
+                    ],
+                    'links' => [
+                        'self'
                     ]
                 ]
             ]
@@ -42,6 +45,9 @@ class TemplateTest extends TestCase
                 'attributes' => [
                     'name',
                     'created_at'
+                ],
+                'links' => [
+                    'self'
                 ]
             ]
         ]);
@@ -63,6 +69,9 @@ class TemplateTest extends TestCase
                 'attributes' => [
                     'name',
                     'created_at'
+                ],
+                'links' => [
+                    'self'
                 ]
             ]
         ]);
@@ -85,6 +94,9 @@ class TemplateTest extends TestCase
                 'attributes' => [
                     'name',
                     'created_at'
+                ],
+                'links' => [
+                    'self'
                 ]
             ]
         ]);
