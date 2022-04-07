@@ -2,7 +2,7 @@
 
 namespace App\Models\Defaults;
 
-use App\CustomPackages\Filter\Traits\Filterable;
+use App\CustomPackages\QueryRequest\Traits\QueryRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +13,7 @@ class Template extends Model
     use HasFactory;
     use SoftDeletes;
     use BelongsToThrough;
-    use Filterable;
+    use QueryRequest;
 
     protected $fillable = ['name', 'category_id'];
 

@@ -2,14 +2,14 @@
 
 namespace App\Models\Defaults;
 
-use App\CustomPackages\Filter\Traits\Filterable;
+use App\CustomPackages\QueryRequest\Traits\QueryRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Operation extends Model
 {
     use HasFactory;
-    use Filterable;
+    use QueryRequest;
 
     public function categories(){
         return $this->hasMany(Category::class);
