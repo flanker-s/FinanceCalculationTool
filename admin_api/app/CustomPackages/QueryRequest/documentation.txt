@@ -1,0 +1,55 @@
+QueryRequest is a written in haste chunk of code that
+excludes code duplicates for most common queries
+in resource controllers.
+
+Dependencies:
+
+    - Filter
+
+Example of usage:
+
+/** The examples of URLs you can use to query your API resources **/
+
+URLs:
+    - www.example.com/api/entities?include[]=category
+    - www.example.com/api/entities?filter[name]=needle
+    - www.example.com/api/entities?filter[name]=needle&include[]=category
+
+/** You can override key words such as "include" or "filter" shown in URL example in "KeyWords" class **/
+/** But the array structures of values passed by URL shouldn't be changed **/
+/** The "KeyWords" class is defined in QueryRequest directory **/
+
+KeyWords class:
+
+    public const FILTER = 'filter';
+    public const INCLUDE = 'include';
+
+/** Then you need to add QueryRequest trait to your Model class. **/
+
+Model:
+
+    class SomeEntity extends Model
+    {
+        use QueryRequest;
+    }
+
+/** Now you have queryRequest() method in your model object. **/
+/** You can invoke it like that SomeEntity::queryRequest($request) **/
+/** $request should be a type of Request or Array. **/
+/** The return type would be Illuminate\Database\Eloquent\Builder object **/
+/** so you can proceed calling building functions after that. **/
+
+Controller:
+
+    use App\{path}\QueryRequest\KeyWords;
+
+    public function index(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'string',
+            'filter' => 'array',
+            'include' => 'array'
+        ]);
+        $query = SomeEntity::queryRequest($data, KeyWords::INCLUDE, KeyWords::FILTER);
+        return SomeEntityResource::collection($query->paginate(10));
+    }
