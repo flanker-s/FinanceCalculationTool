@@ -35,14 +35,14 @@ class DatabaseSeeder extends Seeder
 
         Category::create([
             'name' => 'Various incomes',
-            'isPrimary' => true,
+            'is_primary' => true,
             'operation_id' => $income->id,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
         Category::create([
             'name' => 'Various expenses',
-            'isPrimary' => true,
+            'is_primary' => true,
             'operation_id' => $expense->id,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),

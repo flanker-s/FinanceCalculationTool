@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->boolean('isPrimary')->default(false);
+            $table->boolean('is_primary')->default(false);
             $table->foreignId('operation_id');
             $table->timestamps();
             $table->softDeletes();

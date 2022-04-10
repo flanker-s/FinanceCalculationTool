@@ -66,7 +66,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
 
         if(!$category) abort(404);
-        if($category->isPrimary) abort(405);
+        if($category->is_primary) abort(405);
 
         $category->update($request->all());
         return new CategoryResource($category);
@@ -83,7 +83,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
 
         if(!$category) abort(404);
-        if($category->isPrimary) abort(405);
+        if($category->is_primary) abort(405);
 
         Category::destroy($id);
         return response('item deleted', 204);
