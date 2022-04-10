@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\Defaults\TemplateController;
 use App\Http\Controllers\Api\v1\Defaults\CategoryController;
-use App\Http\Controllers\Api\v1\Defaults\OperationCategoryController;
-use App\Http\Controllers\Api\v1\Defaults\OperationTemplateController;
 use App\Http\Controllers\Api\v1\Defaults\OperationController;
 use \App\Http\Controllers\Api\AuthenticationController;
 
@@ -32,6 +31,7 @@ Route::group([
     'prefix' => 'v1',
     'middleware' => ['auth:sanctum']
 ], function () {
+    Route::resource('/users', UserController::class)->name('index', 'users');
     Route::group([
         'prefix' => 'defaults'
     ], function (){

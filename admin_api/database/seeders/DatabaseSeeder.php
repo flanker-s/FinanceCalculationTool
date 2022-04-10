@@ -49,6 +49,8 @@ class DatabaseSeeder extends Seeder
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
+        User::factory()->count(10)->create();
+
         $operation_ids = Operation::all()->pluck('id');
         Category::factory()->count(10)->create([
             'operation_id' => function () use ($operation_ids) {
