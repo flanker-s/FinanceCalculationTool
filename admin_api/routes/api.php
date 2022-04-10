@@ -35,8 +35,6 @@ Route::group([
     Route::group([
         'prefix' => 'defaults'
     ], function (){
-        Route::apiResource('/operations.categories',  OperationCategoryController::class);
-        Route::apiResource('/operations.templates', OperationTemplateController::class);
         Route::apiResource('/operations', OperationController::class)->name('index', 'operations');
         Route::apiResource('/categories', CategoryController::class)->name('index', 'categories');
         Route::apiResource('/templates', TemplateController::class)->name('index', 'templates');
