@@ -20,7 +20,6 @@ class OperationController extends Controller
     public function index(Request $request)
     {
         $data = $request->validate([
-           'name' => 'string',
             KeyWords::FILTER => 'array',
             KeyWords::INCLUDE => 'array'
         ]);
