@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\CustomPackages\QueryRequest\KeyWords;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Users\IndexUserRequest;
+use App\Http\Requests\Api\V1\Users\StoreUserRequest;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,11 +17,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(Request $request)
+    public function index(IndexUserRequest $request)
     {
-        $data = $request->validate([
-            KeyWords::FILTER
-        ]);
+        $data = $request->validated();
         $query = User::where('is_primary', false);
         $users = $query->queryRequest($data, KeyWords::FILTER)->get();
         return UserResource::collection($users);
@@ -31,13 +31,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return UserResource
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required|min:6'
-        ]);
+        $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         return new UserResource(User::create($data));
     }
