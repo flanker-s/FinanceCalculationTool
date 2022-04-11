@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Api\V1\Defaults;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Defaults\Templates\IndexTemplateRequest;
+use App\Http\Requests\Api\V1\Defaults\Templates\ShowTemplateRequest;
+use App\Http\Requests\Api\V1\Defaults\Templates\StoreTemplateRequest;
+use App\Http\Requests\Api\V1\Defaults\Templates\UpdateTemplateRequest;
 use App\Http\Resources\Api\v1\Defaults\TemplateResource;
 use App\Models\Defaults\Template;
 use Illuminate\Http\Request;
@@ -15,12 +19,9 @@ class TemplateController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(Request $request)
+    public function index(IndexTemplateRequest $request)
     {
-        $data = $request->validate([
-            KeyWords::FILTER => 'array',
-            KeyWords::INCLUDE => 'array'
-        ]);
+        $data = $request->validated();
         $query = Template::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
         return TemplateResource::collection($query->paginate(10));
     }
@@ -31,13 +32,10 @@ class TemplateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \App\Http\Resources\Api\v1\Defaults\TemplateResource
      */
-    public function store(Request $request)
+    public function store(StoreTemplateRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'category_id' => 'required',
-        ]);
-        return new TemplateResource(Template::create($request->all()));
+        $data = $request->validated();
+        return new TemplateResource(Template::create($data));
     }
 
     /**
@@ -46,12 +44,9 @@ class TemplateController extends Controller
      * @param int $id
      * @return TemplateResource
      */
-    public function show(int $id, Request $request)
+    public function show(int $id, ShowTemplateRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'string',
-            KeyWords::INCLUDE => 'array'
-        ]);
+        $data = $request->validated();
         $template = Template::queryRequest($data, KeyWords::INCLUDE)->find($id);
         if(!$template) abort(404);
         return new TemplateResource($template);
@@ -64,11 +59,11 @@ class TemplateController extends Controller
      * @param  int $id
      * @return \App\Http\Resources\Api\v1\Defaults\TemplateResource
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTemplateRequest $request, $id)
     {
         $template = Template::find($id);
         if(!$template) abort(404);
-        $template->update($request->all());
+        $template->update($request->validated());
         return new TemplateResource($template);
     }
 
