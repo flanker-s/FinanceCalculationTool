@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Api\V1\Defaults;
 
 use App\CustomPackages\QueryRequest\KeyWords;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Defaults\Categories\IndexCategoryRequest;
+use App\Http\Requests\Api\V1\Defaults\Categories\ShowCategoryRequest;
+use App\Http\Requests\Api\V1\Defaults\Categories\StoreCategoryRequest;
+use App\Http\Requests\Api\V1\Defaults\Categories\UpdateCategoryRequest;
 use App\Http\Resources\Api\v1\Defaults\CategoryResource;
 use App\Models\Defaults\Category;
 use Illuminate\Http\Request;
@@ -15,12 +19,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index(Request $request)
+    public function index(IndexCategoryRequest $request)
     {
-        $data = $request->validate([
-            KeyWords::FILTER => 'array',
-            KeyWords::INCLUDE => 'array'
-        ]);
+        $data = $request->validated();
         $query = Category::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
         return CategoryResource::collection($query->paginate(10));
     }
@@ -31,13 +32,10 @@ class CategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return CategoryResource
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'operation_id' => 'required',
-        ]);
-        return new CategoryResource(Category::create($request->all()));
+        $data = $request->validated();
+        return new CategoryResource(Category::create($data));
     }
 
     /**
@@ -46,9 +44,10 @@ class CategoryController extends Controller
      * @param int $id
      * @return CategoryResource
      */
-    public function show(Request $request, int $id)
+    public function show(ShowCategoryRequest $request, int $id)
     {
-        $category = Category::queryRequest($request, KeyWords::INCLUDE)->find($id);
+        $data = $request->validated();
+        $category = Category::queryRequest($data, KeyWords::INCLUDE)->find($id);
         if(!$category) abort(404);
         return new CategoryResource($category);
     }
@@ -60,14 +59,14 @@ class CategoryController extends Controller
      * @param int $id
      * @return CategoryResource
      */
-    public function update(Request $request, int $id)
+    public function update(UpdateCategoryRequest $request, int $id)
     {
         $category = Category::find($id);
 
         if(!$category) abort(404);
         if($category->is_primary) abort(405);
 
-        $category->update($request->all());
+        $category->update($request->validated());
         return new CategoryResource($category);
     }
 
