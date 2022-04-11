@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 trait Filterable
 {
-    private static $filtersNamespace = 'App\\Http\\Filters\\Api\\V1\\Defaults';
+    private static $filtersNamespace = 'App\\Http\\Filters';
 
     public function scopeFilter($query, $parameters)
     {
