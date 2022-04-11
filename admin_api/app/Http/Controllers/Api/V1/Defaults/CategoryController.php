@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function index(IndexCategoryRequest $request)
     {
         $data = $request->validated();
-        $query = Category::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
+        $query = Category::queryRequest($data);
         return CategoryResource::collection($query->paginate(10));
     }
 
@@ -47,7 +47,7 @@ class CategoryController extends Controller
     public function show(ShowCategoryRequest $request, int $id)
     {
         $data = $request->validated();
-        $category = Category::queryRequest($data, KeyWords::INCLUDE)->find($id);
+        $category = Category::queryRequest($data)->find($id);
         if(!$category) abort(404);
         return new CategoryResource($category);
     }

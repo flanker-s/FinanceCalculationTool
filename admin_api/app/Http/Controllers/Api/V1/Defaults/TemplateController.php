@@ -22,7 +22,7 @@ class TemplateController extends Controller
     public function index(IndexTemplateRequest $request)
     {
         $data = $request->validated();
-        $query = Template::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
+        $query = Template::queryRequest($data);
         return TemplateResource::collection($query->paginate(10));
     }
 
@@ -47,7 +47,7 @@ class TemplateController extends Controller
     public function show(int $id, ShowTemplateRequest $request)
     {
         $data = $request->validated();
-        $template = Template::queryRequest($data, KeyWords::INCLUDE)->find($id);
+        $template = Template::queryRequest($data)->find($id);
         if(!$template) abort(404);
         return new TemplateResource($template);
     }

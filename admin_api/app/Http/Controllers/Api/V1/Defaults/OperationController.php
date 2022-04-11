@@ -22,7 +22,7 @@ class OperationController extends Controller
     public function index(IndexOperationRequest $request)
     {
         $data = $request->validated();
-        $query = Operation::queryRequest($data, KeyWords::FILTER,  KeyWords::INCLUDE);
+        $query = Operation::queryRequest($data);
         return OperationResource::collection($query->get());
     }
 
@@ -35,7 +35,7 @@ class OperationController extends Controller
     public function show(ShowOperationRequest $request, int $id)
     {
         $data = $request->validated();
-        $operation = Operation::queryRequest($data, KeyWords::INCLUDE)->find($id);
+        $operation = Operation::queryRequest($data)->find($id);
         if(!$operation) abort(404);
         return new OperationResource($operation);
     }
