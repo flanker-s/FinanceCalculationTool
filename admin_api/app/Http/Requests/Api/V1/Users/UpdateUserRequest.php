@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\V1\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -23,10 +24,15 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $userAbilityIds = $this->user()->abilities->pluck('id')->filter(function ($value){
+            return $value != null;
+        })->all();
+
         return [
             'name' => '',
             'email' => 'email',
-            'password' => 'min:6'
+            'password' => 'min:6',
+            'abilities' => ['array', Rule::in($userAbilityIds)]
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\CustomPackages\QueryRequest\KeyWords;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Users\IndexUserRequest;
 use App\Http\Requests\Api\V1\Users\StoreUserRequest;
+use App\Http\Requests\Api\V1\Users\UpdateUserRequest;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $query = User::where('is_primary', false);
-        $users = $query->queryRequest($data, KeyWords::FILTER)->get();
+        $users = $query->queryRequest($data)->get();
         return UserResource::collection($users);
     }
 
@@ -35,7 +36,11 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
-        return new UserResource(User::create($data));
+        $user = User::create($data);
+        if(isset($data['abilities'])){
+            $user->abilities()->attach($data['abilities']);
+        }
+        return new UserResource($user);
     }
 
     /**
@@ -58,14 +63,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return UserResource
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         $user = User::find($id);
 
         if(!$user) abort(404);
         if($user->is_primary) abort(405);
 
-        $user->update($request->all());
+        $data = $request->validated();
+        if(isset($data['password'])){
+            $data['password'] = bcrypt($data['password']);
+        }
+        $user->update($data);
+
+        if(isset($data['abilities'])){
+            $user->abilities()->sync($data['abilities']);
+        }
+
         return new UserResource($user);
     }
 
@@ -82,7 +96,7 @@ class UserController extends Controller
         if(!$user) abort(404);
         if($user->is_primary) abort(405);
 
-        User::destroy($user);
+        User::destroy($id);
         return response('user deleted', 204);;
     }
 }

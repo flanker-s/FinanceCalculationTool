@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\V1\Users;
 
 use App\CustomPackages\QueryRequest\KeyWords;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class IndexUserRequest extends FormRequest
 {
@@ -26,6 +27,7 @@ class IndexUserRequest extends FormRequest
     {
         return [
             KeyWords::FILTER => 'array:name,email',
+            KeyWords::INCLUDE => ['array', Rule::in(['abilities'])]
         ];
     }
 }

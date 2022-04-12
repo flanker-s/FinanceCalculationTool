@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Api\V1\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -23,10 +25,15 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
+        $userAbilityIds = $this->user()->abilities->pluck('id')->filter(function ($value){
+            return $value != null;
+        })->all();
+
         return [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'abilities' => ['array', Rule::in($userAbilityIds)]
         ];
     }
 }

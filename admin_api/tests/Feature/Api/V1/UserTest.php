@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\Api\V1;
 
+use App\Models\Ability;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\Feature\Api\V1TestCase as TestCase;
 
 class UserTest extends TestCase
@@ -50,10 +52,16 @@ class UserTest extends TestCase
     public function test_user_can_create_user()
     {
         $this->seed();
+        $user = User::where('is_primary', true)->first();
+        $userAbilityNames = $user->abilities->pluck('name')->filter(function ($value){
+            return $value != null;
+        })->all();
+        Sanctum::actingAs($user, $userAbilityNames);
         $data = [
             'name' => 'test',
             'email' => 'test@gmail.com',
-            'password' => 'password'
+            'password' => 'password',
+            'abilities' => [Ability::first()->id]
         ];
         $response = $this->post($this->uri . '/users', $data);
         $response->assertStatus(201);
@@ -73,11 +81,14 @@ class UserTest extends TestCase
     public function test_user_can_update_user()
     {
         $this->seed();
+        $user = User::where('is_primary', false)->first();
         $data = [
             'name' => 'test2',
             'email' => 'test2@gmail.com',
+            'password' => 'password',
+            'abilities' => [$user->abilities()->pluck('id')->first()]
         ];
-        $uri = $this->uri . '/users/' . User::where('is_primary', false)->first()->id;
+        $uri = $this->uri . '/users/' . $user->id;
         $response = $this->put($uri, $data);
         $response->assertStatus(200);
         $response->assertJsonStructure([

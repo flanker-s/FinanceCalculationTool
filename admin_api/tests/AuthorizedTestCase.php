@@ -4,6 +4,7 @@
 namespace Tests;
 
 
+use App\Models\Ability;
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
 

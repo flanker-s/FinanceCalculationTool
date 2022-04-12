@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
         $credentials = request(['email', 'password']);
         if(!auth()->attempt($credentials)){
             return response()->json([
-                'messege' => 'The given data was invalid',
+                'message' => 'The given data was invalid',
                 'errors' => [
                     'password' =>[
                         'invalid credentials'
@@ -55,10 +55,14 @@ class AuthenticationController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
-        $authToken = $user->createToken('auth-token')->plainTextToken;
+        $userAbilityNames = $user->abilities->pluck('name')->filter(function ($value){
+            return $value != null;
+        })->all();
+
+        $authToken = $user->createToken('auth-token', $userAbilityNames)->plainTextToken;
 
         return response()->json([
-           'access_token' => $authToken
+           'access_token' => $authToken,
         ]);
     }
 }

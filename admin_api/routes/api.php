@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AbilityController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,13 +32,39 @@ Route::group([
     'prefix' => 'v1',
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::resource('/users', UserController::class)->name('index', 'users');
+
+    Route::group(['prefix' => 'users'], function (){
+        Route::get('/{id}', [UserController::class, 'show']);
+        Route::get('/', [UserController::class, 'index'])->name('users');
+        Route::post('/', [UserController::class, 'store'])->middleware(['ability:manage-users']);
+        Route::put('/{id}', [UserController::class, 'update'])->middleware(['ability:manage-users']);
+        Route::delete('/{id}', [UserController::class, 'destroy'])->middleware(['ability:manage-users']);
+    });
+
+    Route::get('/abilities', [AbilityController::class, 'index'])->name('abilities')
+        ->middleware(['ability:manage-users']);
+
     Route::group([
         'prefix' => 'defaults'
     ], function (){
-        Route::apiResource('/operations', OperationController::class)->name('index', 'operations');
-        Route::apiResource('/categories', CategoryController::class)->name('index', 'categories');
-        Route::apiResource('/templates', TemplateController::class)->name('index', 'templates');
+        Route::group(['prefix' => 'operations'], function (){
+            Route::get('/{id}', [OperationController::class, 'show']);
+            Route::get('/', [OperationController::class, 'index'])->name('operations');
+        });
+        Route::group(['prefix' => 'categories'], function (){
+            Route::get('/{id}', [CategoryController::class, 'show']);
+            Route::get('/', [CategoryController::class, 'index'])->name('categories');
+            Route::post('/', [CategoryController::class, 'store'])->middleware(['ability:manage-categories']);
+            Route::put('/{id}', [CategoryController::class, 'update'])->middleware(['ability:manage-categories']);
+            Route::delete('/{id}', [CategoryController::class, 'destroy'])->middleware(['ability:manage-categories']);
+        });
+        Route::group(['prefix' => 'templates'], function (){
+            Route::get('/{id}', [TemplateController::class, 'show']);
+            Route::get('/', [TemplateController::class, 'index'])->name('templates');
+            Route::post('/', [TemplateController::class, 'store'])->middleware(['ability:manage-templates']);
+            Route::put('/{id}', [TemplateController::class, 'update'])->middleware(['ability:manage-templates']);
+            Route::delete('/{id}', [TemplateController::class, 'destroy'])->middleware(['ability:manage-templates']);
+        });
     });
 });
 

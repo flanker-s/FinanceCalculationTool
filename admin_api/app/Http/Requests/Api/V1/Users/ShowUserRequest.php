@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\V1\Users;
 
 use App\CustomPackages\QueryRequest\KeyWords;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ShowUserRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class ShowUserRequest extends FormRequest
     public function rules()
     {
         return [
-
+            KeyWords::INCLUDE => ['array', Rule::in(['abilities'])]
         ];
     }
 }

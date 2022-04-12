@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ability;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\Defaults\Operation;
@@ -18,6 +19,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $abilities = collect([
+            Ability::create(['name' => 'manage-users'])->id,
+            Ability::create(['name' => 'manage-categories'])->id,
+            Ability::create(['name' => 'manage-templates'])->id,
+        ]);
+
         User::create([
             'name' =>'admin',
             'email' => 'admin@gmail.com',
@@ -25,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'is_primary' => true,
             'remember_token' => Str::random(10),
-        ]);
+        ])->abilities()->attach($abilities);
 
         $income = Operation::create([
             'name' => 'income'
@@ -49,7 +56,10 @@ class DatabaseSeeder extends Seeder
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        User::factory()->count(10)->create();
+        $users = User::factory()->count(10)->create();
+        $users->each(function ($user) use ($abilities){
+            $user->abilities()->attach($abilities->random(rand(1, $abilities->count())));
+        });
 
         $operation_ids = Operation::all()->pluck('id');
         Category::factory()->count(10)->create([
