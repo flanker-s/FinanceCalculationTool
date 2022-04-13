@@ -14,6 +14,11 @@ class TemplateCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'links' => [
+                'self' => route('templates')
+            ],
+            'data' => $this->collection
+        ];
     }
 }

@@ -14,6 +14,11 @@ class AbilityCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'links' => [
+                'self' => route('abilities')
+            ],
+            'data' => $this->collection
+        ];
     }
 }

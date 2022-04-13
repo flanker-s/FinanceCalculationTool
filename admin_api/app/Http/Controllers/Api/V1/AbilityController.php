@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Abilities\IndexAbilityRequest;
 use App\Http\Requests\Api\V1\Abilities\ShowAbilityRequest;
+use App\Http\Resources\Api\V1\AbilityCollection;
 use App\Http\Resources\Api\V1\AbilityResource;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\Ability;
@@ -17,7 +18,7 @@ class AbilityController extends Controller
     {
         $data = $request->validated();
         $abilities = Ability::queryRequest($data)->get();
-        return AbilityResource::collection($abilities);
+        return new AbilityCollection($abilities);
     }
 
     public function show(ShowAbilityRequest $request, $id)

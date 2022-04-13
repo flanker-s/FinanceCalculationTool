@@ -17,6 +17,9 @@ class CategoryTest extends TestCase
         $response = $this->get($this->uri . '/categories');
         $response->assertStatus(200);
         $response->assertJsonStructure([
+            'links' => [
+                'self'
+            ],
             'data' => [
                 [
                     'type',
@@ -26,7 +29,7 @@ class CategoryTest extends TestCase
                         'created_at'
                     ]
                 ]
-            ]
+            ],
         ]);
     }
 

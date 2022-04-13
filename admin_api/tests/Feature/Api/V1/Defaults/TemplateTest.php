@@ -17,6 +17,9 @@ class TemplateTest extends TestCase
         $response = $this->get($this->uri . '/templates');
         $response->assertStatus(200);
         $response->assertJsonStructure([
+            'links' => [
+                'self'
+            ],
             'data' => [
                 [
                     'type',

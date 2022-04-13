@@ -17,6 +17,9 @@ class UserTest extends TestCase
         $response = $this->get($this->uri . '/users');
         $response->assertStatus(200);
         $response->assertJsonStructure([
+            'links' => [
+                'self'
+            ],
             'data' => [
                 [
                     'type',

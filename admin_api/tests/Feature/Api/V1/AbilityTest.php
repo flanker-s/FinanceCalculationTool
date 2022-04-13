@@ -15,6 +15,9 @@ class AbilityTest extends TestCase
         $response = $this->get($this->uri . '/abilities');
         $response->assertStatus(200);
         $response->assertJsonStructure([
+            'links' => [
+                'self'
+            ],
             'data' => [
                 [
                     'type',

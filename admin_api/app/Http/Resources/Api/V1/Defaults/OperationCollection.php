@@ -14,6 +14,11 @@ class OperationCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'links' => [
+                'self' => route('operations')
+            ],
+            'data' => $this->collection
+        ];
     }
 }

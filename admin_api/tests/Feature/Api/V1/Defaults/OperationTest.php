@@ -15,6 +15,9 @@ class OperationTest extends TestCase
         $response = $this->get($this->uri . '/operations');
         $response->assertStatus(200);
         $response->assertJsonStructure([
+            'links' => [
+                'self'
+            ],
             'data' => [
                 [
                     'type',

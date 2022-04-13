@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Users\IndexUserRequest;
 use App\Http\Requests\Api\V1\Users\StoreUserRequest;
 use App\Http\Requests\Api\V1\Users\UpdateUserRequest;
+use App\Http\Resources\Api\V1\UserCollection;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,14 +17,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return UserCollection
      */
     public function index(IndexUserRequest $request)
     {
         $data = $request->validated();
         $query = User::where('is_primary', false);
         $users = $query->queryRequest($data)->get();
-        return UserResource::collection($users);
+        return new UserCollection($users);
     }
 
     /**

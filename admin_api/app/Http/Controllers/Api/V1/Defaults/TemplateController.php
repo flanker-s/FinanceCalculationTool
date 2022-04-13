@@ -7,6 +7,7 @@ use App\Http\Requests\Api\V1\Defaults\Templates\IndexTemplateRequest;
 use App\Http\Requests\Api\V1\Defaults\Templates\ShowTemplateRequest;
 use App\Http\Requests\Api\V1\Defaults\Templates\StoreTemplateRequest;
 use App\Http\Requests\Api\V1\Defaults\Templates\UpdateTemplateRequest;
+use App\Http\Resources\Api\V1\Defaults\TemplateCollection;
 use App\Http\Resources\Api\v1\Defaults\TemplateResource;
 use App\Models\Defaults\Template;
 use Illuminate\Http\Request;
@@ -17,13 +18,13 @@ class TemplateController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return TemplateCollection
      */
     public function index(IndexTemplateRequest $request)
     {
         $data = $request->validated();
         $query = Template::queryRequest($data);
-        return TemplateResource::collection($query->paginate(10));
+        return new TemplateCollection($query->paginate(10));
     }
 
     /**
