@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\CustomPackages\QueryRequest\KeyWords;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Users\IndexUserRequest;
 use App\Http\Requests\Api\V1\Users\StoreUserRequest;
@@ -10,16 +9,17 @@ use App\Http\Requests\Api\V1\Users\UpdateUserRequest;
 use App\Http\Resources\Api\V1\UserCollection;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param IndexUserRequest $request
      * @return UserCollection
      */
-    public function index(IndexUserRequest $request)
+    public function index(IndexUserRequest $request): UserCollection
     {
         $data = $request->validated();
         $query = User::where('is_primary', false);
@@ -30,10 +30,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreUserRequest  $request
      * @return UserResource
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): UserResource
     {
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
@@ -47,10 +47,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return UserResource
      */
-    public function show($id)
+    public function show(int $id): UserResource
     {
         $user = User::find($id);
         if($user->is_primary) abort(405);
@@ -60,11 +60,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UpdateUserRequest $request
+     * @param int $id
      * @return UserResource
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, int $id): UserResource
     {
         $user = User::find($id);
 
@@ -87,10 +87,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
-    public function destroy($id)
+    public function destroy(int $id): Response
     {
         $user = User::find($id);
 
@@ -98,6 +98,6 @@ class UserController extends Controller
         if($user->is_primary) abort(405);
 
         User::destroy($id);
-        return response('user deleted', 204);;
+        return response('user deleted', 204);
     }
 }

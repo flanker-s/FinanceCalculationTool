@@ -7,21 +7,31 @@ use App\Http\Requests\Api\V1\Abilities\IndexAbilityRequest;
 use App\Http\Requests\Api\V1\Abilities\ShowAbilityRequest;
 use App\Http\Resources\Api\V1\AbilityCollection;
 use App\Http\Resources\Api\V1\AbilityResource;
-use App\Http\Resources\Api\V1\UserResource;
 use App\Models\Ability;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AbilityController extends Controller
 {
-    public function index(IndexAbilityRequest $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @param IndexAbilityRequest $request
+     * @return AbilityCollection
+     */
+    public function index(IndexAbilityRequest $request): AbilityCollection
     {
         $data = $request->validated();
         $abilities = Ability::queryRequest($data)->get();
         return new AbilityCollection($abilities);
     }
 
-    public function show(ShowAbilityRequest $request, $id)
+    /**
+     * Display the specified resource.
+     *
+     * @param ShowAbilityRequest $request
+     * @param int $id
+     * @return AbilityResource
+     */
+    public function show(ShowAbilityRequest $request, int $id): AbilityResource
     {
         $data = $request->validated();
         $ability = Ability::queryRequest($data)->find($id);

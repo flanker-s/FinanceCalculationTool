@@ -10,17 +10,17 @@ use App\Http\Requests\Api\V1\Defaults\Templates\UpdateTemplateRequest;
 use App\Http\Resources\Api\V1\Defaults\TemplateCollection;
 use App\Http\Resources\Api\v1\Defaults\TemplateResource;
 use App\Models\Defaults\Template;
-use Illuminate\Http\Request;
-use App\CustomPackages\QueryRequest\KeyWords;
+use Illuminate\Http\Response;
 
 class TemplateController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param IndexTemplateRequest $request
      * @return TemplateCollection
      */
-    public function index(IndexTemplateRequest $request)
+    public function index(IndexTemplateRequest $request): TemplateCollection
     {
         $data = $request->validated();
         $query = Template::queryRequest($data);
@@ -30,10 +30,10 @@ class TemplateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \App\Http\Resources\Api\v1\Defaults\TemplateResource
+     * @param StoreTemplateRequest $request
+     * @return TemplateResource
      */
-    public function store(StoreTemplateRequest $request)
+    public function store(StoreTemplateRequest $request): TemplateResource
     {
         $data = $request->validated();
         return new TemplateResource(Template::create($data));
@@ -42,10 +42,11 @@ class TemplateController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param ShowTemplateRequest $request
      * @param int $id
      * @return TemplateResource
      */
-    public function show(int $id, ShowTemplateRequest $request)
+    public function show(ShowTemplateRequest $request, int $id): TemplateResource
     {
         $data = $request->validated();
         $template = Template::queryRequest($data)->find($id);
@@ -56,11 +57,11 @@ class TemplateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int $id
-     * @return \App\Http\Resources\Api\v1\Defaults\TemplateResource
+     * @param UpdateTemplateRequest $request
+     * @param int $id
+     * @return TemplateResource
      */
-    public function update(UpdateTemplateRequest $request, $id)
+    public function update(UpdateTemplateRequest $request, int $id): TemplateResource
     {
         $template = Template::find($id);
         if(!$template) abort(404);
@@ -71,12 +72,12 @@ class TemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
-    public function destroy($id)
+    public function destroy(int $id): Response
     {
         Template::destroy($id);
-        return response('item deleted', 204);
+        return response('template deleted', 204);
     }
 }
