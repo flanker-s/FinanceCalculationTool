@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class UserFilter
 {
-    public function filterName(Builder $query, $value)
+    public function filterName(Builder $query, $value): Builder
     {
         return $query->where('name', 'like', "%{$value}%");
     }
 
-    public function filterEmail(Builder $query, $value)
+    public function filterEmail(Builder $query, $value): Builder
     {
         return $query->where('email', 'like', "%{$value}%");
     }
