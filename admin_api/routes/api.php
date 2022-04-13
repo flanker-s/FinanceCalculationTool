@@ -41,8 +41,10 @@ Route::group([
         Route::delete('/{id}', [UserController::class, 'destroy']);
     });
 
-    Route::get('/abilities', [AbilityController::class, 'index'])->name('abilities')
-        ->middleware(['ability:manage-users']);
+    Route::group(['prefix' => 'abilities', 'middleware' => 'ability:manage-users'], function (){
+        Route::get('/{id}', [AbilityController::class, 'show']);
+        Route::get('/', [AbilityController::class, 'index'])->name('abilities');
+    });
 
     Route::group([
         'prefix' => 'defaults'

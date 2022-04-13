@@ -11,7 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AbilityController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return AbilityResource::collection(Ability::all());
+    }
+
+    public function show($id)
+    {
+        return new AbilityResource(Ability::find($id));
     }
 }
