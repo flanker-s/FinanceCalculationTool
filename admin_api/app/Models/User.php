@@ -44,6 +44,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getAbilityNamesAttribute(){
+        return $this->abilities->pluck('name')->filter(function ($value){
+            return $value != null;
+        })->all();
+    }
+
+    public function getAbilityIdsAttribute(){
+        return $this->abilities->pluck('id')->filter(function ($value){
+            return $value != null;
+        })->all();
+    }
+
+
     public function abilities()
     {
         return $this->belongsToMany(

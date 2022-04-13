@@ -25,15 +25,11 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
-        $userAbilityIds = $this->user()->abilities->pluck('id')->filter(function ($value){
-            return $value != null;
-        })->all();
-
         return [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6',
-            'abilities' => ['array', Rule::in($userAbilityIds)]
+            'abilities' => ['array', Rule::in($this->user()->ability_ids)]
         ];
     }
 }

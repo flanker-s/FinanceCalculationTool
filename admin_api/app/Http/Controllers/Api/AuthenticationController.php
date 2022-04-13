@@ -55,11 +55,8 @@ class AuthenticationController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
-        $userAbilityNames = $user->abilities->pluck('name')->filter(function ($value){
-            return $value != null;
-        })->all();
 
-        $authToken = $user->createToken('auth-token', $userAbilityNames)->plainTextToken;
+        $authToken = $user->createToken('auth-token', $user->ability_names)->plainTextToken;
 
         return response()->json([
            'access_token' => $authToken,

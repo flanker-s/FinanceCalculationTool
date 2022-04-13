@@ -53,10 +53,8 @@ class UserTest extends TestCase
     {
         $this->seed();
         $user = User::where('is_primary', true)->first();
-        $userAbilityNames = $user->abilities->pluck('name')->filter(function ($value){
-            return $value != null;
-        })->all();
-        Sanctum::actingAs($user, $userAbilityNames);
+
+        Sanctum::actingAs($user, $user->ability_names);
         $data = [
             'name' => 'test',
             'email' => 'test@gmail.com',

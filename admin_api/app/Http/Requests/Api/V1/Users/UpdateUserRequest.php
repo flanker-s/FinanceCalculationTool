@@ -24,15 +24,11 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        $userAbilityIds = $this->user()->abilities->pluck('id')->filter(function ($value){
-            return $value != null;
-        })->all();
-
         return [
             'name' => '',
             'email' => 'email',
             'password' => 'min:6',
-            'abilities' => ['array', Rule::in($userAbilityIds)]
+            'abilities' => ['array', Rule::in($this->user()->ability_ids)]
         ];
     }
 }
