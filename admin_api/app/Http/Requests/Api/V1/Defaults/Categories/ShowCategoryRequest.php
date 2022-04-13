@@ -13,7 +13,7 @@ class ShowCategoryRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class ShowCategoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             KeyWords::INCLUDE => ['array', Rule::in(['operation', 'templates'])]

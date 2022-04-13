@@ -13,7 +13,7 @@ class IndexTemplateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class IndexTemplateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             KeyWords::FILTER => 'array:name,category_id,operation_id',

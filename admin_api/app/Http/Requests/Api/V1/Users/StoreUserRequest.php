@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\V1\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
@@ -13,7 +12,7 @@ class StoreUserRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +22,7 @@ class StoreUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required',
