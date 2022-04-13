@@ -33,12 +33,12 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
 
-    Route::group(['prefix' => 'users'], function (){
+    Route::group(['prefix' => 'users', 'middleware' => 'ability:manage-users'], function (){
         Route::get('/{id}', [UserController::class, 'show']);
         Route::get('/', [UserController::class, 'index'])->name('users');
-        Route::post('/', [UserController::class, 'store'])->middleware(['ability:manage-users']);
-        Route::put('/{id}', [UserController::class, 'update'])->middleware(['ability:manage-users']);
-        Route::delete('/{id}', [UserController::class, 'destroy'])->middleware(['ability:manage-users']);
+        Route::post('/', [UserController::class, 'store']);
+        Route::put('/{id}', [UserController::class, 'update']);
+        Route::delete('/{id}', [UserController::class, 'destroy']);
     });
 
     Route::get('/abilities', [AbilityController::class, 'index'])->name('abilities')
