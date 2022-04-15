@@ -4,9 +4,9 @@ use App\Http\Controllers\Api\V1\AbilityController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\v1\Defaults\TemplateController;
-use App\Http\Controllers\Api\v1\Defaults\CategoryController;
-use App\Http\Controllers\Api\v1\Defaults\OperationController;
+use App\Http\Controllers\Api\V1\Defaults\TemplateController;
+use App\Http\Controllers\Api\V1\Defaults\CategoryController;
+use App\Http\Controllers\Api\V1\Defaults\OperationController;
 use \App\Http\Controllers\Api\AuthenticationController;
 
 
