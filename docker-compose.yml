@@ -1,25 +1,41 @@
-version: '3.3'
+version: '4'
 
 services:
   admin_api:
     build:
-      context: ./docker/admin_api
+      context: ./admin_api
+      dockerfile: ./docker/dockerfile
     container_name: admin_api
+    hostname: ${ADMIN_API_HOST}
     restart: unless-stopped
     environment:
-      DB_NAME: admin_db
-      DB_NAME_TEST: admin_db_test
-      DB_HOST: admin_db
-      DB_HOST_TEST: admin_db_test
-      DB_USER: root
-      DB_PASSWORD: uy%6#kdS)@9
+      APP_MODE: ${ADMIN_APP_MODE}
+      REFRESH_MIGRATIONS: ${REFRESH_MIGRATIONS}
+
+      ADMIN_NAME: ${ADMIN_API_USER_NAME}
+      ADMIN_EMAIL: ${ADMIN_API_USER_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_API_USER_PASSWORD}
+
+      DB_HOST: ${ADMIN_DB_HOST}
+      DB_PORT: ${ADMIN_DB_PORT}
+      DB_DATABASE: ${ADMIN_DB_DATABASE}
+      DB_USERNAME: ${ADMIN_DB_USERNAME}
+      DB_PASSWORD: ${ADMIN_API_USER_PASSWORD}
+
+      DB_HOST_TEST: ${ADMIN_DB_HOST_TEST}
+      DB_PORT_TEST: ${ADMIN_DB_PORT_TEST}
+      DB_DATABASE_TEST: ${ADMIN_DB_DATABASE_TEST}
+      DB_USERNAME_TEST: ${ADMIN_DB_USERNAME_TEST}
+      DB_PASSWORD_TEST: ${ADMIN_DB_PASSWORD_TEST}
     ports:
       - "8400:8000"
     volumes:
       - ./admin_api:/app
     depends_on:
-      - admin_db
-      - admin_db_test
+      admin_db:
+        condition: service_healthy
+      admin_db_test:
+        condition: service_healthy
     networks:
       - app
   
@@ -27,13 +43,18 @@ services:
     image: mysql:8.0.28
     restart: unless-stopped
     container_name: admin_db
+    hostname: ${ADMIN_DB_HOST}
     environment:
-      MYSQL_DATABASE: admin_db
-      MYSQL_ROOT_PASSWORD: 'uy%6#kdS)@9'
+      MYSQL_DATABASE: ${ADMIN_DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${ADMIN_DB_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
     ports:
-      - "33066:3306"
+      - 33066:${ADMIN_DB_PORT}
     volumes:
-      - ./admin_db/admin_db:/var/lib/mysql
+      - ./admin_db/db:/var/lib/mysql
     networks:
       - app
 
@@ -41,13 +62,18 @@ services:
       image: mysql:8.0.28
       restart: unless-stopped
       container_name: admin_db_test
+      hostname: ${ADMIN_DB_HOST_TEST}
       environment:
-        MYSQL_DATABASE: admin_db_test
-        MYSQL_ROOT_PASSWORD: 'uy%6#kdS)@9'
+        MYSQL_DATABASE: ${ADMIN_DB_DATABASE_TEST}
+        MYSQL_ROOT_PASSWORD: ${ADMIN_DB_PASSWORD_TEST}
+      healthcheck:
+        test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+        timeout: 20s
+        retries: 10
       ports:
-        - "33077:3306"
+        - 33077:${ADMIN_DB_PORT_TEST}
       volumes:
-        - ./admin_db/admin_db_test:/var/lib/mysql
+        - ./admin_db/db_test:/var/lib/mysql
       networks:
         - app
 

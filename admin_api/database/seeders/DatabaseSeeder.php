@@ -26,10 +26,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' =>'admin',
-            'email' => 'admin@gmail.com',
+            'name' =>env('ADMIN_NAME'),
+            'email' => env('ADMIN_EMAIL'),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt(env("ADMIN_PASSWORD")),
             'is_primary' => true,
             'remember_token' => Str::random(10),
         ])->abilities()->attach($abilities);
