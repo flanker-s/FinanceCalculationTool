@@ -28,7 +28,7 @@ services:
       DB_USERNAME_TEST: ${ADMIN_DB_USERNAME_TEST}
       DB_PASSWORD_TEST: ${ADMIN_DB_PASSWORD_TEST}
     ports:
-      - "8400:8000"
+      - 8400:${ADMIN_API_PORT}
     volumes:
       - ./admin_api:/app
     depends_on:
