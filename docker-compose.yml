@@ -1,6 +1,24 @@
 version: '4'
 
 services:
+
+  admin_ui:
+    build:
+      context: ./admin_ui
+      dockerfile: docker/dockerfile
+    container_name: admin_ui
+    environment:
+      API_HOST: ${ADMIN_API_HOST}
+      API_PORT: ${ADMIN_API_PORT}
+    ports:
+      - 3001:${ADMIN_UI_PORT}
+    volumes:
+      - ./admin_ui:/app
+    depends_on:
+      - admin_api
+    networks:
+      - app
+
   admin_api:
     build:
       context: ./admin_api
