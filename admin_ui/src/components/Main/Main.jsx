@@ -1,9 +1,20 @@
 import classes from './Main.module.css'
+import {Container, Typography} from "@mui/material"
 
 function Main(){
     return(
         <main>
-            <h2>Main</h2>
+            <Container
+                sx={{
+                    height: '100%',
+                }}
+            >
+                <Typography
+                    variant="h1"
+                >
+                    Main
+                </Typography>
+            </Container>
         </main>
     )
 }
