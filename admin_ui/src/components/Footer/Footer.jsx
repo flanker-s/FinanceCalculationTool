@@ -13,8 +13,7 @@ function Footer(){
                 <Typography
                     variant="h4"
                     sx={{
-                        color: theme.palette.text.white,
-
+                        color: theme.palette.negative.main,
                     }}
                 >
                     Footer

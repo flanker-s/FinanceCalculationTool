@@ -20,7 +20,7 @@ function Header() {
                     >
                         <MenuIcon
                             fontSize="large"
-                            color="text"
+                            color="negative"
                         />
                     </IconButton>
                 </Toolbar>

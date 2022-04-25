@@ -11,8 +11,8 @@ export const fctTheme = createTheme({
         background: {
             main: "#402B26"
         },
-        text: {
-            white: "#FFF"
+        negative: {
+            main: "#FFF"
         }
     },
 })
