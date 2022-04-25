@@ -4,28 +4,26 @@ import MenuIcon from "@mui/icons-material/Menu"
 
 function Header() {
     return (
-        <header>
-            <AppBar
-                position="sticky"
-            >
-                <Toolbar>
-                    <Typography
-                        variant="h5"
-                        sx={{flexGrow: '1'}}
-                    >
-                        FCT
-                    </Typography>
-                    <IconButton
-                        size="medium"
-                    >
-                        <MenuIcon
-                            fontSize="large"
-                            color="negative"
-                        />
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-        </header>
+        <AppBar
+            position="sticky"
+        >
+            <Toolbar>
+                <Typography
+                    variant="h5"
+                    sx={{flexGrow: '1'}}
+                >
+                    FCT
+                </Typography>
+                <IconButton
+                    size="medium"
+                >
+                    <MenuIcon
+                        fontSize="large"
+                        color="negative"
+                    />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
     )
 }
 
