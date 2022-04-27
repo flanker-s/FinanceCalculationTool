@@ -1,5 +1,3 @@
-import classes from './Header.module.css'
-
 import {AppBar, Stack, IconButton, Toolbar, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu"
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
