@@ -9,22 +9,6 @@ use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
-    /**
-     * Test if user can register
-     *
-     * @return void
-     */
-    public function test_user_can_register()
-    {
-        $response = $this->post('api/register', [
-            'name' => 'user',
-            'email' => 'user@email.com',
-            'password' => 'password'
-        ]);
-
-        $response->assertStatus(201);
-    }
     /**
      * Test if user can login
      *

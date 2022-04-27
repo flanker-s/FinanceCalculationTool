@@ -22,7 +22,6 @@ use \App\Http\Controllers\Api\AuthenticationController;
 */
 
 Route::post('/login', [AuthenticationController::class, 'login']);
-Route::post('/register', [AuthenticationController::class, 'register']);
 Route::get('/user', [AuthenticationController::class, 'user'])->middleware('auth:sanctum');
 
 Route::group([
