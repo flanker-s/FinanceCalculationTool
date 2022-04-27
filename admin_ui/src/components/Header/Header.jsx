@@ -1,8 +1,10 @@
-import {AppBar, Stack, IconButton, Toolbar, Typography} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu"
-import NavigationMenu from "../NavigationMenu/NavigationMenu"
+import {AppBar, Stack, Toolbar, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
+import NavigationMenu from "../NavigationMenu/NavigationMenu"
+import BurgerMenuButton from "../BurgerMenu/BurgerMenuButton";
 import ProfileLogo from "../Profile/ProfileLogo";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import {BurgerMenuProvider} from "../../contexts/BurgerMenuContext";
 
 function Header() {
     const ResponsiveNav = styled('div')(({theme}) => ({
@@ -15,32 +17,43 @@ function Header() {
             display: "none"
         }
     }))
+    const ResponsiveBurgerMenu = styled('div')(({theme}) => ({
+        [theme.breakpoints.up('md')]: {
+            display: "none"
+        },
+        [theme.breakpoints.up('sm')]: {
+            paddingRight: "8px"
+        }
+    }))
     return (
         <AppBar
             position="sticky"
         >
-            <Toolbar>
-                <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    spacing={2}
-                    sx={{width: "100%"}}
-                >
-                    <Typography variant="h5">
-                        FCT
-                    </Typography>
-                    <ResponsiveNav>
-                        <NavigationMenu/>
-                    </ResponsiveNav>
-                    <ProfileLogo />
-                    <ResponsiveBtn>
-                        <IconButton size="medium">
-                            <MenuIcon fontSize="large" color="negative"/>
-                        </IconButton>
-                    </ResponsiveBtn>
-                </Stack>
-            </Toolbar>
+            <BurgerMenuProvider>
+                <Toolbar>
+                    <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        spacing={2}
+                        sx={{width: "100%"}}
+                    >
+                        <Typography variant="h5">
+                            FCT
+                        </Typography>
+                        <ResponsiveNav>
+                            <NavigationMenu/>
+                        </ResponsiveNav>
+                        <ProfileLogo/>
+                        <ResponsiveBtn>
+                            <BurgerMenuButton/>
+                        </ResponsiveBtn>
+                    </Stack>
+                </Toolbar>
+                <ResponsiveBurgerMenu>
+                    <BurgerMenu/>
+                </ResponsiveBurgerMenu>
+            </BurgerMenuProvider>
         </AppBar>
     )
 }
