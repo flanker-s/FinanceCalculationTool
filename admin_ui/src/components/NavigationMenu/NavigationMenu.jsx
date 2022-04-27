@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {ListItem, List} from "@mui/material"
-import NavigationButton from "./NavigationButton"
+import NavigationMenuItem from "./NavigationMenuItem"
 import NavigationContext from "../../contexts/NavigationContext"
 
 function NavigationMenu({direction}) {
@@ -13,7 +13,7 @@ function NavigationMenu({direction}) {
                         <ListItem
                             key={"navbar-item-" + index}
                         >
-                            <NavigationButton
+                            <NavigationMenuItem
                                 routeName={routeName}
                                 url={routes[routeName]}
                             />

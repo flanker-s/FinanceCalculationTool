@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom"
 import {useTheme} from "@mui/material"
 
 
-function NavigationButton({routeName, url}) {
+function NavigationMenuItem({routeName, url}) {
     const theme = useTheme()
     return (
         <Button
@@ -19,4 +19,4 @@ function NavigationButton({routeName, url}) {
     )
 }
 
-export default NavigationButton;
+export default NavigationMenuItem;
