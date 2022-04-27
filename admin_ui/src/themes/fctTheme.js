@@ -13,6 +13,9 @@ export const fctTheme = createTheme({
         },
         negative: {
             main: "#FFF"
+        },
+        active: {
+            main: "#57A348"
         }
     },
 })

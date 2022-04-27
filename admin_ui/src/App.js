@@ -1,20 +1,34 @@
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Header from "./components/Header/Header"
-import Main from "./components/Main/Main"
 import Footer from "./components/Footer/Footer"
+import Home from "./pages/Home/Home"
+import Defaults from "./pages/Defaults/Defaults"
+import {Container} from "@mui/material";
+import {useContext, useState} from "react";
+import GlobalRoutesContext from "./contexts/NavigationContext";
 
 function App() {
+    const {routes} = useContext(GlobalRoutesContext)
+
     return (
-        <>
-            <header>
-                <Header />
-            </header>
+        <Router>
+            <Header/>
             <main>
-                <Main />
+                <Container
+                    sx={{
+                        height: '100%',
+                    }}
+                >
+                    <Routes>
+                        <Route exact path={routes.Home} element={<Home/>}/>>
+                        <Route path={routes.Defaults} element={<Defaults/>}/>
+                    </Routes>
+                </Container>
             </main>
             <footer>
-                <Footer />
+                <Footer/>
             </footer>
-        </>
+        </Router>
     )
 }
 
