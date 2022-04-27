@@ -2,8 +2,11 @@ FROM bitnami/laravel:8.6.11
 
 WORKDIR /app
 
+USER root
 COPY . .
 ADD /docker/start.sh /docker
 RUN chmod +x ./docker/start.sh && apt update
+
+USER bitnami
 
 CMD ["./docker/start.sh"]
