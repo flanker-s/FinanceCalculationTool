@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -42,6 +43,26 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'access_token'
+        ]);
+    }
+    public function test_user_can_get_current_user(){
+        Sanctum::actingAs(User::create([
+            'name' => 'test',
+            'email' => 'test@email.com',
+            'password' => 'password'
+        ]), ['*']);
+        $response = $this->get('api/user');
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                'type',
+                'id',
+                'attributes' => [
+                    'name',
+                    'email',
+                    'created_at'
+                ]
+            ]
         ]);
     }
 }

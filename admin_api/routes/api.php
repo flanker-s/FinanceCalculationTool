@@ -21,12 +21,9 @@ use \App\Http\Controllers\Api\AuthenticationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class, 'login']);
+Route::post('/register', [AuthenticationController::class, 'register']);
+Route::get('/user', [AuthenticationController::class, 'user'])->middleware('auth:sanctum');
 
 Route::group([
     'prefix' => 'v1',
