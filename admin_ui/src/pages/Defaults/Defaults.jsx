@@ -1,6 +1,11 @@
+import BasicTabs from "../../components/BasicTabs/BasicTabs";
+
 function Defaults() {
     return (
-        <h4>DEFAULTS</h4>
+        <BasicTabs tabs={{
+            Templates: <h4>Templates</h4>,
+            Categories: <h4>Categories</h4>
+        }} />
     )
 }
 

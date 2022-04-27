@@ -13,7 +13,6 @@ function BurgerMenuButton() {
                     ? <MenuOpenIcon fontSize="large" color="negative"/>
                     : <MenuIcon fontSize="large" color="negative"/>
             }
-
         </IconButton>
     )
 }
