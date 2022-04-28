@@ -7,7 +7,6 @@ use App\Http\Requests\Api\UserAuthenticationRequest;
 use App\Http\Resources\Api\V1\UserResource;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends Controller
 {
@@ -40,6 +39,7 @@ class AuthenticationController extends Controller
 
         return response()->json([
             'access_token' => $authToken,
+            'user' => new UserResource($user)
         ]);
     }
 
