@@ -5,7 +5,6 @@ import {useContext} from "react";
 
 function BurgerMenu() {
     const {isActive} = useContext(BurgerMenuContext)
-    console.log(isActive)
     return (
         <Stack sx={{
             display: isActive ? "flex" : "none",

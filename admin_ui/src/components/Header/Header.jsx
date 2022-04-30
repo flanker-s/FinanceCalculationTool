@@ -2,9 +2,9 @@ import {AppBar, Stack, Toolbar, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import BurgerMenuButton from "../BurgerMenu/BurgerMenuButton";
-import ProfileLogo from "../Profile/ProfileLogo";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import {BurgerMenuProvider} from "../../contexts/BurgerMenuContext";
+import ProfileMenu from "../Profile/ProfileMenu"
 
 function Header() {
     const ResponsiveNav = styled('div')(({theme}) => ({
@@ -35,7 +35,6 @@ function Header() {
                         direction="row"
                         justifyContent="space-between"
                         alignItems="center"
-                        spacing={2}
                         sx={{width: "100%"}}
                     >
                         <Typography variant="h5">
@@ -44,7 +43,7 @@ function Header() {
                         <ResponsiveNav>
                             <NavigationMenu/>
                         </ResponsiveNav>
-                        <ProfileLogo/>
+                        <ProfileMenu />
                         <ResponsiveBtn>
                             <BurgerMenuButton/>
                         </ResponsiveBtn>

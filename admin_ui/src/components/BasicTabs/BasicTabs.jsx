@@ -54,14 +54,14 @@ export default function BasicTabs({tabs}) {
                     aria-label="basic tabs example"
                     centered={true}
                 >
-                    {Object.keys(tabs).map((tabName, index) => {
-                        return <Tab label={tabName} {...a11yProps(index)} />
+                    {Object.keys(tabs).map((tabName, i) => {
+                        return <Tab key={'def-tab' + i} label={tabName} {...a11yProps(i)}/>
                     })}
                 </Tabs>
             </Box>
-            {Object.keys(tabs).map((tabName, index) => {
+            {Object.keys(tabs).map((tabName, i) => {
                 return (
-                    <TabPanel value={value} index={index}>
+                    <TabPanel key={'def-tab-panel' + i} value={value} index={i}>
                         {tabName}
                     </TabPanel>
                 )

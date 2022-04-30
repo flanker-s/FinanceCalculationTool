@@ -1,9 +1,19 @@
-import {IconButton, Stack, Typography} from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {Stack, Typography} from '@mui/material'
+import {capitalize} from "@mui/material"
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import AuthContext from "../../contexts/AuthContext"
+import {useContext} from "react"
+import Box from "@mui/material/Box"
+import {useTheme} from "@emotion/react"
 
 function ProfileLogo() {
+    const {user} = useContext(AuthContext)
+    const theme = useTheme()
+
     return (
-        <IconButton color="negative" size="large">
+        <Box sx={{
+            color: theme.palette.negative.main
+        }}>
             <Stack direction="row"
                    justifyContent="center"
                    alignItems="center"
@@ -11,11 +21,11 @@ function ProfileLogo() {
             >
                 <AccountCircleIcon fontSize="large"/>
                 <Typography>
-                    Fake user
+                    {capitalize(user.attributes.name)}
                 </Typography>
             </Stack>
-        </IconButton>
-    );
-};
+        </Box>
+    )
+}
 
-export default ProfileLogo;
+export default ProfileLogo
