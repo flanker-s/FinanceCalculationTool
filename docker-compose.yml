@@ -8,8 +8,8 @@ services:
       dockerfile: docker/dockerfile
     container_name: admin_ui
     environment:
-      API_HOST: ${ADMIN_API_HOST}
-      API_PORT: ${ADMIN_API_PORT}
+      REACT_APP_API_HOST: ${ADMIN_API_HOST}
+      REACT_APP_API_PORT: ${ADMIN_API_PORT}
       WDS_SOCKET_PORT: 3001
     ports:
       - 3001:${ADMIN_UI_PORT}
@@ -25,7 +25,6 @@ services:
       context: ./admin_api
       dockerfile: ./docker/dockerfile
     container_name: admin_api
-    hostname: ${ADMIN_API_HOST}
     restart: unless-stopped
     environment:
       APP_MODE: ${ADMIN_APP_MODE}
@@ -47,7 +46,7 @@ services:
       DB_USERNAME_TEST: ${ADMIN_DB_USERNAME_TEST}
       DB_PASSWORD_TEST: ${ADMIN_DB_PASSWORD_TEST}
     ports:
-      - 8400:${ADMIN_API_PORT}
+      - ${ADMIN_API_PORT}:8000
     volumes:
       - ./admin_api:/app
     depends_on:
