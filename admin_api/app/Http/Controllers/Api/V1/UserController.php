@@ -22,9 +22,12 @@ class UserController extends Controller
     public function index(IndexUserRequest $request): UserCollection
     {
         $data = $request->validated();
-        $query = User::where('is_primary', false);
-        $users = $query->queryRequest($data)->get();
-        return new UserCollection($users);
+        $query = User::where('is_primary', false)->queryRequest($data);
+        if(isset($request['paginate'])){
+            return new UserCollection($query->paginate($request['paginate']));
+        } else {
+            return new UserCollection($query->get());
+        }
     }
 
     /**

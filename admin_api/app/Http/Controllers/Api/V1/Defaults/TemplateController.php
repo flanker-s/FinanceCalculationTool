@@ -24,7 +24,11 @@ class TemplateController extends Controller
     {
         $data = $request->validated();
         $query = Template::queryRequest($data);
-        return new TemplateCollection($query->paginate(10));
+        if(isset($request['paginate'])){
+            return new TemplateCollection($query->paginate($request['paginate']));
+        } else {
+            return new TemplateCollection($query->get());
+        }
     }
 
     /**

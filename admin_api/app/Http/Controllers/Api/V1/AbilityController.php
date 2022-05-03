@@ -20,8 +20,12 @@ class AbilityController extends Controller
     public function index(IndexAbilityRequest $request): AbilityCollection
     {
         $data = $request->validated();
-        $abilities = Ability::queryRequest($data)->get();
-        return new AbilityCollection($abilities);
+        $query = Ability::queryRequest($data);
+        if(isset($request['paginate'])){
+            return new AbilityCollection($query->paginate($request['paginate']));
+        } else {
+            return new AbilityCollection($query->get());
+        }
     }
 
     /**

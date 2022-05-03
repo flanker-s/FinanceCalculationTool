@@ -24,7 +24,11 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
         $query = Category::queryRequest($data);
-        return new CategoryCollection($query->paginate(10));
+        if(isset($request['paginate'])){
+            return new CategoryCollection($query->paginate($request['paginate']));
+        } else {
+            return new CategoryCollection($query->get());
+        }
     }
 
     /**

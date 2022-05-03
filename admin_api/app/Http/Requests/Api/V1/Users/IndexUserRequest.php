@@ -27,7 +27,8 @@ class IndexUserRequest extends FormRequest
     {
         return [
             KeyWords::FILTER => 'array:name,email',
-            KeyWords::INCLUDE => ['array', Rule::in(['abilities'])]
+            KeyWords::INCLUDE => ['array', Rule::in(['abilities'])],
+            'paginate' => 'integer|min:1'
         ];
     }
 }

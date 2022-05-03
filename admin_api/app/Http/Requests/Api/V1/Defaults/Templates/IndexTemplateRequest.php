@@ -27,7 +27,8 @@ class IndexTemplateRequest extends FormRequest
     {
         return [
             KeyWords::FILTER => 'array:name,category_id,operation_id',
-            KeyWords::INCLUDE => ['array', Rule::in(['category', 'operation'])]
+            KeyWords::INCLUDE => ['array', Rule::in(['category', 'operation'])],
+            'paginate' => 'integer|min:1'
         ];
     }
 }
