@@ -8,7 +8,7 @@ use App\Http\Requests\Api\V1\Defaults\Templates\ShowTemplateRequest;
 use App\Http\Requests\Api\V1\Defaults\Templates\StoreTemplateRequest;
 use App\Http\Requests\Api\V1\Defaults\Templates\UpdateTemplateRequest;
 use App\Http\Resources\Api\V1\Defaults\TemplateCollection;
-use App\Http\Resources\Api\v1\Defaults\TemplateResource;
+use App\Http\Resources\Api\V1\Defaults\TemplateResource;
 use App\Models\Defaults\Template;
 use Illuminate\Http\Response;
 

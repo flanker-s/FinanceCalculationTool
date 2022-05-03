@@ -8,7 +8,7 @@ use App\Http\Requests\Api\V1\Defaults\Categories\ShowCategoryRequest;
 use App\Http\Requests\Api\V1\Defaults\Categories\StoreCategoryRequest;
 use App\Http\Requests\Api\V1\Defaults\Categories\UpdateCategoryRequest;
 use App\Http\Resources\Api\V1\Defaults\CategoryCollection;
-use App\Http\Resources\Api\v1\Defaults\CategoryResource;
+use App\Http\Resources\Api\V1\Defaults\CategoryResource;
 use App\Models\Defaults\Category;
 use Illuminate\Http\Response;
 

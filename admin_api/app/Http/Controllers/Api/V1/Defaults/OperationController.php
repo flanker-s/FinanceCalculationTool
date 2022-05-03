@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Defaults\Operations\IndexOperationRequest;
 use App\Http\Requests\Api\V1\Defaults\Operations\ShowOperationRequest;
 use App\Http\Resources\Api\V1\Defaults\OperationCollection;
-use App\Http\Resources\Api\v1\Defaults\OperationResource;
+use App\Http\Resources\Api\V1\Defaults\OperationResource;
 use App\Models\Defaults\Operation;
 
 class OperationController extends Controller
