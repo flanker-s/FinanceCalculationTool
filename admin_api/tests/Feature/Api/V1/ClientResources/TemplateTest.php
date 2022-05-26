@@ -1,15 +1,12 @@
 <?php
 
-namespace Tests\Feature\Api\V1\Defaults;
+namespace Tests\Feature\Api\V1\ClientResources;
 
-use App\Models\Defaults\Template;
-use App\Models\Defaults\Category;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Sanctum\Sanctum;
-use Tests\Feature\Api\V1\DefaultsTestCase as TestCase;
+use App\Models\ClientResources\Template;
+use App\Models\ClientResources\Category;
+use Tests\Feature\Api\V1\ClientResourcesTestCase;
 
-class TemplateTest extends TestCase
+class TemplateTest extends ClientResourcesTestCase
 {
     public function test_user_can_get_all_templates()
     {

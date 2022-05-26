@@ -1,15 +1,12 @@
 <?php
 
-namespace Tests\Feature\Api\V1\Defaults;
+namespace Tests\Feature\Api\V1\ClientResources;
 
-use App\Models\Defaults\Category;
-use App\Models\Defaults\Operation;
-use App\Models\Defaults\Template;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Feature\Api\V1\DefaultsTestCase as TestCase;
+use App\Models\ClientResources\Category;
+use App\Models\ClientResources\Operation;
+use Tests\Feature\Api\V1\ClientResourcesTestCase;
 
-class CategoryTest extends TestCase
+class CategoryTest extends ClientResourcesTestCase
 {
     public function test_user_can_get_all_categories()
     {

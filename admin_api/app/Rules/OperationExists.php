@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\Defaults\Operation;
+use App\Models\ClientResources\Operation;
 use Illuminate\Contracts\Validation\Rule;
 
 class OperationExists implements Rule

@@ -1,13 +1,11 @@
 <?php
 
-namespace Tests\Feature\Api\V1\Defaults;
+namespace Tests\Feature\Api\V1\ClientResources;
 
-use App\Models\Defaults\Operation;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Feature\Api\V1\DefaultsTestCase as TestCase;
+use App\Models\ClientResources\Operation;
+use Tests\Feature\Api\V1\ClientResourcesTestCase;
 
-class OperationTest extends TestCase
+class OperationTest extends ClientResourcesTestCase
 {
     public function test_user_can_get_all_operations()
     {

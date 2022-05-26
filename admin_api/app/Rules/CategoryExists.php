@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\Defaults\Category;
+use App\Models\ClientResources\Category;
 use Illuminate\Contracts\Validation\Rule;
 
 class CategoryExists implements Rule

@@ -3,11 +3,9 @@
 namespace Tests\Feature\Api\V1;
 
 use App\Models\Ability;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Feature\Api\V1TestCase as TestCase;
+use Tests\Feature\Api\V1TestCase;
 
-class AbilityTest extends TestCase
+class AbilityTest extends V1TestCase
 {
     public function test_user_can_get_all_abilities()
     {

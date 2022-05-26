@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use App\Models\Ability;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use App\Models\Defaults\Operation;
-use App\Models\Defaults\Category;
-use App\Models\Defaults\Template;
+use App\Models\ClientResources\Operation;
+use App\Models\ClientResources\Category;
+use App\Models\ClientResources\Template;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder

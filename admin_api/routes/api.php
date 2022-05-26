@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\Api\V1\AbilityController;
 use App\Http\Controllers\Api\V1\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Defaults\TemplateController;
-use App\Http\Controllers\Api\V1\Defaults\CategoryController;
-use App\Http\Controllers\Api\V1\Defaults\OperationController;
-use \App\Http\Controllers\Api\AuthenticationController;
+use App\Http\Controllers\Api\V1\ClientResources\TemplateController;
+use App\Http\Controllers\Api\V1\ClientResources\CategoryController;
+use App\Http\Controllers\Api\V1\ClientResources\OperationController;
+use App\Http\Controllers\Api\AuthenticationController;
 
 
 /*
@@ -43,7 +42,7 @@ Route::group([
     });
 
     Route::group([
-        'prefix' => 'defaults'
+        'prefix' => 'client_resources'
     ], function (){
         Route::group(['prefix' => 'operations'], function (){
             Route::get('/{id}', [OperationController::class, 'show']);
