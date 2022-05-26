@@ -10,7 +10,7 @@ import TemplateForm from "./TemplateForm"
 
 function TemplateArea({operationId, defaultCategoryId, tableParams}) {
 
-    const url = '/defaults/templates'
+    const url = '/client_resources/templates'
     const query = {
         paginate: 10,
         filter: {

@@ -26,7 +26,7 @@ function TemplateForm({
                       }
 ) {
     const {status, items} = useApiResource(
-        '/defaults/categories',
+        '/client_resources/categories',
         {
             filter: {
                 operation_id: operationId
