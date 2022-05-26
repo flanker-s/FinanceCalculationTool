@@ -1,13 +1,9 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-function TabPanel(props) {
-    const {children, value, index, ...other} = props;
-
+function TabPanel({children, value, index, ...other}) {
     return (
         <div
             role="tabpanel"
@@ -18,18 +14,12 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{p: 3}}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </div>
     );
 }
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
 
 function a11yProps(index) {
     return {
@@ -61,8 +51,8 @@ export default function BasicTabs({tabs}) {
             </Box>
             {Object.keys(tabs).map((tabName, i) => {
                 return (
-                    <TabPanel key={'def-tab-panel' + i} value={value} index={i}>
-                        {tabName}
+                    <TabPanel key={'def-tab-panel' + i} value={value} index={i} >
+                        {tabs[tabName]}
                     </TabPanel>
                 )
             })}

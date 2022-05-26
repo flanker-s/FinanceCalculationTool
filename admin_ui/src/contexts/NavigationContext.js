@@ -3,8 +3,9 @@ import {createContext, useState} from "react"
 const NavigationContext = createContext()
 
 const initialRoutes = {
-    Home: "/",
-    Defaults: "/defaults"
+    Home: '/',
+    Incomes: '/incomes',
+    Expenses: '/expenses'
 }
 
 export const NavigationProvider = ({children}) => {

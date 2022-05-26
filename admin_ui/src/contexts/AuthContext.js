@@ -1,5 +1,6 @@
 import {createContext, useState} from "react"
 import {api} from "../connections/ApiConnection"
+import useToken from "../hooks/useToken"
 
 const AuthContext = createContext()
 
@@ -8,12 +9,12 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [stayLoggedIn, setStayLoggedIn] = useState(false)
 
-    const auth = () => {
-        const token = sessionStorage.getItem('auth_token') ?? localStorage.getItem('auth_token')
+    const {getToken, setToken} = useToken()
 
+    const auth = () => {
         api.get('/user', {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${getToken()}`
             }
         })
             .then(({data}) => {
@@ -37,11 +38,7 @@ export const AuthProvider = ({children}) => {
                     Accept: 'application/json',
                 }
             }).then(({data}) => {
-                if(stayLoggedIn){
-                    localStorage.setItem('auth_token', data.access_token)
-                } else {
-                    sessionStorage.setItem('auth_token', data.access_token)
-                }
+                setToken(data.access_token, stayLoggedIn)
             setUser(data.user)
             setStatus('authenticated')
         }).catch(error => errorCallback(error))
