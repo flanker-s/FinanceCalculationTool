@@ -40,7 +40,7 @@ class TemplateController extends Controller
     public function store(StoreTemplateRequest $request): TemplateResource
     {
         $data = $request->validated();
-        return new TemplateResource(Template::create($data));
+        return new TemplateResource(Template::create($data)->load(['category', 'operation']));
     }
 
     /**
@@ -67,7 +67,7 @@ class TemplateController extends Controller
      */
     public function update(UpdateTemplateRequest $request, int $id): TemplateResource
     {
-        $template = Template::find($id);
+        $template = Template::with(['category', 'operation'])->find($id);
         if(!$template) abort(404);
         $template->update($request->validated());
         return new TemplateResource($template);
