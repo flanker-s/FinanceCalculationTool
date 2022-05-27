@@ -67,10 +67,10 @@ class TemplateController extends Controller
      */
     public function update(UpdateTemplateRequest $request, int $id): TemplateResource
     {
-        $template = Template::with(['category', 'operation'])->find($id);
+        $template = Template::find($id);
         if(!$template) abort(404);
         $template->update($request->validated());
-        return new TemplateResource($template);
+        return new TemplateResource($template->load(['category', 'operation']));
     }
 
     /**
