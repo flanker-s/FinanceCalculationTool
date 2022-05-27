@@ -45,10 +45,9 @@ function useApiResource(url, initQuery = {}) {
     }
 
     const updateItem = (item) => {
-        const itemIndex = items.findIndex(item => item.id === item.id)
-        const updatedItems = [...items]
-        updatedItems[itemIndex] = item
-        setItems(updatedItems)
+        setItems(items.map((existedItem)=>{
+            return item.id === existedItem.id ? item : existedItem
+        }))
     }
 
     const index = () => {
