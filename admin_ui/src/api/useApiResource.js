@@ -41,7 +41,7 @@ function useApiResource(url, initQuery = {}) {
 
 
     const addItem = (item) => {
-        setItems([...items, item])
+        setItems([item, ...items])
     }
 
     const updateItem = (item) => {
