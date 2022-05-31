@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Loading from "../../pages/Loading/Loading"
 import moment from "moment"
 
-function ResourceTable({status, items, allowedFields, error, handleEdit}) {
+function ResourceTable({status, items, allowedFields, error, editHandler, removeHandler}) {
 
     switch (status) {
         case 'processing':
@@ -48,10 +48,10 @@ function ResourceTable({status, items, allowedFields, error, handleEdit}) {
                                         }
                                     })}
                                     <TableCell align="right">
-                                        <Button onClick={()=>handleEdit(item)}>
+                                        <Button onClick={()=>editHandler(item)}>
                                             <EditIcon />
                                         </Button>
-                                        <Button>
+                                        <Button onClick={()=>removeHandler(item)}>
                                             <DeleteIcon />
                                         </Button>
                                     </TableCell>

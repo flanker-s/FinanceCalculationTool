@@ -7,6 +7,7 @@ import Button from "@mui/material/Button"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import Search from "../../SearchFields/Search"
 import TemplateForm from "./TemplateForm"
+import RemoveTemplateDialog from "./RemoveTemplateDialog"
 
 function TemplateArea({operationId, defaultCategoryId, tableParams}) {
 
@@ -16,11 +17,12 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
         filter: {
             operation_id: operationId
         },
-        include: ['category']
+        include: ['category', 'operation']
     }
-    const {status, meta, items, error, changeFilters, changePage, create, update} = useApiResource(url, query)
+    const {status, meta, items, error, changeFilters, changePage, create, update, remove} = useApiResource(url, query)
 
     const [templateForm, setTemplateForm] = useState()
+    const [removeItemDialog, setRemoveItemDialog] = useState()
 
     const closeTemplateForm = () => {
         setTemplateForm(null)
@@ -51,9 +53,29 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
         )
     }
 
+    const openRemoveItemDialog = (item) => {
+        setRemoveItemDialog(
+            <RemoveTemplateDialog
+                item={item}
+                itemColor="red"
+                closeHandler={closeRemoveItemDialog}
+                acceptHandler={acceptRemove}
+            />
+        )
+    }
+
+    const closeRemoveItemDialog = () => {
+        setRemoveItemDialog(null)
+    }
+
+    const acceptRemove = (id) => {
+        remove(id)
+    }
+
     return (
         <>
             {templateForm}
+            {removeItemDialog}
             <Stack spacing={1}>
                 <Search searchHandler={value => changeFilters({name: value})}/>
                 <Button variant="contained" onClick={openCreateForm}>
@@ -68,7 +90,8 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
                     }}
                 />
                 <ResourceTable
-                    handleEdit={openUpdateForm}
+                    editHandler={openUpdateForm}
+                    removeHandler={openRemoveItemDialog}
                     status={status}
                     items={items}
                     allowedFields={tableParams.fields}

@@ -50,6 +50,10 @@ function useApiResource(url, initQuery = {}) {
         }))
     }
 
+    const removeItem = (id) => {
+        setItems(items.filter(existedItem => existedItem.id !== id))
+    }
+
     const index = () => {
         setStatus('processing')
         // api.interceptors.request.use(request => {
@@ -105,6 +109,20 @@ function useApiResource(url, initQuery = {}) {
         })
     }
 
+    const remove = (id) => {
+        api.delete(version + url + '/' + id,{
+            headers: {
+                Accept: 'application/json',
+                Authorization: `Bearer ${getToken()}`
+            }
+        }).then(() => {
+            removeItem(id)
+        }).catch(error => {
+            setError(error)
+            setStatus('error')
+        })
+    }
+
     return {
         status,
         error,
@@ -117,7 +135,8 @@ function useApiResource(url, initQuery = {}) {
         changePage,
         resetQuery,
         create,
-        update
+        update,
+        remove
     }
 }
 
