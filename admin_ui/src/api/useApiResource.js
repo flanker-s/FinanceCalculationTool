@@ -56,10 +56,10 @@ function useApiResource(url, initQuery = {}) {
 
     const index = () => {
         setStatus('processing')
-        // api.interceptors.request.use(request => {
-        //     console.log('Starting Request', JSON.stringify(request, null, 2))
-        //     return request
-        // })
+        api.interceptors.request.use(request => {
+            console.log('Starting Request', JSON.stringify(request, null, 2))
+            return request
+        })
         console.log(serializeGetParams(query))
         api.get(version + url, {
             headers: {

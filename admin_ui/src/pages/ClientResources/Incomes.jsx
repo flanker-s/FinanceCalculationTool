@@ -1,6 +1,7 @@
 import React from 'react'
 import BasicTabs from "../../components/BasicTabs/BasicTabs"
 import TemplateArea from "../../components/ClientResources/Templates/TemplateArea"
+import CategoryArea from "../../components/ClientResources/Categories/CategoryArea"
 
 function Incomes() {
 
@@ -18,7 +19,16 @@ function Incomes() {
                     }
                 }}
             />,
-            Categories: <div>Categories</div>
+            Categories: <CategoryArea
+                operationId={1}
+                tableParams={{
+                    fields: {
+                        name: 'Name',
+                        created_at: 'Created at',
+                        id: 'Id',
+                    }
+                }}
+            />
         }}/>
     )
 }
