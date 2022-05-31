@@ -1,4 +1,4 @@
-import useTemplateForm from "./hooks/useTemplateForm"
+import useFormData from "../../Forms/hooks/useFormData"
 import {
     Dialog,
     DialogActions,
@@ -33,7 +33,7 @@ function TemplateForm({
             }
         }
     )
-    const {data, changeProperties} = useTemplateForm(
+    const {data, changeProperties} = useFormData(
         {
             name: initTemplateName,
             category_id: initCategoryId

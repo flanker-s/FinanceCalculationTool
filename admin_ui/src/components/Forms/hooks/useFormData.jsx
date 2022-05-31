@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-function useTemplateForm(initData) {
+function useFormData(initData) {
 
     const [data, setData] = useState(initData)
 
@@ -14,4 +14,4 @@ function useTemplateForm(initData) {
     }
 }
 
-export default useTemplateForm
+export default useFormData
