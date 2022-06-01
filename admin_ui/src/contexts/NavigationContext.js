@@ -5,7 +5,8 @@ const NavigationContext = createContext()
 const initialRoutes = {
     Home: '/',
     Incomes: '/incomes',
-    Expenses: '/expenses'
+    Expenses: '/expenses',
+    Users: '/users'
 }
 
 export const NavigationProvider = ({children}) => {

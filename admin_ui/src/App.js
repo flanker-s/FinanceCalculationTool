@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login"
 import Loading from "./pages/Loading/Loading"
 import Incomes from "./pages/ClientResources/Incomes"
 import Expenses from "./pages/ClientResources/Expenses"
+import Users from "./pages/Users/Users"
 
 function App() {
     const {routes} = useContext(NavigationContext)
@@ -28,6 +29,7 @@ function App() {
                                     <Route exact path={routes.Home} element={<Home/>}/>>
                                     <Route path={routes.Incomes} element={<Incomes/>}/>
                                     <Route path={routes.Expenses} element={<Expenses/>}/>
+                                    <Route path={routes.Users} element={<Users/>}/>
                                 </Routes>
                             </Container>
                         </main>
