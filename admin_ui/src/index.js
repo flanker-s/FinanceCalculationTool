@@ -4,8 +4,8 @@ import './index.css'
 import App from './App'
 import {ThemeProvider} from "@mui/material";
 import {fctTheme} from "./themes/fctTheme";
-import {NavigationProvider} from "./contexts/NavigationContext";
-import {AuthProvider} from "./contexts/AuthContext";
+import {NavigationProvider} from "./providers/Navigation/NavigationContext";
+import {AuthProvider} from "./providers/Authentication/AuthContext";
 import {BrowserRouter as Router} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'))

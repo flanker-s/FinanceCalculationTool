@@ -1,6 +1,6 @@
 import {Stack} from "@mui/material"
-import NavigationMenu from "../NavigationMenu/NavigationMenu"
-import BurgerMenuContext from "../../contexts/BurgerMenuContext";
+import NavigationMenu from "./NavigationMenu/NavigationMenu"
+import BurgerMenuContext from "../../../../providers/BurgerMenu/BurgerMenuContext";
 import {useContext} from "react";
 
 function BurgerMenu() {

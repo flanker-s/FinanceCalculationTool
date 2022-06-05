@@ -1,6 +1,6 @@
 import {createContext, useState} from "react"
-import {api} from "../connections/ApiConnection"
-import useToken from "../hooks/useToken"
+import {api} from "../../api/ApiConnection"
+import useToken from "../../hooks/Authorization/useToken"
 
 const AuthContext = createContext()
 

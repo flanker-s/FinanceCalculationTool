@@ -1,4 +1,4 @@
-import useFormData from "../../../../components/Forms/hooks/useFormData"
+import useFormData from "../../../../hooks/FormData/useFormData"
 import {
     Dialog,
     DialogActions,

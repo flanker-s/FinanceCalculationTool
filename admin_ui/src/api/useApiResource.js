@@ -1,7 +1,7 @@
-import useToken from "../hooks/useToken"
-import useSerialization from "../hooks/useSerialization"
+import useToken from "../hooks/Authorization/useToken"
+import useSerialization from "../hooks/Serialization/useSerialization"
 import {useEffect, useState} from "react"
-import {api} from "../connections/ApiConnection"
+import {api} from "./ApiConnection"
 
 function useApiResource(url, initQuery = {}) {
 

@@ -1,10 +1,10 @@
 import {AppBar, Stack, Toolbar, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import NavigationMenu from "../NavigationMenu/NavigationMenu"
-import BurgerMenuButton from "../BurgerMenu/BurgerMenuButton";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import {BurgerMenuProvider} from "../../contexts/BurgerMenuContext";
-import ProfileMenu from "../Profile/ProfileMenu"
+import NavigationMenu from "./BurgerMenu/NavigationMenu/NavigationMenu"
+import BurgerMenuButton from "./BurgerMenu/BurgerMenuButton";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import {BurgerMenuProvider} from "../../../providers/BurgerMenu/BurgerMenuContext";
+import ProfileMenu from "../../shared/Profile/ProfileMenu"
 
 function Header() {
     const ResponsiveNav = styled('div')(({theme}) => ({

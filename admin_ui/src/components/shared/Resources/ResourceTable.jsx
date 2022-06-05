@@ -1,7 +1,7 @@
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Loading from "../../pages/Loading/Loading"
+import Loading from "../../../pages/Loading/Loading"
 import moment from "moment"
 
 function ResourceTable({status, items, allowedFields, error, editHandler, removeHandler}) {

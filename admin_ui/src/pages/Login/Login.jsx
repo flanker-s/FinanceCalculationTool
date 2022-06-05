@@ -4,7 +4,7 @@ import * as React from "react"
 import {Button, Checkbox, Stack, TextField} from "@mui/material"
 import {useContext, useState} from "react"
 import {LoginFormSchema} from "../../validations/LoginFormValidation"
-import AuthContext from "../../contexts/AuthContext"
+import AuthContext from "../../providers/Authentication/AuthContext"
 
 function Login() {
 
