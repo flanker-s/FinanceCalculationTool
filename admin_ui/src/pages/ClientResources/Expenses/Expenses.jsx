@@ -1,15 +1,15 @@
 import React from 'react'
-import BasicTabs from "../../components/BasicTabs/BasicTabs"
-import TemplateArea from "../../components/ClientResources/Templates/TemplateArea"
-import CategoryArea from "../../components/ClientResources/Categories/CategoryArea"
+import BasicTabs from "../../../components/BasicTabs/BasicTabs"
+import TemplateArea from "../components/Templates/TemplateArea"
+import CategoryArea from "../components/Categories/CategoryArea"
 
-function Incomes() {
+function Expenses() {
 
     return (
         <BasicTabs tabs={{
             Templates: <TemplateArea
-                operationId={1}
-                defaultCategoryId={1}
+                operationId={2}
+                defaultCategoryId={2}
                 tableParams={{
                     fields: {
                         name: 'Name',
@@ -20,7 +20,7 @@ function Incomes() {
                 }}
             />,
             Categories: <CategoryArea
-                operationId={1}
+                operationId={2}
                 tableParams={{
                     fields: {
                         name: 'Name',
@@ -33,4 +33,4 @@ function Incomes() {
     )
 }
 
-export default Incomes
+export default Expenses

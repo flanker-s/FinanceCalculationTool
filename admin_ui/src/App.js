@@ -8,8 +8,8 @@ import NavigationContext from "./contexts/NavigationContext"
 import AuthContext from "./contexts/AuthContext"
 import Login from "./pages/Login/Login"
 import Loading from "./pages/Loading/Loading"
-import Incomes from "./pages/ClientResources/Incomes"
-import Expenses from "./pages/ClientResources/Expenses"
+import Incomes from "./pages/ClientResources/Incomes/Incomes"
+import Expenses from "./pages/ClientResources/Expenses/Expenses"
 import Users from "./pages/Users/Users"
 
 function App() {

@@ -1,9 +1,9 @@
 import React from 'react'
-import ConfirmDialog from "../../Dialogs/СonfirmDialog"
+import ConfirmDialog from "../../../../components/Dialogs/СonfirmDialog"
 import Typography from "@mui/material/Typography"
 import {DialogContentText} from "@mui/material"
 
-function RemoveTemplateDialog({item, closeHandler, acceptHandler}) {
+function RemoveCategoryDialog({item, closeHandler, acceptHandler}) {
     const name = item?.attributes?.name
     const id = item?.id
     const operationId = item?.included?.operation?.id
@@ -47,4 +47,4 @@ function RemoveTemplateDialog({item, closeHandler, acceptHandler}) {
     )
 }
 
-export default RemoveTemplateDialog
+export default RemoveCategoryDialog
