@@ -1,4 +1,4 @@
-import useFormData from "../../../app/hooks/FormData/useFormData"
+import useFormData from "../../../../hooks/FormData/useFormData"
 import {
     Dialog,
     DialogActions,
@@ -10,19 +10,19 @@ import {
 import Button from "@mui/material/Button"
 import React from "react"
 
-function UserForm({
-                      title,
-                      id,
-                      initUserName,
-                      handleClose,
-                      handleAccept,
-                      initEmail
-                  }
+function CategoryForm({
+                          title,
+                          id,
+                          initCategoryName = '',
+                          operationId,
+                          handleClose,
+                          handleAccept
+                      }
 ) {
     const {data, changeProperties} = useFormData(
         {
-            name: initUserName,
-            email: initEmail
+            name: initCategoryName,
+            operation_id: operationId
         }
     )
 
@@ -41,32 +41,12 @@ function UserForm({
                 <TextField
                     autoFocus
                     margin="dense"
-                    label="Email"
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    value={data.email}
-                    onChange={e => changeProperties({email: e.target.value})}
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
                     label="Name"
                     type="text"
                     fullWidth
                     variant="standard"
                     value={data.name}
                     onChange={e => changeProperties({name: e.target.value})}
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    label="Password"
-                    type="text"
-                    fullWidth
-                    variant="standard"
-                    value={data.password}
-                    onChange={e => changeProperties({password: e.target.value})}
                 />
             </DialogContent>
             <DialogActions>
@@ -77,4 +57,4 @@ function UserForm({
     )
 }
 
-export default UserForm
+export default CategoryForm

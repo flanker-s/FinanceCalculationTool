@@ -1,61 +1,54 @@
-import ResourceTable from "../../../../app/components/shared/Resources/ResourceTable"
+import {useState} from "react"
+import UserForm from "./UserForm"
+import RemoveUserDialog from "./RemoveUserDialog"
 import {Stack} from "@mui/material"
-import useApiResource from "../../../../app/api/useApiResource"
-import ResourcePagination from "../../../../app/components/shared/Resources/ResourcePagination"
-import React, {useState} from "react"
+import Search from "../../shared/SearchFields/Search"
 import Button from "@mui/material/Button"
+import ResourcePagination from "../ResourcePagination"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
-import Search from "../../../../app/components/shared/SearchFields/Search"
-import TemplateForm from "./TemplateForm"
-import RemoveTemplateDialog from "./RemoveTemplateDialog"
+import ResourceTable from "../ResourceTable"
+import useApiResource from "../../../api/useApiResource"
 
-function TemplateArea({operationId, defaultCategoryId, tableParams}) {
+function UserArea() {
 
-    const url = '/client_resources/templates'
+    const url = '/users'
     const query = {
         paginate: 10,
-        filter: {
-            operation_id: operationId
-        },
-        include: ['category', 'operation']
     }
     const {status, meta, items, error, changeFilters, changePage, create, update, remove} = useApiResource(url, query)
 
-    const [templateForm, setTemplateForm] = useState()
-    const [removeItemDialog, setRemoveItemDialog] = useState()
+    const [userForm, setUserForm] = useState()
+    const [removeUserDialog, setRemoveUserDialog] = useState()
 
     const closeTemplateForm = () => {
-        setTemplateForm(null)
+        setUserForm(null)
     }
 
     const openCreateForm = () => {
-        setTemplateForm(
-            <TemplateForm
-                title="Create template"
-                operationId={operationId}
+        setUserForm(
+            <UserForm
+                title="Create category"
                 handleClose={closeTemplateForm}
                 handleAccept={data => create(data)}
-                initCategoryId={defaultCategoryId}
             />
         )
     }
     const openUpdateForm = (item) => {
-        setTemplateForm(
-            <TemplateForm
-                title="Update template"
-                operationId={operationId}
+        setUserForm(
+            <UserForm
+                title="Update category"
                 handleClose={closeTemplateForm}
                 handleAccept={data => update(item.id, data)}
                 id={item.id}
-                initCategoryId={item.included.category.id}
-                initTemplateName={item.attributes.name}
+                initUserName={item.attributes.name}
+                initEmail={item.attributes.email}
             />
         )
     }
 
     const openRemoveItemDialog = (item) => {
-        setRemoveItemDialog(
-            <RemoveTemplateDialog
+        setRemoveUserDialog(
+            <RemoveUserDialog
                 item={item}
                 itemColor="red"
                 closeHandler={closeRemoveItemDialog}
@@ -65,7 +58,7 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
     }
 
     const closeRemoveItemDialog = () => {
-        setRemoveItemDialog(null)
+        setRemoveUserDialog(null)
     }
 
     const acceptRemove = (id) => {
@@ -74,8 +67,8 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
 
     return (
         <>
-            {templateForm}
-            {removeItemDialog}
+            {userForm}
+            {removeUserDialog}
             <Stack spacing={1}>
                 <Search searchHandler={value => changeFilters({name: value})}/>
                 <Button variant="contained" onClick={openCreateForm}>
@@ -94,7 +87,12 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
                     removeHandler={openRemoveItemDialog}
                     status={status}
                     items={items}
-                    allowedFields={tableParams.fields}
+                    allowedFields={{
+                        name: 'Name',
+                        email: 'Email',
+                        created_at: 'Created at',
+                        id: 'Id',
+                    }}
                     error={error}
                 />
             </Stack>
@@ -102,4 +100,4 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
     )
 }
 
-export default TemplateArea
+export default UserArea

@@ -1,5 +1,5 @@
 import React from 'react'
-import ConfirmDialog from "../../../../app/components/shared/Dialogs/СonfirmDialog"
+import ConfirmDialog from "../../../shared/Dialogs/СonfirmDialog"
 import Typography from "@mui/material/Typography"
 import {DialogContentText} from "@mui/material"
 
