@@ -1,4 +1,4 @@
-import useFormData from "../../../../hooks/FormData/useFormData"
+import useFormData from "../../../../app/hooks/FormData/useFormData"
 import {
     Dialog,
     DialogActions,
@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
-import useApiResource from "../../../../api/useApiResource"
+import useApiResource from "../../../../app/api/useApiResource"
 import Loading from "../../../Loading/Loading"
 import React from "react"
 

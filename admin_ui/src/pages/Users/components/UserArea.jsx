@@ -2,12 +2,12 @@ import {useState} from "react"
 import UserForm from "./UserForm"
 import RemoveUserDialog from "./RemoveUserDialog"
 import {Stack} from "@mui/material"
-import Search from "../../../components/shared/SearchFields/Search"
+import Search from "../../../app/components/shared/SearchFields/Search"
 import Button from "@mui/material/Button"
-import ResourcePagination from "../../../components/shared/Resources/ResourcePagination"
+import ResourcePagination from "../../../app/components/shared/Resources/ResourcePagination"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
-import ResourceTable from "../../../components/shared/Resources/ResourceTable"
-import useApiResource from "../../../api/useApiResource"
+import ResourceTable from "../../../app/components/shared/Resources/ResourceTable"
+import useApiResource from "../../../app/api/useApiResource"
 
 function UserArea() {
 

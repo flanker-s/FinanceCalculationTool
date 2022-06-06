@@ -3,8 +3,8 @@ import Typography from "@mui/material/Typography"
 import * as React from "react"
 import {Button, Checkbox, Stack, TextField} from "@mui/material"
 import {useContext, useState} from "react"
-import {LoginFormSchema} from "../../validations/LoginFormValidation"
-import AuthContext from "../../providers/Authentication/AuthContext"
+import {LoginFormSchema} from "../../app/validations/LoginFormValidation"
+import AuthContext from "../../app/providers/Authentication/AuthContext"
 
 function Login() {
 

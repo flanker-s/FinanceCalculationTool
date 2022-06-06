@@ -1,5 +1,5 @@
 import React from 'react'
-import BasicTabs from "../../../components/shared/BasicTabs/BasicTabs"
+import BasicTabs from "../../../app/components/shared/BasicTabs/BasicTabs"
 import TemplateArea from "../components/Templates/TemplateArea"
 import CategoryArea from "../components/Categories/CategoryArea"
 
