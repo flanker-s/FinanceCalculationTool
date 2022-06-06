@@ -4,7 +4,7 @@ import NavigationMenu from "./BurgerMenu/NavigationMenu/NavigationMenu"
 import BurgerMenuButton from "./BurgerMenu/BurgerMenuButton";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import {BurgerMenuProvider} from "../../../providers/BurgerMenu/BurgerMenuContext";
-import ProfileMenu from "../../shared/Profile/ProfileMenu"
+import ProfileMenu from "../../shared/Logos/Profile/ProfileMenu"
 
 function Header() {
     const ResponsiveNav = styled('div')(({theme}) => ({

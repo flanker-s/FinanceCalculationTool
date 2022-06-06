@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import ProfileLogo from "./ProfileLogo"
-import AuthContext from "../../../providers/Authentication/AuthContext"
+import AuthContext from "../../../../providers/Authentication/AuthContext"
 import {useContext} from "react"
 
 function ProfileMenu() {

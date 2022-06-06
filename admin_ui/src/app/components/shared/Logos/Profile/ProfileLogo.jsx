@@ -1,7 +1,7 @@
 import {Stack, Typography} from '@mui/material'
 import {capitalize} from "@mui/material"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import AuthContext from "../../../providers/Authentication/AuthContext"
+import AuthContext from "../../../../providers/Authentication/AuthContext"
 import {useContext} from "react"
 import Box from "@mui/material/Box"
 import {useTheme} from "@emotion/react"
