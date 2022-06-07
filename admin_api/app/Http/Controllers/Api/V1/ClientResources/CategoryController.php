@@ -10,6 +10,7 @@ use App\Http\Requests\Api\V1\ClientResources\Categories\UpdateCategoryRequest;
 use App\Http\Resources\Api\V1\ClientResources\CategoryCollection;
 use App\Http\Resources\Api\V1\ClientResources\CategoryResource;
 use App\Models\ClientResources\Category;
+use App\Models\ClientResources\Template;
 use Illuminate\Http\Response;
 
 class CategoryController extends Controller
@@ -85,6 +86,10 @@ class CategoryController extends Controller
     public function destroy(int $id): Response
     {
         $category = Category::find($id);
+
+        $operationId = $category->operation->id;
+        $defaultCategory = Category::where('is_primary', true)->where('operation_id', $operationId)->first();
+        Template::where('category_id', $id)->update(['category_id' => $defaultCategory->id]);
 
         if(!$category) abort(404);
         if($category->is_primary) abort(405);
