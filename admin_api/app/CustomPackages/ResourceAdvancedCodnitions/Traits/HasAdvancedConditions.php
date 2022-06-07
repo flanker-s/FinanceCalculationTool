@@ -11,7 +11,7 @@ trait HasAdvancedConditions
     public function whenAnyLoaded(array $resources){
         $result = null;
         foreach ($resources as $name => $item) {
-            if(get_class($item->resource) != MissingValue::class){
+            if($item->resource && get_class($item->resource) != MissingValue::class){
                 $result[$name] = $item;
             }
         }
