@@ -12,7 +12,9 @@ function SortingTableRow({id, properties, editHandler, removeHandler}) {
         <TableRow>
             {properties.map((property) => {
                 return (
-                    <TableCell>
+                    <TableCell
+                        key={id}
+                    >
                         {property}
                     </TableCell>
                 )

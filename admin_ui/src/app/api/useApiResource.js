@@ -26,6 +26,9 @@ function useApiResource(url, initQuery = {}) {
     const changePagination = (count) => {
         setQuery({...query, paginate: count, page: 1})
     }
+    const changeSort = (orderBy, order) => {
+        setQuery({...query, sort: `${orderBy}-${order}`, page: 1})
+    }
     const changeFilters = (filter) => {
         setQuery({...query, filter: filter, page: 1})
     }
@@ -127,9 +130,11 @@ function useApiResource(url, initQuery = {}) {
         status,
         error,
         meta,
+        query,
         links,
         items,
         changePagination,
+        changeSort,
         changeFilters,
         changeIncludes,
         changePage,

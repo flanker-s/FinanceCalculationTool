@@ -1,12 +1,17 @@
 import SortingTable from "../../shared/Tables/Sorting/SortingTable"
 import {ConvertTime} from "../../../utils/Converters/TimeConverter"
 
-function UserTable({items, editHandler, removeHandler}) {
+function UserTable({items, sort, editHandler, removeHandler, sortHandler}) {
+
+    const sortParts = sort.split('-')
+    const orderBy = sortParts[0]
+    const order = sortParts[1]
 
     const handleEdit = id => editHandler(id)
     const handleRemove = id => removeHandler(id)
+    const handleSort = (orderBy, order) => sortHandler(orderBy, order)
 
-    const tableItems = items.map(item =>{
+    const tableItems = items.map(item => {
         return {
             id: item.id,
             properties: [
@@ -36,9 +41,12 @@ function UserTable({items, editHandler, removeHandler}) {
 
     return (
         <SortingTable
-            tableItems = {tableItems}
+            tableItems={tableItems}
+            orderBy={orderBy}
+            order={order}
             editHandler={handleEdit}
             removeHandler={handleRemove}
+            sortHandler={handleSort}
         />
     )
 }

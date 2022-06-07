@@ -4,16 +4,13 @@ import SortingTableColumn from "./SortingTableColumn"
 
 function SortingTable({
                           tableItems,
-                          orderBy,
+                          orderBy = 'name',
                           order = 'asc',
                           sortHandler,
                           editHandler,
                           removeHandler
 }) {
 
-    const handleSortChange = () => {
-
-    }
     const handleEdit = id => editHandler(id)
     const handleRemove = id => removeHandler(id)
 
@@ -22,7 +19,9 @@ function SortingTable({
             <SortingTableColumn
                 name={item.tableName}
                 sortId={item.sortId}
-                sortChangeHandler={handleSortChange}
+                orderBy={orderBy}
+                order={order}
+                sortChangeHandler={sortHandler}
             />
         )
     })

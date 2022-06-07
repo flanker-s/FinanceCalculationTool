@@ -13,10 +13,23 @@ import LoadingSwitch from "../../shared/Loading/LoadingSwitch"
 function UserArea() {
 
     const url = '/users'
-    const query = {
+    const initQuery = {
         paginate: 10,
+        sort: 'name-asc'
     }
-    const {status, meta, items, error, changeFilters, changePage, create, update, remove} = useApiResource(url, query)
+    const {
+        status,
+        meta,
+        query,
+        items,
+        error,
+        changeSort,
+        changeFilters,
+        changePage,
+        create,
+        update,
+        remove
+    } = useApiResource(url, initQuery)
 
     const [userForm, setUserForm] = useState()
     const [removeUserDialog, setRemoveUserDialog] = useState()
@@ -94,7 +107,9 @@ function UserArea() {
                         <UserTable
                             editHandler={openUpdateForm}
                             removeHandler={openRemoveItemDialog}
+                            sortHandler={changeSort}
                             items={items}
+                            sort={query.sort}
                         />
                     }
                     error=""
