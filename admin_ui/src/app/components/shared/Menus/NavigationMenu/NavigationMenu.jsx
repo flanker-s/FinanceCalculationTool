@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {ListItem, List} from "@mui/material"
 import NavigationMenuItem from "./NavigationMenuItem"
-import NavigationContext from "../../../../../providers/Navigation/NavigationContext"
+import NavigationContext from "../../../../providers/Navigation/NavigationContext"
 
 function NavigationMenu({direction}) {
     const {routes} = useContext(NavigationContext)

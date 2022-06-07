@@ -6,8 +6,9 @@ import Search from "../../shared/SearchFields/Search"
 import Button from "@mui/material/Button"
 import ResourcePagination from "../ResourcePagination"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
-import ResourceTable from "../ResourceTable"
 import useApiResource from "../../../api/useApiResource"
+import UserTable from "./UserTable"
+import LoadingSwitch from "../../shared/Loading/LoadingSwitch"
 
 function UserArea() {
 
@@ -24,6 +25,9 @@ function UserArea() {
         setUserForm(null)
     }
 
+    const getItemById = (id) => {
+        return items.find(item => item.id === id)
+    }
     const openCreateForm = () => {
         setUserForm(
             <UserForm
@@ -33,7 +37,8 @@ function UserArea() {
             />
         )
     }
-    const openUpdateForm = (item) => {
+    const openUpdateForm = (id) => {
+        const item = getItemById(id)
         setUserForm(
             <UserForm
                 title="Update category"
@@ -46,7 +51,8 @@ function UserArea() {
         )
     }
 
-    const openRemoveItemDialog = (item) => {
+    const openRemoveItemDialog = (id) => {
+        const item = getItemById(id)
         setRemoveUserDialog(
             <RemoveUserDialog
                 item={item}
@@ -82,18 +88,16 @@ function UserArea() {
                         marginRight: 'auto !important',
                     }}
                 />
-                <ResourceTable
-                    editHandler={openUpdateForm}
-                    removeHandler={openRemoveItemDialog}
+                <LoadingSwitch
                     status={status}
-                    items={items}
-                    allowedFields={{
-                        name: 'Name',
-                        email: 'Email',
-                        created_at: 'Created at',
-                        id: 'Id',
-                    }}
-                    error={error}
+                    completed={
+                        <UserTable
+                            editHandler={openUpdateForm}
+                            removeHandler={openRemoveItemDialog}
+                            items={items}
+                        />
+                    }
+                    error=""
                 />
             </Stack>
         </>

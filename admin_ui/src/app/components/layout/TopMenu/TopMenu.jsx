@@ -1,9 +1,9 @@
 import {Stack} from "@mui/material"
-import NavigationMenu from "./NavigationMenu/NavigationMenu"
-import BurgerMenuContext from "../../../../providers/BurgerMenu/BurgerMenuContext";
+import NavigationMenu from "../../shared/Menus/NavigationMenu/NavigationMenu"
+import BurgerMenuContext from "../../../providers/BurgerMenu/BurgerMenuContext";
 import {useContext} from "react";
 
-function BurgerMenu() {
+function TopMenu() {
     const {isActive} = useContext(BurgerMenuContext)
     return (
         <Stack sx={{
@@ -16,4 +16,4 @@ function BurgerMenu() {
     )
 }
 
-export default BurgerMenu
+export default TopMenu

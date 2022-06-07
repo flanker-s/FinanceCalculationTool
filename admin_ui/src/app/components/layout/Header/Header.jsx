@@ -1,8 +1,8 @@
 import {AppBar, Stack, Toolbar, Typography} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import NavigationMenu from "./BurgerMenu/NavigationMenu/NavigationMenu"
-import BurgerMenuButton from "./BurgerMenu/BurgerMenuButton";
-import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import NavigationMenu from "../../shared/Menus/NavigationMenu/NavigationMenu"
+import TopMenuButton from "../TopMenu/TopMenuButton";
+import TopMenu from "../TopMenu/TopMenu";
 import {BurgerMenuProvider} from "../../../providers/BurgerMenu/BurgerMenuContext";
 import ProfileMenu from "../../shared/Logos/Profile/ProfileMenu"
 
@@ -17,7 +17,7 @@ function Header() {
             display: "none"
         }
     }))
-    const ResponsiveBurgerMenu = styled('div')(({theme}) => ({
+    const ResponsiveTopMenu = styled('div')(({theme}) => ({
         [theme.breakpoints.up('md')]: {
             display: "none"
         },
@@ -45,13 +45,13 @@ function Header() {
                         </ResponsiveNav>
                         <ProfileMenu />
                         <ResponsiveBtn>
-                            <BurgerMenuButton/>
+                            <TopMenuButton/>
                         </ResponsiveBtn>
                     </Stack>
                 </Toolbar>
-                <ResponsiveBurgerMenu>
-                    <BurgerMenu/>
-                </ResponsiveBurgerMenu>
+                <ResponsiveTopMenu>
+                    <TopMenu/>
+                </ResponsiveTopMenu>
             </BurgerMenuProvider>
         </AppBar>
     )

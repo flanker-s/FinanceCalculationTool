@@ -2,9 +2,9 @@ import {IconButton} from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import {useContext} from "react"
-import BurgerMenuContext from "../../../../providers/BurgerMenu/BurgerMenuContext"
+import BurgerMenuContext from "../../../providers/BurgerMenu/BurgerMenuContext"
 
-function BurgerMenuButton() {
+function TopMenuButton() {
     const {isActive, setActivity} = useContext(BurgerMenuContext)
     return (
         <IconButton size="medium" onClick={()=>setActivity(!isActive)}>
@@ -17,4 +17,4 @@ function BurgerMenuButton() {
     )
 }
 
-export default BurgerMenuButton;
+export default TopMenuButton;
