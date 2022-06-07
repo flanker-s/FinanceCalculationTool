@@ -8,5 +8,5 @@ class KeyWords
 {
     public const FILTER = 'filter';
     public const INCLUDE = 'include';
-
+    public const SORT = 'sort';
 }

@@ -28,6 +28,12 @@ class IndexAbilityRequest extends FormRequest
         return [
             KeyWords::FILTER => 'array:name',
             KeyWords::INCLUDE => ['array', Rule::in(['users'])],
+            KeyWords::SORT => ['string', Rule::in([
+                'name-asc',
+                'name-desc',
+                'id-asc',
+                'id-desc',
+            ])],
             'paginate' => 'integer|min:1'
         ];
     }

@@ -19,6 +19,10 @@ trait QueryRequest
         if (isset($request[KeyWords::INCLUDE])) {
             $query->with($request[KeyWords::INCLUDE]);
         }
+        if (isset($request[KeyWords::SORT])) {
+            $sort = explode('-', $request[KeyWords::SORT]);
+            $query->orderBy($sort[0], $sort[1]);
+        }
         return $query;
     }
 }

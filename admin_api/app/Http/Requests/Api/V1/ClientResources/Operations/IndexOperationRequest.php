@@ -27,7 +27,13 @@ class IndexOperationRequest extends FormRequest
     {
         return [
             KeyWords::FILTER => 'array:name',
-            KeyWords::INCLUDE => ['array', Rule::in(['categories', 'templates'])]
+            KeyWords::INCLUDE => ['array', Rule::in(['categories', 'templates'])],
+            KeyWords::SORT => ['string', Rule::in([
+                'name-asc',
+                'name-desc',
+                'id-asc',
+                'id-desc',
+            ])],
         ];
     }
 }
