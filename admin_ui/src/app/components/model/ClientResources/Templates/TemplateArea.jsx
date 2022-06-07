@@ -1,4 +1,3 @@
-import ResourceTable from "../../ResourceTable"
 import {Stack} from "@mui/material"
 import useApiResource from "../../../../api/useApiResource"
 import ResourcePagination from "../../ResourcePagination"
@@ -8,24 +7,42 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import Search from "../../../shared/SearchFields/Search"
 import TemplateForm from "./TemplateForm"
 import RemoveTemplateDialog from "./RemoveTemplateDialog"
+import LoadingSwitch from "../../../shared/Loading/LoadingSwitch"
+import TemplateTable from "../Templates/TemplateTable"
 
 function TemplateArea({operationId, defaultCategoryId, tableParams}) {
 
     const url = '/client_resources/templates'
-    const query = {
+    const initQuery = {
         paginate: 10,
+        sort: 'name-asc',
         filter: {
             operation_id: operationId
         },
         include: ['category', 'operation']
     }
-    const {status, meta, items, error, changeFilters, changePage, create, update, remove} = useApiResource(url, query)
+    const {
+        status,
+        meta,
+        items,
+        query,
+        error,
+        changeSort,
+        changeFilters,
+        changePage,
+        create,
+        update,
+        remove} = useApiResource(url, initQuery)
 
     const [templateForm, setTemplateForm] = useState()
     const [removeItemDialog, setRemoveItemDialog] = useState()
 
     const closeTemplateForm = () => {
         setTemplateForm(null)
+    }
+
+    const getItemById = (id) => {
+        return items.find(item => item.id === id)
     }
 
     const openCreateForm = () => {
@@ -39,7 +56,8 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
             />
         )
     }
-    const openUpdateForm = (item) => {
+    const openUpdateForm = (id) => {
+        const item = getItemById(id)
         setTemplateForm(
             <TemplateForm
                 title="Update template"
@@ -53,7 +71,8 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
         )
     }
 
-    const openRemoveItemDialog = (item) => {
+    const openRemoveItemDialog = (id) => {
+        const item = getItemById(id)
         setRemoveItemDialog(
             <RemoveTemplateDialog
                 item={item}
@@ -89,13 +108,18 @@ function TemplateArea({operationId, defaultCategoryId, tableParams}) {
                         marginRight: 'auto !important',
                     }}
                 />
-                <ResourceTable
-                    editHandler={openUpdateForm}
-                    removeHandler={openRemoveItemDialog}
+                <LoadingSwitch
                     status={status}
-                    items={items}
-                    allowedFields={tableParams.fields}
-                    error={error}
+                    completed={
+                        <TemplateTable
+                            editHandler={openUpdateForm}
+                            removeHandler={openRemoveItemDialog}
+                            sortHandler={changeSort}
+                            items={items}
+                            sort={query.sort}
+                        />
+                    }
+                    error=""
                 />
             </Stack>
         </>

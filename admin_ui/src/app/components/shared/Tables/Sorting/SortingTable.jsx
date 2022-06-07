@@ -14,9 +14,10 @@ function SortingTable({
     const handleEdit = id => editHandler(id)
     const handleRemove = id => removeHandler(id)
 
-    const columns = tableItems[0]?.properties?.map(item => {
+    const columns = tableItems[0]?.properties?.map((item, i) => {
         return (
             <SortingTableColumn
+                key={i}
                 name={item.tableName}
                 sortId={item.sortId}
                 orderBy={orderBy}
@@ -26,11 +27,12 @@ function SortingTable({
         )
     })
 
-    const rows = tableItems.map((item) => {
+    const rows = tableItems.map((item, i) => {
         const id = item.id
         const properties = item?.properties?.map(prop=>prop.value)
         return (
             <SortingTableRow
+                key={i}
                 id={id}
                 properties={properties}
                 editHandler={handleEdit}

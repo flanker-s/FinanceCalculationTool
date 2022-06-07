@@ -1,4 +1,3 @@
-import ResourceTable from "../../ResourceTable"
 import {Stack} from "@mui/material"
 import useApiResource from "../../../../api/useApiResource"
 import ResourcePagination from "../../ResourcePagination"
@@ -8,25 +7,44 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import Search from "../../../shared/SearchFields/Search"
 import CategoryForm from "./CategoryForm"
 import RemoveCategoryDialog from "./RemoveCategoryDialog"
+import CategoryTable from "./CategoryTable"
+import LoadingSwitch from "../../../shared/Loading/LoadingSwitch"
+import UserTable from "../../Users/UserTable"
 
-function CategoryArea({operationId, tableParams}) {
+function CategoryArea({operationId}) {
 
     const primaryCategoriesIds = [1, 2]
     const url = '/client_resources/categories'
-    const query = {
+    const initQuery = {
         paginate: 10,
+        sort: 'name-asc',
         filter: {
             operation_id: operationId
         },
         include: ['operation']
     }
-    const {status, meta, items, error, changeFilters, changePage, create, update, remove} = useApiResource(url, query)
+    const {
+        status,
+        meta,
+        items,
+        query,
+        error,
+        changeSort,
+        changeFilters,
+        changePage,
+        create,
+        update,
+        remove} = useApiResource(url, initQuery)
 
     const [categoryForm, setCategoryForm] = useState()
     const [removeItemDialog, setRemoveItemDialog] = useState()
 
     const closeTemplateForm = () => {
         setCategoryForm(null)
+    }
+
+    const getItemById = (id) => {
+        return items.find(item => item.id === id)
     }
 
     const openCreateForm = () => {
@@ -39,7 +57,8 @@ function CategoryArea({operationId, tableParams}) {
             />
         )
     }
-    const openUpdateForm = (item) => {
+    const openUpdateForm = (id) => {
+        const item = getItemById(id)
         setCategoryForm(
             <CategoryForm
                 title="Update category"
@@ -51,7 +70,8 @@ function CategoryArea({operationId, tableParams}) {
         )
     }
 
-    const openRemoveItemDialog = (item) => {
+    const openRemoveItemDialog = (id) => {
+        const item = getItemById(id)
         setRemoveItemDialog(
             <RemoveCategoryDialog
                 item={item}
@@ -91,13 +111,18 @@ function CategoryArea({operationId, tableParams}) {
                         marginRight: 'auto !important',
                     }}
                 />
-                <ResourceTable
-                    editHandler={openUpdateForm}
-                    removeHandler={openRemoveItemDialog}
+                <LoadingSwitch
                     status={status}
-                    items={excludePrimaryCategories(items)}
-                    allowedFields={tableParams.fields}
-                    error={error}
+                    completed={
+                        <CategoryTable
+                            editHandler={openUpdateForm}
+                            removeHandler={openRemoveItemDialog}
+                            sortHandler={changeSort}
+                            items={items}
+                            sort={query.sort}
+                        />
+                    }
+                    error=""
                 />
             </Stack>
         </>

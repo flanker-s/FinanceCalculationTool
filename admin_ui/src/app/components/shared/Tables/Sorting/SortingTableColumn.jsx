@@ -2,22 +2,32 @@ import {TableCell, TableSortLabel} from "@mui/material/index"
 
 function SortingTableColumn({
                                 name,
-                                sortId = 'name',
+                                sortId = '',
                                 orderBy = 'name',
                                 order = 'asc',
                                 sortChangeHandler
-}) {
+                            }) {
     const defaultOrder = 'asc'
     const handleSortChange = () => {
-        if(sortId === orderBy){
+        if (sortId === orderBy) {
             sortChangeHandler(sortId, invertOrder(order))
         } else {
             sortChangeHandler(sortId, defaultOrder)
         }
     }
+
+    if (!sortId) {
+        return (
+            <TableCell
+
+            >
+                {name}
+            </TableCell>
+        )
+    }
     return (
         <TableCell
-            key={sortId}
+
         >
             <TableSortLabel
                 active={orderBy === sortId}
@@ -31,7 +41,7 @@ function SortingTableColumn({
     )
 }
 
-function invertOrder(order){
+function invertOrder(order) {
     return order === 'asc' ? 'desc' : 'asc'
 }
 
