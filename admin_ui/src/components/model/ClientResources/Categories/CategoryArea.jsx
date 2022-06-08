@@ -9,7 +9,6 @@ import CategoryForm from "./CategoryForm"
 import RemoveCategoryDialog from "./RemoveCategoryDialog"
 import CategoryTable from "./CategoryTable"
 import LoadingSwitch from "../../../shared/Loading/LoadingSwitch"
-import UserTable from "../../Users/UserTable"
 
 function CategoryArea({operationId}) {
 
