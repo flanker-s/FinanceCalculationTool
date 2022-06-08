@@ -23,6 +23,7 @@ function UserArea() {
         query,
         items,
         error,
+        getItemById,
         changeSort,
         changeFilters,
         changePage,
@@ -38,9 +39,6 @@ function UserArea() {
         setUserForm(null)
     }
 
-    const getItemById = (id) => {
-        return items.find(item => item.id === id)
-    }
     const openCreateForm = () => {
         setUserForm(
             <UserForm

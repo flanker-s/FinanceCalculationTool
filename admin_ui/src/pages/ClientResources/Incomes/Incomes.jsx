@@ -10,24 +10,9 @@ function Incomes() {
             Templates: <TemplateArea
                 operationId={1}
                 defaultCategoryId={1}
-                tableParams={{
-                    fields: {
-                        name: 'Name',
-                        category: 'Category',
-                        created_at: 'Created at',
-                        id: 'Id',
-                    }
-                }}
             />,
             Categories: <CategoryArea
                 operationId={1}
-                tableParams={{
-                    fields: {
-                        name: 'Name',
-                        created_at: 'Created at',
-                        id: 'Id',
-                    }
-                }}
             />
         }}/>
     )

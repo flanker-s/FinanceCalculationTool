@@ -28,6 +28,7 @@ function CategoryArea({operationId}) {
         items,
         query,
         error,
+        getItemById,
         changeSort,
         changeFilters,
         changePage,
@@ -40,10 +41,6 @@ function CategoryArea({operationId}) {
 
     const closeTemplateForm = () => {
         setCategoryForm(null)
-    }
-
-    const getItemById = (id) => {
-        return items.find(item => item.id === id)
     }
 
     const openCreateForm = () => {

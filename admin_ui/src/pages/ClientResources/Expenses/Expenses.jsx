@@ -10,24 +10,9 @@ function Expenses() {
             Templates: <TemplateArea
                 operationId={2}
                 defaultCategoryId={2}
-                tableParams={{
-                    fields: {
-                        name: 'Name',
-                        category: 'Category',
-                        created_at: 'Created at',
-                        id: 'Id',
-                    }
-                }}
             />,
             Categories: <CategoryArea
                 operationId={2}
-                tableParams={{
-                    fields: {
-                        name: 'Name',
-                        created_at: 'Created at',
-                        id: 'Id',
-                    }
-                }}
             />
         }}/>
     )

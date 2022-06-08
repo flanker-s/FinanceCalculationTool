@@ -47,6 +47,10 @@ function useApiResource(url, initQuery = {}) {
         setItems([item, ...items])
     }
 
+    const getItemById = (id) => {
+        return items.find(item => item.id === id)
+    }
+
     const updateItem = (item) => {
         setItems(items.map((existedItem)=>{
             return item.id === existedItem.id ? item : existedItem
@@ -133,6 +137,7 @@ function useApiResource(url, initQuery = {}) {
         query,
         links,
         items,
+        getItemById,
         changePagination,
         changeSort,
         changeFilters,
