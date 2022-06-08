@@ -114,7 +114,7 @@ function CategoryArea({operationId}) {
                             editHandler={openUpdateForm}
                             removeHandler={openRemoveItemDialog}
                             sortHandler={changeSort}
-                            items={items}
+                            items={excludePrimaryCategories(items)}
                             sort={query.sort}
                         />
                     }
