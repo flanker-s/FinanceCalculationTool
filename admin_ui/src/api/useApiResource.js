@@ -32,6 +32,15 @@ function useApiResource(url, initQuery = {}) {
     const changeFilters = (filter) => {
         setQuery({...query, filter: filter, page: 1})
     }
+    const removeFilters = (...filters) => {
+        const newQuery = {...query}
+        filters?.forEach((filter)=>{
+            delete newQuery.filter[filter]
+        })
+        console.log(newQuery)
+        newQuery['page'] = 1
+        setQuery(newQuery)
+    }
     const changeIncludes = (includes) => {
         setQuery({...query, include: includes, page: 1})
     }
@@ -42,23 +51,8 @@ function useApiResource(url, initQuery = {}) {
         setQuery({})
     }
 
-
-    const addItem = (item) => {
-        setItems([item, ...items])
-    }
-
     const getItemById = (id) => {
         return items.find(item => item.id === id)
-    }
-
-    const updateItem = (item) => {
-        setItems(items.map((existedItem)=>{
-            return item.id === existedItem.id ? item : existedItem
-        }))
-    }
-
-    const removeItem = (id) => {
-        setItems(items.filter(existedItem => existedItem.id !== id))
     }
 
     const index = () => {
@@ -94,8 +88,8 @@ function useApiResource(url, initQuery = {}) {
                 Accept: 'application/json',
                 Authorization: `Bearer ${getToken()}`
             }
-        }).then(({data}) => {
-            addItem(data.data)
+        }).then(() => {
+            index()
         }).catch(error => {
             setError(error)
             setStatus('error')
@@ -108,8 +102,8 @@ function useApiResource(url, initQuery = {}) {
                 Accept: 'application/json',
                 Authorization: `Bearer ${getToken()}`
             }
-        }).then(({data}) => {
-            updateItem(data.data)
+        }).then(() => {
+            index()
         }).catch(error => {
             setError(error)
             setStatus('error')
@@ -123,7 +117,7 @@ function useApiResource(url, initQuery = {}) {
                 Authorization: `Bearer ${getToken()}`
             }
         }).then(() => {
-            removeItem(id)
+            index()
         }).catch(error => {
             setError(error)
             setStatus('error')
@@ -141,6 +135,7 @@ function useApiResource(url, initQuery = {}) {
         changePagination,
         changeSort,
         changeFilters,
+        removeFilters,
         changeIncludes,
         changePage,
         resetQuery,
