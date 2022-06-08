@@ -8,9 +8,9 @@ import Search from "../../../shared/SearchFields/Search"
 import TemplateForm from "./TemplateForm"
 import RemoveTemplateDialog from "./RemoveTemplateDialog"
 import LoadingSwitch from "../../../shared/Loading/LoadingSwitch"
-import TemplateTable from "../Templates/TemplateTable"
+import TemplateTable from "./TemplateTable"
 
-function TemplateArea({operationId, defaultCategoryId, tableParams}) {
+function TemplateArea({operationId, defaultCategoryId}) {
 
     const url = '/client_resources/templates'
     const initQuery = {

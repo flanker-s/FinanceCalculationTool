@@ -1,7 +1,7 @@
 import React from 'react'
-import BasicTabs from "../../../app/components/shared/Tabs/BasicTabs"
-import TemplateArea from "../../../app/components/model/ClientResources/Templates/TemplateArea"
-import CategoryArea from "../../../app/components/model/ClientResources/Categories/CategoryArea"
+import BasicTabs from "../../../components/shared/Tabs/BasicTabs"
+import TemplateArea from "../../../components/model/ClientResources/Templates/TemplateArea"
+import CategoryArea from "../../../components/model/ClientResources/Categories/CategoryArea"
 
 function Expenses() {
 

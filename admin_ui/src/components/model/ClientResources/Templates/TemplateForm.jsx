@@ -12,7 +12,7 @@ import {
 import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
 import useApiResource from "../../../../api/useApiResource"
-import Loading from "../../../../../pages/Loading/Loading"
+import Loading from "../../../../pages/Loading/Loading"
 import React from "react"
 
 function TemplateForm({

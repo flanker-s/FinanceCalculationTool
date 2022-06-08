@@ -1,5 +1,5 @@
 import React from 'react'
-import UserArea from "../../app/components/model/Users/UserArea"
+import UserArea from "../../components/model/Users/UserArea"
 
 function Users() {
     return (
