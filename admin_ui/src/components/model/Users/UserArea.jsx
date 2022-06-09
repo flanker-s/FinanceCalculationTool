@@ -42,7 +42,7 @@ function UserArea() {
     const openCreateForm = () => {
         setUserForm(
             <UserForm
-                title="Create category"
+                title="Create user"
                 handleClose={closeTemplateForm}
                 handleAccept={data => create(data)}
             />
@@ -52,7 +52,7 @@ function UserArea() {
         const item = getItemById(id)
         setUserForm(
             <UserForm
-                title="Update category"
+                title="Update user"
                 handleClose={closeTemplateForm}
                 handleAccept={data => update(item.id, data)}
                 id={item.id}
