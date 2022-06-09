@@ -9,6 +9,7 @@ import TemplateForm from "./TemplateForm"
 import RemoveTemplateDialog from "./RemoveTemplateDialog"
 import LoadingSwitch from "../../../shared/Loading/LoadingSwitch"
 import TemplateTable from "./TemplateTable"
+import ResourceSelect from "../../ResourceSelect"
 
 function TemplateArea({operationId, defaultCategoryId}) {
 
@@ -30,6 +31,7 @@ function TemplateArea({operationId, defaultCategoryId}) {
         getItemById,
         changeSort,
         changeFilters,
+        removeFilters,
         changePage,
         create,
         update,
@@ -37,6 +39,18 @@ function TemplateArea({operationId, defaultCategoryId}) {
 
     const [templateForm, setTemplateForm] = useState()
     const [removeItemDialog, setRemoveItemDialog] = useState()
+
+    const handleCategorySelect = (id) => {
+        if(id === 'all'){
+            removeFilters('category_id')
+        } else {
+            changeFilters({category_id: id})
+        }
+    }
+
+    const handleSearch = (value) => {
+        changeFilters({name: value})
+    }
 
     const closeTemplateForm = () => {
         setTemplateForm(null)
@@ -93,10 +107,30 @@ function TemplateArea({operationId, defaultCategoryId}) {
             {templateForm}
             {removeItemDialog}
             <Stack spacing={1}>
-                <Search searchHandler={value => changeFilters({name: value})}/>
-                <Button variant="contained" onClick={openCreateForm}>
-                    <AddCircleOutlineIcon fontSize="large"/>
-                </Button>
+                <ResourceSelect
+                    url="/client_resources/categories"
+                    label="category"
+                    initQuery={{
+                        filter: {
+                            operation_id: operationId
+                        },
+                    }}
+                    allowAll={true}
+                    initSelected="all"
+                    selectHandler={handleCategorySelect}
+                />
+                <Stack direction="row" style={{width: "100%"}}>
+                    <Search
+                        searchHandler={handleSearch}
+                        sx={{
+                            width: "100%",
+                            paddingRight: "6pt"
+                        }}
+                    />
+                    <Button variant="contained" onClick={openCreateForm}>
+                        <AddCircleOutlineIcon fontSize="large"/>
+                    </Button>
+                </Stack>
                 <ResourcePagination
                     meta={meta}
                     changePageHandler={(e, value) => changePage(value)}
