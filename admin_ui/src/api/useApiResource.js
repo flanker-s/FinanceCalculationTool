@@ -29,8 +29,13 @@ function useApiResource(url, initQuery = {}) {
     const changeSort = (orderBy, order) => {
         setQuery({...query, sort: `${orderBy}-${order}`, page: 1})
     }
-    const changeFilters = (filter) => {
-        setQuery({...query, filter: filter, page: 1})
+    const changeFilters = (filters) => {
+        const newQuery = {...query}
+        Object.keys(filters)?.forEach((filterName)=>{
+            newQuery.filter[filterName] = filters[filterName]
+        })
+        newQuery['page'] = 1
+        setQuery(newQuery)
     }
     const removeFilters = (...filters) => {
         const newQuery = {...query}
