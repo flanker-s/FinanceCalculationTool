@@ -1,5 +1,5 @@
 import {TableCell} from "@mui/material/index"
-import {Button, TableRow} from "@mui/material"
+import {Button, Stack, TableRow} from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteIcon from "@mui/icons-material/Delete"
 
@@ -20,12 +20,14 @@ function SortingTableRow({id, properties, editHandler, removeHandler}) {
                 )
             })}
             <TableCell align="right">
-                <Button onClick={handleEdit}>
-                    <EditIcon />
-                </Button>
-                <Button onClick={handleRemove}>
-                    <DeleteIcon />
-                </Button>
+                <Stack direction="row" justifyContent="flex-end">
+                    <Button onClick={handleEdit}>
+                        <EditIcon />
+                    </Button>
+                    <Button onClick={handleRemove}>
+                        <DeleteIcon />
+                    </Button>
+                </Stack>
             </TableCell>
         </TableRow>
     )

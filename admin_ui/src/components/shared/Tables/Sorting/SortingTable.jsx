@@ -47,7 +47,7 @@ function SortingTable({
                 <TableHead>
                     <TableRow>
                         {columns}
-                        <TableCell>
+                        <TableCell align="right" sx={{paddingRight: "24pt"}}>
                             Options
                         </TableCell>
                     </TableRow>
