@@ -12,7 +12,8 @@ function ResourceSelect({
                             label="resource",
                             allowAll = false,
                             initSelected = null,
-                            selectHandler
+                            selectHandler,
+                            ...props
                         }) {
     const labelId = label + "-select-label"
 
@@ -31,7 +32,7 @@ function ResourceSelect({
             status={status}
             loading={<Loading/>}
             completed={
-                <FormControl>
+                <FormControl {...props}>
                     <InputLabel id={labelId}>{capitalizeFirstLetter(label)}</InputLabel>
                     <Select
                         labelId={labelId}
@@ -40,7 +41,7 @@ function ResourceSelect({
                         value={selected}
                         onChange={handleSelect}
                     >
-                        {allowAll ? <MenuItem value="all">Select all</MenuItem> : ''}
+                        {allowAll ? <MenuItem value="all">Select all</MenuItem> : null}
                         {items?.map((item, i) => {
                             return <MenuItem key={i} value={item.id}>{item.attributes.name}</MenuItem>
                         })}
