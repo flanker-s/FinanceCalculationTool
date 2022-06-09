@@ -1,13 +1,16 @@
 import {Stack, TextField} from "@mui/material"
 
-function Search({searchHandler}) {
+function Search({searchHandler, ...props}) {
     return (
-        <Stack direction='row'>
+        <Stack direction='row' {...props}>
             <TextField
                 label='Search'
                 onChange={e => searchHandler(e.target.value)}
                 InputProps={{
                     type: 'search',
+                }}
+                sx={{
+                    width: "100%"
                 }}
             >
             </TextField>
