@@ -53,7 +53,7 @@ function TemplateForm({
                         label="Name"
                         type="text"
                         fullWidth
-                        variant="standard"
+                        variant="outlined"
                         value={data.name}
                         onChange={e => changeProperties({name: e.target.value})}
                     />
