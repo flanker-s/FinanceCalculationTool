@@ -61,7 +61,7 @@ function TemplateForm({
                         url="/client_resources/categories"
                         label="category"
                         initQuery={{
-                            filter: {
+                            relations: {
                                 operation_id: operationId
                             },
                         }}
