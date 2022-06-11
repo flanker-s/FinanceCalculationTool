@@ -15,9 +15,9 @@ function CategoryArea({operationId}) {
     const primaryCategoriesIds = [1, 2]
     const url = '/client_resources/categories'
     const initQuery = {
-        paginate: 10,
+        pagination: 10,
         sort: 'name-asc',
-        filter: {
+        relations: {
             operation_id: operationId
         },
         include: ['operation']

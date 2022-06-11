@@ -14,7 +14,7 @@ function UserArea() {
 
     const url = '/users'
     const initQuery = {
-        paginate: 10,
+        pagination: 10,
         sort: 'name-asc'
     }
     const {

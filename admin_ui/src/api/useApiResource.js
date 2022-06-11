@@ -2,15 +2,25 @@ import useToken from "../hooks/Authorization/useToken"
 import useSerialization from "../hooks/Serialization/useSerialization"
 import {useEffect, useState} from "react"
 import {api} from "./ApiConnection"
+import useQueryParams from "./useQueryParams"
 
-function useApiResource(url, initQuery = {}) {
+function useApiResource(url, initParams = {}) {
 
     const version = '/v1'
 
     const {getToken} = useToken()
     const {serializeGetParams} = useSerialization()
 
-    const [query, setQuery] = useState(initQuery)
+    const {
+        query,
+        changePagination,
+        changeSort,
+        changeFilters,
+        removeFilters,
+        changeIncludes,
+        changePage,
+        resetQuery,
+    } = useQueryParams(initParams)
 
     const [status, setStatus] = useState('processing')
     const [error, setError] = useState()
@@ -22,39 +32,6 @@ function useApiResource(url, initQuery = {}) {
     useEffect(()=>{
         index()
     }, [query])
-
-    const changePagination = (count) => {
-        setQuery({...query, paginate: count, page: 1})
-    }
-    const changeSort = (orderBy, order) => {
-        setQuery({...query, sort: `${orderBy}-${order}`, page: 1})
-    }
-    const changeFilters = (filters) => {
-        const newQuery = {...query}
-        Object.keys(filters)?.forEach((filterName)=>{
-            newQuery.filter[filterName] = filters[filterName]
-        })
-        newQuery['page'] = 1
-        setQuery(newQuery)
-    }
-    const removeFilters = (...filters) => {
-        const newQuery = {...query}
-        filters?.forEach((filter)=>{
-            delete newQuery.filter[filter]
-        })
-        console.log(newQuery)
-        newQuery['page'] = 1
-        setQuery(newQuery)
-    }
-    const changeIncludes = (includes) => {
-        setQuery({...query, include: includes, page: 1})
-    }
-    const changePage = (number) => {
-        setQuery({...query, page: number})
-    }
-    const resetQuery = () => {
-        setQuery({})
-    }
 
     const getItemById = (id) => {
         return items.find(item => item.id === id)
@@ -136,7 +113,6 @@ function useApiResource(url, initQuery = {}) {
         query,
         links,
         items,
-        getItemById,
         changePagination,
         changeSort,
         changeFilters,
@@ -144,6 +120,7 @@ function useApiResource(url, initQuery = {}) {
         changeIncludes,
         changePage,
         resetQuery,
+        getItemById,
         create,
         update,
         remove

@@ -14,13 +14,12 @@ import ResourceSelect from "../../ResourceSelect"
 function TemplateArea({operationId, defaultCategoryId}) {
 
     const url = '/client_resources/templates'
-    const initQuery = {
-        paginate: 10,
+
+    const initParams = {
+        pagination: 10,
+        relations: { operation_id: operationId },
+        include: ['category', 'operation'],
         sort: 'name-asc',
-        filter: {
-            operation_id: operationId
-        },
-        include: ['category', 'operation']
     }
     const {
         status,
@@ -35,7 +34,7 @@ function TemplateArea({operationId, defaultCategoryId}) {
         changePage,
         create,
         update,
-        remove} = useApiResource(url, initQuery)
+        remove} = useApiResource(url, initParams)
 
     const [templateForm, setTemplateForm] = useState()
     const [removeItemDialog, setRemoveItemDialog] = useState()
@@ -111,7 +110,7 @@ function TemplateArea({operationId, defaultCategoryId}) {
                     url="/client_resources/categories"
                     label="category"
                     initQuery={{
-                        filter: {
+                        relations: {
                             operation_id: operationId
                         },
                     }}
