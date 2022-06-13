@@ -8,21 +8,24 @@ import {
     TextField
 } from "@mui/material"
 import Button from "@mui/material/Button"
-import React from "react"
+import AbilitySwitchGroup from "./AbilitySwitchGroup"
 
 function UserForm({
                       title,
                       id,
                       initUserName,
+                      initAbilityIds=[],
                       handleClose,
                       handleAccept,
                       initEmail
                   }
 ) {
+
     const {data, changeProperties} = useFormData(
         {
             name: initUserName,
-            email: initEmail
+            email: initEmail,
+            abilities: initAbilityIds
         }
     )
 
@@ -67,6 +70,11 @@ function UserForm({
                     variant="standard"
                     value={data.password}
                     onChange={e => changeProperties({password: e.target.value})}
+                />
+                <AbilitySwitchGroup
+                    label="Abilities"
+                    selectedIds={data.abilities}
+                    switchHandler={ids => changeProperties({abilities: ids})}
                 />
             </DialogContent>
             <DialogActions>

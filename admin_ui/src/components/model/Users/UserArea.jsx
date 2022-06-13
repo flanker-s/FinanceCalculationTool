@@ -15,7 +15,8 @@ function UserArea() {
     const url = '/users'
     const initQuery = {
         pagination: 10,
-        sort: 'name-asc'
+        sort: 'name-asc',
+        include: ['abilities']
     }
     const {
         status,
@@ -58,6 +59,7 @@ function UserArea() {
                 id={item.id}
                 initUserName={item.attributes.name}
                 initEmail={item.attributes.email}
+                initAbilityIds={item.included.abilities.map(ability => ability.id)}
             />
         )
     }
