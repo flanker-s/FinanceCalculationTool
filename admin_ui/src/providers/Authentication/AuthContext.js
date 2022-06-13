@@ -15,6 +15,9 @@ export const AuthProvider = ({children}) => {
         api.get('/user', {
             headers: {
                 Authorization: `Bearer ${getToken()}`
+            },
+            params: {
+                include: ['abilities']
             }
         })
             .then(({data}) => {
