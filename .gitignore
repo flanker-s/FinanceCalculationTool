@@ -1,5 +1,6 @@
 /.devcontainer
 /admin_db
+/client_db
 /.env
 /scripts
 /.idea

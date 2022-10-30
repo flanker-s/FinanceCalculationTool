@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
     environment:
       APP_MODE: ${ADMIN_APP_MODE}
-      REFRESH_MIGRATIONS: ${REFRESH_MIGRATIONS}
+      REFRESH_MIGRATIONS: ${ADMIN_REFRESH_MIGRATIONS}
 
       ADMIN_NAME: ${ADMIN_API_USER_NAME}
       ADMIN_EMAIL: ${ADMIN_API_USER_EMAIL}
@@ -95,14 +95,88 @@ services:
       networks:
         - app
 
+  client_api:
+    build:
+      context: ./client_api
+      dockerfile: docker/dockerfile
+    container_name: client_api
+    restart: unless-stopped
+    environment:
+      APP_MODE: ${CLIENT_APP_MODE}
+      REFRESH_MIGRATIONS: ${CLIENT_REFRESH_MIGRATIONS}
+
+      DB_HOST: ${CLIENT_DB_HOST}
+      DB_PORT: ${CLIENT_DB_PORT}
+      DB_DATABASE: ${CLIENT_DB_DATABASE}
+      DB_USERNAME: ${CLIENT_DB_USERNAME}
+      DB_PASSWORD: ${CLIENT_DB_PASSWORD}
+
+      DB_HOST_TEST: ${CLIENT_DB_HOST_TEST}
+      DB_PORT_TEST: ${CLIENT_DB_PORT_TEST}
+      DB_DATABASE_TEST: ${CLIENT_DB_DATABASE_TEST}
+      DB_USERNAME_TEST: ${CLIENT_DB_USERNAME_TEST}
+      DB_PASSWORD_TEST: ${CLIENT_DB_PASSWORD_TEST}
+
+    ports:
+      - ${CLIENT_API_PORT}:8000
+    volumes:
+      - ./client_api:/app
+    depends_on:
+      client_db:
+        condition: service_healthy
+      client_db_test:
+        condition: service_healthy
+    networks:
+      - app
+
+  client_db:
+    image: mysql:8.0.28
+    restart: unless-stopped
+    container_name: client_db
+    hostname: ${CLIENT_DB_HOST}
+    environment:
+      MYSQL_DATABASE: ${CLIENT_DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${CLIENT_DB_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+    ports:
+      - 34066:${CLIENT_DB_PORT}
+    volumes:
+      - ./client_db/db:/var/lib/mysql
+    networks:
+      - app
+
+  client_db_test:
+    image: mysql:8.0.28
+    restart: unless-stopped
+    container_name: client_db_test
+    hostname: ${CLIENT_DB_HOST_TEST}
+    environment:
+      MYSQL_DATABASE: ${CLIENT_DB_DATABASE_TEST}
+      MYSQL_ROOT_PASSWORD: ${CLIENT_DB_PASSWORD_TEST}
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+    ports:
+      - 34077:${CLIENT_DB_PORT_TEST}
+    volumes:
+      - ./client_db/db_test:/var/lib/mysql
+    networks:
+      - app
+
   adminer:
       image: adminer
       container_name: adminer
       ports:
-        - "8401:8080"
+        - "8411:8080"
       depends_on:
         - admin_db
         - admin_db_test
+        - client_db
+        - client_db_test
       networks:
         - app
 networks:
