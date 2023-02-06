@@ -8,13 +8,14 @@ services:
       dockerfile: docker/dockerfile
     container_name: admin_ui
     environment:
+      APP_MODE: ${ADMIN_APP_MODE}
       REACT_APP_API_HOST: ${ADMIN_API_HOST}
       REACT_APP_API_PORT: ${ADMIN_API_PORT}
       WDS_SOCKET_PORT: 3001
     ports:
       - 3001:${ADMIN_UI_PORT}
     volumes:
-      - ./admin_ui:/app
+      - ./admin_ui/src:/app/src
     depends_on:
       - admin_api
     networks:
@@ -95,15 +96,5 @@ services:
       networks:
         - app
 
-  adminer:
-      image: adminer
-      container_name: adminer
-      ports:
-        - "8401:8080"
-      depends_on:
-        - admin_db
-        - admin_db_test
-      networks:
-        - app
 networks:
   app:

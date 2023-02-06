@@ -4,6 +4,8 @@ WORKDIR /app
 
 USER root
 COPY . .
+ADD /.env.example /.env.example
+ADD /.env.testing.example /.env.testing.example
 ADD /docker/start.sh /docker
 RUN chmod +x ./docker/start.sh && apt update
 

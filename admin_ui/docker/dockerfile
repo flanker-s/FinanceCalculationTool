@@ -1,12 +1,12 @@
-FROM node:alpine3.15
+FROM node:alpine3.17
 
 WORKDIR /app
 
 COPY package.json .
-COPY package-lock.json .
-
 RUN npm install
-
 COPY . .
+ADD /.env.example /.env.example
+ADD /docker/start.sh /docker
+RUN chmod +x ./docker/start.sh
 
-CMD ["npm", "start"]
+CMD ["./docker/start.sh"]
