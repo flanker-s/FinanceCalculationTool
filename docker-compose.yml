@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     environment:
       APP_MODE: ${ADMIN_APP_MODE}
-      REFRESH_MIGRATIONS: ${REFRESH_MIGRATIONS}
+      REFRESH_MIGRATIONS: ${ADMIN_REFRESH_MIGRATIONS}
 
       ADMIN_NAME: ${ADMIN_API_USER_NAME}
       ADMIN_EMAIL: ${ADMIN_API_USER_EMAIL}
@@ -39,7 +39,7 @@ services:
       DB_PORT: ${ADMIN_DB_PORT}
       DB_DATABASE: ${ADMIN_DB_DATABASE}
       DB_USERNAME: ${ADMIN_DB_USERNAME}
-      DB_PASSWORD: ${ADMIN_API_USER_PASSWORD}
+      DB_PASSWORD: ${ADMIN_DB_PASSWORD}
 
       DB_HOST_TEST: ${ADMIN_DB_HOST_TEST}
       DB_PORT_TEST: ${ADMIN_DB_PORT_TEST}
@@ -57,7 +57,7 @@ services:
         condition: service_healthy
     networks:
       - app
-  
+
   admin_db:
     image: mysql:8.0.28
     restart: unless-stopped
@@ -67,7 +67,7 @@ services:
       MYSQL_DATABASE: ${ADMIN_DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${ADMIN_DB_PASSWORD}
     healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 20s
       retries: 10
     ports:
@@ -78,23 +78,23 @@ services:
       - app
 
   admin_db_test:
-      image: mysql:8.0.28
-      restart: unless-stopped
-      container_name: admin_db_test
-      hostname: ${ADMIN_DB_HOST_TEST}
-      environment:
-        MYSQL_DATABASE: ${ADMIN_DB_DATABASE_TEST}
-        MYSQL_ROOT_PASSWORD: ${ADMIN_DB_PASSWORD_TEST}
-      healthcheck:
-        test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-        timeout: 20s
-        retries: 10
-      ports:
-        - 33077:${ADMIN_DB_PORT_TEST}
-      volumes:
-        - ./admin_db/db_test:/var/lib/mysql
-      networks:
-        - app
+    image: mysql:8.0.28
+    restart: unless-stopped
+    container_name: admin_db_test
+    hostname: ${ADMIN_DB_HOST_TEST}
+    environment:
+      MYSQL_DATABASE: ${ADMIN_DB_DATABASE_TEST}
+      MYSQL_ROOT_PASSWORD: ${ADMIN_DB_PASSWORD_TEST}
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+    ports:
+      - 33077:${ADMIN_DB_PORT_TEST}
+    volumes:
+      - ./admin_db/db_test:/var/lib/mysql
+    networks:
+      - app
 
 networks:
   app:
